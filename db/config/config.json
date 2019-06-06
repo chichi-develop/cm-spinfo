@@ -1,0 +1,23 @@
+{
+ "development": {
+ "username": "docker",
+ "password": "docker",
+ "database": "ccwebdb",
+ "host": "localhost",
+ "dialect": "mysql"
+ },
+ "test": {
+ "username": "docker",
+ "password": "docker",
+ "database": "ccwebdb",
+ "host": "localhost",
+ "dialect": "mysql"
+ },
+ "production": {
+ "username": "docker",
+ "password": "docker",
+ "database": "ccwebdb",
+ "host": "localhost",
+ "dialect": "mysql"
+ }
+}

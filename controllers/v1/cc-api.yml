@@ -1,0 +1,128 @@
+swagger: "2.0"
+info:
+  description: "これはccwebのAPIです。"
+  version: "1.0.0"
+  title: "cc-api"
+host: localhost:3000
+basePath: /api
+schemes:
+  - http
+paths:
+  /v1/cm_mdmms/{md_cdcstm}:
+    get:
+      summary: "窓口メモ"
+      # consumes:
+      #   - application/json
+      description: "指定されたIDの窓口メモ情報を返します"
+      parameters:
+        - in: "path"
+          name: "md_cdcstm"
+          type: string
+          required: true
+          description: "取得したい顧客情報の読者番号"
+          x-example: "20984291"
+      responses:
+        '200':
+          description: "Successj"
+          schema:
+            type: object
+            $ref: '#/definitions/cm_mdmms_response'
+  /v1/cm_mdmms:
+    post:
+      summary: Creates a new user.
+      consumes:
+        - application/json
+      # consumes:
+      #   - application/x-www-form-urlencoded
+      parameters:
+        - in: body
+          name: cm_mdmms
+          required: true
+          description: upsert
+          schema:
+            # type: object
+            $ref: '#/definitions/cm_mdmms_request'
+      responses:
+        '200':
+          description: ""
+          schema:
+            properties:
+              token:
+                type: string
+definitions:
+  cm_mdmms_response:
+    properties:
+      md_idmdmm:
+        type: integer
+        format: int32
+        example: "0"
+      md_cdcstm:
+        type: string
+        example: "22222222"
+      md_nommrb:
+        type: integer
+        format: int32
+        example: "0"
+      md_nmmmbr:
+        type: string
+        example: "0"
+      md_txmdmm:
+        type: string
+        example: "Api test"
+      md_fganch:
+        type: integer
+        format: int32
+        example: "1"
+      md_clmdmm:
+        type: string
+        example: "Green"
+      md_ccadip:
+        type: string
+        example: "192.168.100.100"
+      md_ccmodu:
+        type: string
+        example: "dredd"
+      createdAt:
+        type: string
+        example: "2019-05-24"
+      updatedAt:
+        type: string
+        example: "2019-05-24"
+  cm_mdmms_request:
+    properties:
+      md_idmdmm:
+        type: integer
+        format: int32
+        example: "0"
+      md_cdcstm:
+        type: string
+        example: "20977473"
+      md_nommrb:
+        type: integer
+        format: int32
+        example: "0"
+      md_nmmmbr:
+        type: string
+        example: "0"
+      md_txmdmm:
+        type: string
+        example: "Api test"
+      md_fganch:
+        type: integer
+        format: int32
+        example: "1"
+      md_clmdmm:
+        type: string
+        example: "Green"
+      md_ccadip:
+        type: string
+        example: "192.168.100.100"
+      md_ccmodu:
+        type: string
+        example: "dredd"
+      createdAt:
+        type: string
+        example: "2019-05-24"
+      updatedAt:
+        type: string
+        example: "2019-05-24"
