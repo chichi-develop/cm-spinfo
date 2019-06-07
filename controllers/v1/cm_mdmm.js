@@ -34,13 +34,11 @@ exports.destroy = (req, res, next) => {
         md_nommrb: req.params.no
       }
     })
-    if (!beforeData.length) {
-      headerip = req.headers['x-forwarded-for'] || req.client.remoteAddress
-      //headerip = "..ffff..,127.0.0.1...192.168.3.3...."
-      headerip = headerip.match(/\d+\.\d+\.\d+\.\d/g)
-      if (headerip.length > 1) {
-        logger.error(`IPaddress:${headerip}`)
-      }
+    if (beforeData.length===0) {
+      res.status(404).json({msg: 'Not Found Data'});
+    } else {
+      var headerip = req.headers ? getip(req) : 'unknown'
+      headerip = headerip.length>15 ? headerip.match(/\d+\.\d+\.\d+\.\d/g)[0] : headerip
       await models.cm_mdmm.destroy({
         where: {
           md_cdcstm: req.params.id,
@@ -51,9 +49,7 @@ exports.destroy = (req, res, next) => {
       }).catch((error) => {
         res.status(500).json({msg: error.message});
       })
-      logger.info(`Deleted: md_cdcstm:${req.params.id}、md_nommrb:${req.params.no}`)
-    } else {
-      res.status(404).json({msg: 'Not Found Data'});
+      logger.info(`Deleted: md_cdcstm:${req.params.id}、md_nommrb:${req.params.no}、ip:${headerip}`)
     }
   })
 
@@ -65,14 +61,13 @@ exports.create = (req, res, next) => {
     const maxNo = await models.cm_mdmm.max('md_nommrb', {where : {'md_cdcstm': req.body.md_cdcstm }})
     var renban = !maxNo ? 1 : maxNo + 1
     data = req
-    headerip = req.headers['x-forwarded-for'] || req.client.remoteAddress
-    //headerip = "..ffff..,127.0.0.1...192.168.3.3...."
-    headerip = headerip.match(/\d+\.\d+\.\d+\.\d/g)
-    if (headerip.length > 1) {
-      logger.error(`IPaddress:${headerip}`)
-    }
+    var headerip = req.headers ? getip(req) : 'unknown'
+    headerip = headerip.length>15 ? headerip.match(/\d+\.\d+\.\d+\.\d/g)[0] : headerip
+    // if (headerip.length>15) {
+    //   headerip = headerip.match(/\d+\.\d+\.\d+\.\d/g)[0]
+    // }
     data.body.md_nommrb = renban
-    data.body.md_ccadip = headerip[0]
+    data.body.md_ccadip = headerip
     await models.cm_mdmm.create(data.body,{
     },{transaction: t}).then((result) => {
       res.status(201).json({msg: 'Created'});
@@ -93,16 +88,12 @@ exports.update = (req, res, next) => {
     })
     if (beforeData.length !== null) {
       data = req
-      headerip = req.headers['x-forwarded-for'] || req.client.remoteAddress
-      //headerip = "..ffff..,127.0.0.1...192.168.3.3...."
-      headerip = headerip.match(/\d+\.\d+\.\d+\.\d/g)
-      if (headerip.length > 1) {
-        logger.error(`IPaddress:${headerip}`)
-      }
+      var headerip = req.headers ? getip(req) : 'unknown'
+      headerip = headerip.length>15 ? headerip.match(/\d+\.\d+\.\d+\.\d/g)[0] : headerip
       data.body.md_idmdmm = beforeData.md_idmdmm
       data.body.md_cdcstm = req.params.id
       data.body.md_nommrb = req.params.no
-      data.body.md_ccadip = headerip[0]
+      data.body.md_ccadip = headerip
       await models.cm_mdmm.update(data.body,{
         where: {
           md_cdcstm: req.params.id,
@@ -194,3 +185,15 @@ exports.update = (req, res, next) => {
 //     res.redirect(302, "/cm_mdmms");
 //   });
 // };
+
+function getip(req) {
+  return req.headers['x-forwarded-for']
+  ? req.headers['x-forwarded-for']
+  : (req.connection && req.connection.remoteAddress)
+  ? req.connection.remoteAddress
+  : (req.connection.socket && req.connection.socket.remoteAddress)
+  ? req.connection.socket.remoteAddress
+  : (req.socket && req.socket.remoteAddress)
+  ? req.socket.remoteAddress
+  : '0.0.0.0';
+}

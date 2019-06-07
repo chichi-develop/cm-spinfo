@@ -38,16 +38,69 @@ paths:
         - in: body
           name: cm_mdmms
           required: true
-          description: upsert
+          description: create
           schema:
             # type: object
             $ref: '#/definitions/cm_mdmms_request'
       responses:
-        '200':
+        '201':
           description: ""
           schema:
             properties:
-              token:
+              msg:
+                type: string
+
+  /v1/cm_mdmms/{md_cdcstm}/{md_mdmmr}:
+    put:
+      summary: Update a memo.
+      parameters:
+        - in: "path"
+          name: "md_cdcstm"
+          type: string
+          required: true
+          description: "取得したい顧客情報の読者番号"
+          x-example: "20977473"
+        - in: "path"
+          name: "md_mdmmr"
+          type: string
+          required: true
+          description: "取得したいメモデータのメモ連番"
+          x-example: "26"
+        - in: body
+          name: cm_mdmms
+          required: true
+          description: update
+          schema:
+            # type: object
+            $ref: '#/definitions/cm_mdmms_request'
+      responses:
+        '204':
+          description: ""
+          schema:
+            properties:
+              msg:
+                type: string
+    delete:
+      summary: Delete a memo.
+      parameters:
+        - in: "path"
+          name: "md_cdcstm"
+          type: string
+          required: true
+          description: "削除したい顧客情報の読者番号"
+          x-example: "20919840"
+        - in: "path"
+          name: "md_mdmmr"
+          type: string
+          required: true
+          description: "削除したいメモデータのメモ連番"
+          x-example: "9"
+      responses:
+        '204':
+          description: ""
+          schema:
+            properties:
+              msg:
                 type: string
 definitions:
   cm_mdmms_response:
