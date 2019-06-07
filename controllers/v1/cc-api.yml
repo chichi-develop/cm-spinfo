@@ -61,7 +61,7 @@ paths:
           description: "取得したい顧客情報の読者番号"
           x-example: "20977473"
         - in: "path"
-          name: "md_mdmmr"
+          name: "md_nommrb"
           type: string
           required: true
           description: "取得したいメモデータのメモ連番"
@@ -90,7 +90,7 @@ paths:
           description: "削除したい顧客情報の読者番号"
           x-example: "20977473"
         - in: "path"
-          name: "md_mdmmr"
+          name: "md_nommrb"
           type: string
           required: true
           description: "削除したいメモデータのメモ連番"
