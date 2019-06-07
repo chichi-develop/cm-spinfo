@@ -50,7 +50,7 @@ paths:
               msg:
                 type: string
 
-  /v1/cm_mdmms/{md_cdcstm}/{md_mdmmr}:
+  /v1/cm_mdmms/{md_cdcstm}/{md_nommrb}:
     put:
       summary: Update a memo.
       parameters:
@@ -88,13 +88,13 @@ paths:
           type: string
           required: true
           description: "削除したい顧客情報の読者番号"
-          x-example: "20919840"
+          x-example: "20977473"
         - in: "path"
           name: "md_mdmmr"
           type: string
           required: true
           description: "削除したいメモデータのメモ連番"
-          x-example: "9"
+          x-example: "34"
       responses:
         '204':
           description: ""
