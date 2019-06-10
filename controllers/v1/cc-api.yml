@@ -47,7 +47,7 @@ paths:
           description: ""
           schema:
             properties:
-              msg:
+              message:
                 type: string
 
   /v1/cm_mdmms/{md_cdcstm}/{md_nommrb}:
@@ -78,7 +78,7 @@ paths:
           description: ""
           schema:
             properties:
-              msg:
+              message:
                 type: string
     delete:
       summary: Delete a memo.
@@ -94,13 +94,13 @@ paths:
           type: string
           required: true
           description: "削除したいメモデータのメモ連番"
-          x-example: "34"
+          x-example: "31"
       responses:
         '204':
           description: ""
           schema:
             properties:
-              msg:
+              message:
                 type: string
 definitions:
   cm_mdmms_response:

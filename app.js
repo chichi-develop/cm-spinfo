@@ -42,13 +42,7 @@ var logger = log4js.getLogger();
 // app.use(log4js.connectLogger(logger));
 app.use(function(req, res, next){
   logger.info([
-    req.headers['x-forwarded-for'] || req.client.remoteAddress,
-    // req.client.remoteAddress,
-    // req.connection.remoteAddress,
-    // req.ip,
-    // req.ips,
-    // req.connection.socket.remoteAddress,
-    // req.socket.remoteAddress,
+    getip(req),
     new Date().toLocaleString(),
     req.method,
     req.url,
@@ -66,11 +60,6 @@ app.use(methodOverride('_method'))
 
 var router = require('./routes/v1/');
 app.use('/api/v1/', router);
-
-app.get("/", function (req, res) {
-  //res.json({mssage:"This is test"});
-  throw new Error("BROKEN TEST"); // Express will catch this on its own.
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -91,5 +80,22 @@ app.use((err, req, res, next) => {
     },
   });
 });
+
+function getip(req) {
+  var headerip = req.headers ? getheaderip(req) : 'unknown'
+  if (headerip.length > 15) {headerip = headerip.match(/\d+\.\d+\.\d+\.\d/g)[0]}
+  return headerip
+  function getheaderip(req) {
+    return req.headers['x-forwarded-for']
+    ? req.headers['x-forwarded-for']
+    : (req.connection && req.connection.remoteAddress)
+    ? req.connection.remoteAddress
+    : (req.connection.socket && req.connection.socket.remoteAddress)
+    ? req.connection.socket.remoteAddress
+    : (req.socket && req.socket.remoteAddress)
+    ? req.socket.remoteAddress
+    : '0.0.0.0';
+  }
+}
 
 module.exports = app;
