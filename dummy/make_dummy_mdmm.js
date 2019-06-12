@@ -3,16 +3,17 @@ var request = require('request');
 var casual = require('casual').ja_JP;
 var moment = require('moment');
 var options = {
-  uri: "http://localhost:3000/api/v1/cm_mdmms/20967357/6",
-  method: 'PUT',
+  // uri: "http://localhost:3000/api/v1/cm_mdmms/20967357/6",
+  uri: "http://localhost:8340/api/v1/cm_mdmms",
+  method: 'POST',
   headers: {
     //"Content-type": "application/x-www-form-urlencoded",
     "Content-type": "application/json",
   },
   form: {
   "md_idmdmm": "",
-  //"md_cdcstm": casual.integer(from = 20900001, to = 20999999) ,
-  "md_cdcstm": 20967357,
+  "md_cdcstm": casual.integer(from = 20900001, to = 20999999) ,
+  // "md_cdcstm": 20967357,
   "md_nommrb": casual.integer(from = 1, to = 9),
   "md_nmmmbr": casual.random_element(['問い合わせ', '要望', 'その他メモ']) ,
   "md_txmdmm": casual.random_element(['セミナーメモ', '大会メモ', '物販メモ']) ,
@@ -30,4 +31,4 @@ var options = {
 };
 
 
-request.put(options, function(error, response, body){console.log(body)});
+request.post(options, function(error, response, body){console.log(body)});
