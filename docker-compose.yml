@@ -12,15 +12,15 @@ services:
       TZ: 'Asia/Tokyo'
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-    - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
-    - ./db/sql:/docker-entrypoint-initdb.d
+    - ./cm-spinfo-api/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./cm-spinfo-api/db/sql:/docker-entrypoint-initdb.d
     - mysql-data:/var/lib/mysql
     ports:
     - 3306:3306
 
-  node:
+  node-api:
     build:
-      context: .
+      context: ./cm-spinfo-api
     environment:
       - NODE_ENV=production
     container_name: cm-spinfo-api

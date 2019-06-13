@@ -7,8 +7,8 @@ package "VMWare" {
   package "Linux: ccwebsvr" {
     package "docker" {
       package "Repository: cm-spinfo" {
-        package "Folder: cm-spinfo-front" {
-          package "docker-compose: cm-spinfo-front" {
+        package "docker-compose: cm-spinfo" {
+          package "Folder: cm-spinfo-frontend" {
             package "container: cm-spinfo" {
               node "Node.js" as Node.js_cm-spinfo {
                 node "React" as React_cm-spinfo {
@@ -17,11 +17,9 @@ package "VMWare" {
               }
             }
           }
-        }
 
-        package "Folder: cm-spinfo-backend" {
-          package "docker-compose: cm-spinfo-backend" {
-            package "container: cm-spinfo-api" {
+        package "Folder: cm-spinfo-api" {
+          package "container: cm-spinfo-api" {
               node "Node.js" as Node.js_cm-spinfo-api {
                 node "Express" as Express_cm-spinfo-api {
                   [WebAPI]
