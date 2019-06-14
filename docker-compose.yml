@@ -29,7 +29,7 @@ services:
     tty: true
     depends_on:
       - db
-    command: sh /wait.sh npm start
+    command: sh /wait.sh yarn start
 
 volumes:
   mysql-data:
