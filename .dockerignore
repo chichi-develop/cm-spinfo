@@ -4,3 +4,5 @@
 *docker-compose*
 node_modules
 logs
+yarn.lock
+package-lock.json
