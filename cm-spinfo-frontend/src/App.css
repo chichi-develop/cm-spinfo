@@ -1,0 +1,39 @@
+.app {
+  max-width: 100%;
+  background-color: rgb(237, 237, 237);
+}
+
+.app-body {
+  display: block;
+  min-height: calc(100vh - 64px);
+  width:980px;
+  background-color: #f8f8f8;
+  max-width:100%;
+  margin:0 auto;
+}
+
+.app-body-header {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 1.8em 0 1.8em;
+  padding-top: 1.8em;
+}
+
+.app-body-container {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  margin-top: 0.5em;
+  margin-left: 1.8em;
+  margin-right: 1.8em;
+  padding-bottom: 1.8em;
+}
+
+a:link {
+  color: rgb(65, 131,196);
+}
+
+a:visited {
+  color: rgb(65, 131,196);
+}

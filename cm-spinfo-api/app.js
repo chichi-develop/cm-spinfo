@@ -39,6 +39,13 @@ log4js.configure({
 
 var logger = log4js.getLogger();
 
+// CORSを許可する
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // app.use(log4js.connectLogger(logger));
 app.use(function(req, res, next){
   logger.info([

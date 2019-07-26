@@ -1,0 +1,3 @@
+export const GET_MDMMS_START = 'GET_MDMMS_START'
+export const GET_MDMMS_SUCCEED = 'GET_MDMMS_SUCCEED'
+export const GET_MDMMS_FAIL = 'GET_MDMMS_FAIL'

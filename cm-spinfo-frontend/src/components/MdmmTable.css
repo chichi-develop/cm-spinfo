@@ -1,0 +1,49 @@
+
+.mdmmTable {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.mdmmTable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.mdmmTable-title {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.mdmmTable-addButton {
+  display: inline-block;
+  font-size: 16px;
+  padding: 0.5em 1em;
+  margin-bottom: 0.3em;
+  text-decoration: none;
+  background: #668ad8;
+  color: #FFF;
+  border-radius: 3px;
+}
+
+.mdmmTable-table {
+  max-width: 100%;
+  min-width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.mdmmTable-thead th {
+  color:white; /*文字色*/
+  background-color: hsl(60, 3%, 27%); /*背景色*/
+  border:solid 1px #aaaaaa;
+  padding: 0.5em 1em;
+}
+
+.mdmmTable-tbody td {
+  border:solid 1px #aaaaaa;
+  padding: 0.5em 1em;
+}
