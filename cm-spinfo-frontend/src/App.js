@@ -67,7 +67,6 @@ const App = (props) => (
           <div className="app-body-header">
             <SearchForm mdmms={props.mdmms} mdmmSearch={props.mdmmSearch}/>
           </div>
-          <button onClick={() => props.mdmmSearch('20977473')}>test dispatch①</button>
 
           <div className="app-body-container">
             <Route exact path='/' render={() => <MdmmTable data={data} mdmms={props.mdmms} />} />

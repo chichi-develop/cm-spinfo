@@ -15,12 +15,12 @@ const MdmmTable = (props) => (
     </div>
     {/* <p className='mdmmTable-showSwitch'>全表示</p> */}
 
-    { props.mdmms.mdmms.cm_mdmms ? <p>OK!</p> : <p>NG</p>}
+    {/* { props.mdmms.mdmms.cm_mdmms ? <p>OK!</p> : <p>NG</p>} */}
 
     { props.mdmms.mdmms.cm_mdmms ?
         <table className='mdmmTable-table'><HonbanMdmmTableData data={props.mdmms.mdmms.cm_mdmms}/></table>
       :
-        <p>nashi</p>
+        <p>data nothing</p>
     }
 
     <table className='mdmmTable-table'>
@@ -48,8 +48,8 @@ const MdmmTableData = (props) => (
           <td>{row.name}</td>
           <td>{row.address}</td>
           <td>{row.zip}</td>
-          <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.id}`}><EditIcon style={{fontSize: '1.5em'}}/></Link></td>
-          <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.id}`}><DeleteIcon style={{fontSize: '1.5em'}}/></Link></td>
+          <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.id}`}><EditIcon style={{fontSize: '1.5em', color: '#668ad8'}}/></Link></td>
+          <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.id}`}><DeleteIcon style={{fontSize: '1.5em', color: '#668ad8'}}/></Link></td>
         </tr>
       )}
     </tbody>

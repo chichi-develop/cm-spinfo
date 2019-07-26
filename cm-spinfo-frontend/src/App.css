@@ -31,9 +31,11 @@
 }
 
 a:link {
-  color: rgb(65, 131,196);
+  /* color: rgb(65, 131,196); */
+  color: #668ad8;
 }
 
 a:visited {
-  color: rgb(65, 131,196);
+  /* color: rgb(65, 131,196); */
+  color: #668ad8;
 }
