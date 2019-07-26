@@ -7,7 +7,7 @@ const initialState = {
   error: ''
 }
 
-function mdmmsReducer(state = initialState, action) {
+const mdmmsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_MDMMS_START:
       return (Object.assign({}, state, {isLoading: true, error: ''}))

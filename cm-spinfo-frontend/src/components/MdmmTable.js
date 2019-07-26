@@ -14,6 +14,15 @@ const MdmmTable = (props) => (
       <button className='mdmmTable-addButton'>新規メモ登録</button>
     </div>
     {/* <p className='mdmmTable-showSwitch'>全表示</p> */}
+
+    { props.mdmms.mdmms.cm_mdmms ? <p>OK!</p> : <p>NG</p>}
+
+    { props.mdmms.mdmms.cm_mdmms ?
+        <table className='mdmmTable-table'><HonbanMdmmTableData data={props.mdmms.mdmms.cm_mdmms}/></table>
+      :
+        <p>nashi</p>
+    }
+
     <table className='mdmmTable-table'>
       <MdmmTableHeader data={header} />
       <MdmmTableData data={props.data} />
@@ -44,6 +53,21 @@ const MdmmTableData = (props) => (
         </tr>
       )}
     </tbody>
+)
+
+const HonbanMdmmTableData = (props) => (
+  <tbody className='mdmmTable-tbody'>
+    {props.data.map(row =>
+      <tr key={row.md_idmdmm}>
+        <td>{row.md_idmdmm}</td>
+        <td>{row.md_cdcstm}</td>
+        <td>{row.md_txmdmm}</td>
+        <td>{row.updateAt}</td>
+        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.id}`}><EditIcon style={{fontSize: '1.5em'}}/></Link></td>
+        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.id}`}><DeleteIcon style={{fontSize: '1.5em'}}/></Link></td>
+      </tr>
+    )}
+  </tbody>
 )
 
 export default MdmmTable
