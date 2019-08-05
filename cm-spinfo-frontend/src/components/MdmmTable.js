@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
@@ -50,12 +51,12 @@ const MdmmTableData = (props) => (
   <tbody className='mdmmTable-tbody'>
     {props.data.map(row =>
       <tr key={row.md_idmdmm}>
-        <td>{row.updateAt}</td>
+        <td>{moment(row.updateAt).format('YYYY/MM/DD')}</td>
         <td>{row.md_cdcstm}</td>
         <td>{row.md_cdcstm}</td>
         <td>{row.md_txmdmm}</td>
-        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.id}`}><EditIcon style={{fontSize: '1.5em'}}/></Link></td>
-        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.id}`}><DeleteIcon style={{fontSize: '1.5em'}}/></Link></td>
+        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link></td>
+        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.md_idmdmm}`}><DeleteIcon style={{fontSize: '1.5em'}}/></Link></td>
       </tr>
     )}
   </tbody>
