@@ -25,8 +25,15 @@ function SearchForm (props) {
         <button onClick={(e) => {e.preventDefault(); props.mdmmSearch(searchKey)}}><i className="material-icons">search</i></button>
       </form>
       <div className="searchForm-currentContainer">
-        <p className="searchForm-currentData">後藤　直</p>
-        <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+
+        { props.mdmms.mdmms.cm_mdmms ?
+            <>
+              <p className="searchForm-currentData">{props.mdmms.mdmms.cm_mdmms[0].md_cdcstm}</p>
+              <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+            </>
+          :
+            <p className="searchForm-currentMessage">読者番号を入力し、検索してください。</p>
+        }
       </div>
     </div>
   )

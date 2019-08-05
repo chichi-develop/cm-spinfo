@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { useSelector, useDispatch } from 'react-redux'
-import * as ActionType from './actions/actionsConsMdmms';
+// import * as ActionType from './actions/actionsConsMdmms';
+import * as Actions from './actions/actionsMdmms'
 
 import NavigationBar from './components/NavigationBar'
 import SearchForm from './components/SearchForm'
@@ -50,8 +51,13 @@ const data = [
 const App = () => {
   const mdmms = useSelector(state => state.mdmms)
   const dispatch = useDispatch()
+  // const mdmmSearch = useCallback(
+  //   (cdcstm) => dispatch({ type: ActionType.GET_MDMMS_START, payload: cdcstm }),
+  //   [dispatch]
+  // )
+
   const mdmmSearch = useCallback(
-    () => dispatch({ type: ActionType.GET_MDMMS_SUCCEED }),
+    (cdcstm) => dispatch( Actions.GetMdmms.start(cdcstm) ),
     [dispatch]
   )
 
