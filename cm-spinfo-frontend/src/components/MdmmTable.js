@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -7,28 +7,42 @@ import './MdmmTable.css'
 
 const header = ["読者番号", "顧客名", "住所", "郵便番号"]
 
-const MdmmTable = (props) => (
-  <div className='mdmmTable'>
-    <div className='mdmmTable-header'>
-      <p className='mdmmTable-title'>お客様窓口メモ</p>
-      <button className='mdmmTable-addButton'>新規メモ登録</button>
+
+
+const MdmmTable = (props) => {
+  useEffect(() => {
+    // 初期状態では、レンダリングごとに呼ばれる
+    // （初回とその後の毎回）
+    console.log('MdmmTable render!');
+
+    // componentWillUnmountを実装したければ
+    // ここから関数を返すと
+    // Reactはアンマウントの直前にそれを呼び出す
+    return () => console.log('unmounting...');
+  })
+  return (
+    <div className='mdmmTable'>
+      <div className='mdmmTable-header'>
+        <p className='mdmmTable-title'>お客様窓口メモ</p>
+        <button className='mdmmTable-addButton'>新規メモ登録</button>
+      </div>
+      {/* <p className='mdmmTable-showSwitch'>全表示</p> */}
+
+      {/* { props.mdmms.mdmms.cm_mdmms ? <p>OK!</p> : <p>NG</p>} */}
+
+      { props.mdmms.mdmms.cm_mdmms ?
+          <table className='mdmmTable-table'><HonbanMdmmTableData data={props.mdmms.mdmms.cm_mdmms}/></table>
+        :
+          <p>data nothing</p>
+      }
+
+      <table className='mdmmTable-table'>
+        <MdmmTableHeader data={header} />
+        <MdmmTableData data={props.data} />
+      </table>
     </div>
-    {/* <p className='mdmmTable-showSwitch'>全表示</p> */}
-
-    {/* { props.mdmms.mdmms.cm_mdmms ? <p>OK!</p> : <p>NG</p>} */}
-
-    { props.mdmms.mdmms.cm_mdmms ?
-        <table className='mdmmTable-table'><HonbanMdmmTableData data={props.mdmms.mdmms.cm_mdmms}/></table>
-      :
-        <p>data nothing</p>
-    }
-
-    <table className='mdmmTable-table'>
-      <MdmmTableHeader data={header} />
-      <MdmmTableData data={props.data} />
-    </table>
-  </div>
-)
+  )
+}
 
 const MdmmTableHeader = (props) => (
     <thead className='mdmmTable-thead'>

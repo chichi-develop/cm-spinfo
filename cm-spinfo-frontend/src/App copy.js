@@ -1,8 +1,12 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { useSelector, useDispatch } from 'react-redux'
-import * as ActionType from './actions/actionsConsMdmms';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as MdmmActions from './actions/actionsMdmms';
+
+
+
 
 import NavigationBar from './components/NavigationBar'
 import SearchForm from './components/SearchForm'
@@ -47,26 +51,7 @@ const data = [
   {id: 27, name: 'Dal Yu', address: 'Texas', zip: '111-1110'},
 ]
 
-const App = () => {
-  const mdmms = useSelector(state => state.mdmms)
-  const dispatch = useDispatch()
-  const mdmmSearch = useCallback(
-    () => dispatch({ type: ActionType.GET_MDMMS_SUCCEED }),
-    [dispatch]
-  )
-
-  useEffect(() => {
-    // 初期状態では、レンダリングごとに呼ばれる
-    // （初回とその後の毎回）
-    console.log('App render!');
-
-    // componentWillUnmountを実装したければ
-    // ここから関数を返すと
-    // Reactはアンマウントの直前にそれを呼び出す
-    return () => console.log('unmounting...');
-  })
-
-  return (
+const App = (props) => (
     <>
       <div className="app">
 
@@ -80,11 +65,11 @@ const App = () => {
         <div className="app-body">
 
           <div className="app-body-header">
-            <SearchForm mdmms={mdmms} mdmmSearch={mdmmSearch}/>
+            <SearchForm mdmms={props.mdmms} mdmmSearch={props.mdmmSearch}/>
           </div>
 
           <div className="app-body-container">
-            <Route exact path='/' render={() => <MdmmTable data={data} mdmms={mdmms} />} />
+            <Route exact path='/' render={() => <MdmmTable data={data} mdmms={props.mdmms} />} />
             <Route exact path='/AddForm' component={AddForm} />
             <Route exact path='/EditForm' component={EditForm} />
           </div>
@@ -95,7 +80,21 @@ const App = () => {
 
       </div>
     </>
-  )
+)
+
+function mapStateToProps(state) {
+  return {
+    mdmms: state.mdmms
+  }
 }
 
-export default withRouter(App)
+function mapDispatchToProps(dispatch) {
+  return {
+    mdmmSearch: bindActionCreators(MdmmActions.GetMdmms.start, dispatch),
+  }
+}
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App))
