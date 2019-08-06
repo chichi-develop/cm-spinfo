@@ -61,6 +61,12 @@ const App = () => {
     [dispatch]
   )
 
+  const mdmmDelete = useCallback(
+    ({cdcstm, nommrb}) => dispatch( Actions.DeleteMdmms.start({cdcstm, nommrb}) ),
+    // (cdcstm) => dispatch( Actions.DeleteMdmms.start(cdcstm) ),
+    [dispatch]
+  )
+
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
@@ -86,11 +92,11 @@ const App = () => {
         <div className="app-body">
 
           <div className="app-body-header">
-            <SearchForm mdmms={mdmms} mdmmSearch={mdmmSearch}/>
+            <SearchForm mdmms={mdmms} mdmmSearch={mdmmSearch} />
           </div>
 
           <div className="app-body-container">
-            <Route exact path='/' render={() => <MdmmTable data={data} mdmms={mdmms} />} />
+            <Route exact path='/' render={() => <MdmmTable data={data} mdmms={mdmms} mdmmDelete={mdmmDelete} />} />
             <Route exact path='/AddForm' component={AddForm} />
             <Route exact path='/EditForm' component={EditForm} />
           </div>

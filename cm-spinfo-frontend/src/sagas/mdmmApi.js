@@ -9,3 +9,13 @@ export async function getMdmmsFactory(cdcstm) {
     throw error
   }
 }
+
+export async function deleteMdmmsFactory(cdcstm, nommrb) {
+  try {
+    await axios.delete(`${baseUrlMdmms}/${cdcstm}/${nommrb}`)
+    const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

@@ -28,7 +28,7 @@ const MdmmTable = (props) => {
       { props.mdmms.mdmms.cm_mdmms ?
           <table className='mdmmTable-table'>
             <MdmmTableHeader data={header} />
-            <MdmmTableData data={props.mdmms.mdmms.cm_mdmms}/>
+            <MdmmTableData data={props.mdmms.mdmms.cm_mdmms} mdmmDelete={props.mdmmDelete} />
           </table>
         :
           <p>data nothing</p>
@@ -47,19 +47,31 @@ const MdmmTableHeader = (props) => (
     </thead>
 )
 
-const MdmmTableData = (props) => (
-  <tbody className='mdmmTable-tbody'>
-    {props.data.map(row =>
-      <tr key={row.md_idmdmm}>
-        <td>{moment(row.updateAt).format('YYYY/MM/DD')}</td>
-        <td>{row.md_cdcstm}</td>
-        <td>{row.md_cdcstm}</td>
-        <td>{row.md_txmdmm}</td>
-        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/EditForm/${row.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link></td>
-        <td style={{padding: '0', textAlign: 'center', width: '3em'}}><Link to={`/DeleteForm/${row.md_idmdmm}`}><DeleteIcon style={{fontSize: '1.5em'}}/></Link></td>
-      </tr>
-    )}
-  </tbody>
-)
+const MdmmTableData = (props) => {
+  return (
+    <tbody className='mdmmTable-tbody'>
+      {props.data.map(row =>
+        <tr key={row.md_idmdmm}>
+          <td>{moment(row.updateAt).format('YYYY/MM/DD')}</td>
+          <td>{row.md_cdcstm}</td>
+          <td>{row.md_cdcstm}</td>
+          <td>{row.md_txmdmm}</td>
+          <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
+            <Link to={`/EditForm/${row.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link>
+          </td>
+          <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
+            <DeleteIcon style={{fontSize: '1.5em',color: '#668ad8'}}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          props.mdmmDelete({cdcstm:row.md_cdcstm, nommrb:row.md_nommrb});
+                        }}/>
+          </td>
+        </tr>
+      )}
+    </tbody>
+  )
+}
+
+
 
 export default MdmmTable
