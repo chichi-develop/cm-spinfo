@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import _ from 'lodash'
 
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import './MdmmTable.css'
-
-const header = ["更新日", "読者番号", "顧客名", "内容"]
 
 const MdmmTable = (props) => {
 
@@ -30,12 +29,7 @@ const MdmmTable = (props) => {
       </div>
       { props.mdmms.mdmms.cm_mdmms ?
           <div>
-          {/* <table className='mdmmTable-table'> */}
-            {/* <MdmmTableHeader data={header} /> */}
-            {/* <MdmmTableData data={props.mdmms.mdmms.cm_mdmms} mdmmDelete={props.mdmmDelete} /> */}
-            {/* <MdmmTableData data={mdmms} mdmmDelete={props.mdmmDelete} /> */}
-          {/* </table> */}
-          <Test mdmms={mdmms} mdmmDelete={props.mdmmDelete} />
+            <Test mdmms={mdmms} mdmmDelete={props.mdmmDelete} />
           </div>
         :
           <p>data nothing</p>
@@ -44,85 +38,32 @@ const MdmmTable = (props) => {
   )
 }
 
-const MdmmTableHeader = (props) => (
-    <thead className='mdmmTable-thead'>
-      <tr>
-        {props.data.map((h, i) => <th key={i}>{h}</th>)}
-        <th style={{padding: '0', width: '4em'}}>編集</th>
-        <th style={{padding: '0', width: '4em'}}>削除</th>
-      </tr>
-    </thead>
-)
-
-const MdmmTableData = (props) => {
-  return (
-    <tbody className='mdmmTable-tbody'>
-      {props.data.map(row =>
-        <tr key={row.md_idmdmm}>
-          <td>{moment(row.updateAt).format('YYYY/MM/DD')}</td>
-          <td>{row.md_cdcstm}</td>
-          <td>{row.md_cdcstm}</td>
-          <td>{row.md_txmdmm}</td>
-          <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
-            <Link to={`/EditForm/${row.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link>
-          </td>
-          <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
-            <DeleteIcon style={{fontSize: '1.5em',color: '#668ad8'}}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          props.mdmmDelete({cdcstm:row.md_cdcstm, nommrb:row.md_nommrb});
-                        }}/>
-          </td>
-        </tr>
-      )}
-    </tbody>
-  )
-}
-
-
-
-
 const Test = (props) => {
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
     console.log('MdmmTable-test render!');
     setMdmms( props.mdmms )
-
+    setNmmmbrs( _.uniq(_.map(props.mdmms, 'md_nmmmbr')) )
+    console.log( "Nmmmbrs:" + _.uniq(_.map(props.mdmms, 'md_nmmmbr')) )
 
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
     // Reactはアンマウントの直前にそれを呼び出す
     return () => console.log('unmounting...');
-  }, props.mdmms)
+  }, [props.mdmms])
+
   const initialState = {
-        mdmms: props.mdmms,
-        md_nmmmbr: [
-              {
-                  id: 0,
-                  title: '問い合わせ'
-              },{
-                  id: 1,
-                  title: '要望'
-              },{
-                  id: 2,
-                  title: 'その他メモ'
-              },{
-                  id: 3,
-                  title: '0'
-              }
-          ]
+        mdmms: [],
+        md_nmmmbr: [],
     };
 
-  // mdmms
   const [mdmms, setMdmms] = useState(initialState.mdmms);
   const [md_nmmmbrs, setNmmmbrs] = useState(initialState.md_nmmmbr);
   // 検索条件
   const [filterQuery, setFilterQuery] = useState({});
   // ソート条件
   const [sort, setSort] = useState({});
-
-
 
   const filteredMdmm = useMemo(() => {
     let tmpMdmms = mdmms;
@@ -145,7 +86,8 @@ const Test = (props) => {
         if (
             filterQuery.md_nmmmbr_key &&
             // row.md_nmmmbr !== parseInt(filterQuery.md_nmmmbr_key)
-            row.md_nmmmbr !== md_nmmmbrs[parseInt(filterQuery.md_nmmmbr_key)].title
+            // row.md_nmmmbr !== md_nmmmbrs[parseInt(filterQuery.md_nmmmbr_key)].title
+            row.md_nmmmbr !== filterQuery.md_nmmmbr_key
         ) {
             return false;
         }
@@ -186,44 +128,40 @@ const Test = (props) => {
         <table className='mdmmTable-table'>
             <thead className='mdmmTable-thead'>
             <tr>
-                <th onClick={() => handleSort('updatedAt')}>更新日付</th>
-                <th>md_txmdmm</th>
-                <th>md_nmmmbr</th>
-                <th onClick={() => handleSort('md_nmmmbr')}>md_nmmmbr</th>
-                <th style={{padding: '0', width: '4em'}}>編集</th>
-                <th style={{padding: '0', width: '4em'}}>削除</th>
+                <th rowSpan="2" onClick={() => handleSort('updatedAt')}>更新日付</th>
+                <th rowSpan="2" onClick={() => handleSort('md_nommrb')}>メモ連番</th>
+                <th onClick={() => handleSort('md_nmmmbr')}>メモ分類</th>
+                <th onClick={() => handleSort('md_txmdmm')}>内容</th>
+                <th rowSpan="2" style={{padding: '0', width: '4em'}}>編集</th>
+                <th rowSpan="2" style={{padding: '0', width: '4em'}}>削除</th>
             </tr>
             <tr>
-                <th></th>
-                <th>
-                  <input type="text" name="md_txmdmm" className="form-input" placeholder="md_txmdmm"
-                          value={filterQuery.md_txmdmm || ''}
-                          onChange={handleFilter}
-                  />
-                </th>
                 <th>
                   <select
                       name="md_nmmmbr_key"
                       value={filterQuery.md_nmmmbr_key}
                       onChange={handleFilter}
                   >
-                      <option value="">md_nmmmbr選択</option>
+                      <option value="">選択</option>
                       {
-                          md_nmmmbrs.map((item) => {
+                          md_nmmmbrs.map((item,index) => {
                               return (
                                   <option
-                                      key={item.id}
-                                      value={item.id}>
-                                      {item.title}
+                                      key={index}
+                                      value={item}>
+                                      {item}
                                   </option>
                               );
                           })
                       }
                   </select>
                 </th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>
+                  <input type="text" name="md_txmdmm" className="form-input" placeholder="絞り込み検索"
+                          value={filterQuery.md_txmdmm || ''}
+                          onChange={handleFilter}
+                  />
+                </th>
             </tr>
             </thead>
             <tbody className='mdmmTable-tbody'>
@@ -231,17 +169,14 @@ const Test = (props) => {
                 filteredMdmm.map((mdmm) => {
                     return(
                         <tr key={mdmm.md_idmdmm}>
-                            <td>{mdmm.updatedAt}</td>
-                            <td>{mdmm.md_txmdmm}</td>
-                            {/* <td>{mdmm.md_idmdmm}</td> */}
+                            <td>{moment(mdmm.updateAt).format('YYYY/MM/DD')}</td>
+                            <td>{mdmm.md_nommrb}</td>
                             <td>{mdmm.md_nmmmbr}</td>
-                            <td>
-                            {
+                            <td>{mdmm.md_txmdmm}</td>
+                            {/* {
                                 mdmm.md_nmmmbr ?
-                                // md_nmmmbrs.find(c => c.id === mdmm.md_nmmmbr).title : ''
-                                md_nmmmbrs.find(c => c.title === mdmm.md_nmmmbr).title : ''
-                            }
-                            </td>
+                                  md_nmmmbrs.find(c => c.id === mdmm.md_nmmmbr).title : ''
+                            } */}
                             <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                               <Link to={`/EditForm/${mdmm.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link>
                             </td>
@@ -261,7 +196,5 @@ const Test = (props) => {
     </>
   );
 }
-
-
 
 export default MdmmTable
