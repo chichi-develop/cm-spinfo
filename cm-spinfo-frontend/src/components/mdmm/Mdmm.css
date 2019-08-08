@@ -48,3 +48,13 @@
   border:solid 1px #aaaaaa;
   padding: 0.5em 1em;
 }
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 80%;
+  width: 90%;
+  transform: translate(-50%, -50%) !important;
+  background-color: gray;
+}

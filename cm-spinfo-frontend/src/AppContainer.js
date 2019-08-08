@@ -5,6 +5,7 @@ import * as Actions from './redux/actions/actionsMdmms'
 
 import SearchForm from './components/common/SearchForm'
 import Mdmm from './components/mdmm/Mdmm'
+import MdmmEdit from './components/mdmm/MdmmEdit'
 
 import './AppContainer.css';
 
@@ -36,7 +37,7 @@ const AppContainer = () => {
   })
 
   const AddForm = () => <div>AddForm</div>;
-  const EditForm = () => <div>EditForm</div>;
+  const EditForm = () => <MdmmEdit/>
 
   // react-router-domの定義をrenderからcomponentに変えたが、再レンダリングが増えたため、戻した
   // const mdmmContainer = () => (
@@ -54,7 +55,7 @@ const AppContainer = () => {
           <Route exact path='/' render={() => <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} />} />
           {/* renderからcomponentに変えたが、再レンダリングが増えたため、戻した */}
           <Route exact path='/AddForm' component={AddForm} />
-          <Route exact path='/EditForm' component={EditForm} />
+          <Route path='/EditForm' component={EditForm} />
         </div>
 
     </>
