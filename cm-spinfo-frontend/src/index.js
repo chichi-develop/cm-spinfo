@@ -12,7 +12,7 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './redux/sagas/mdmmSaga'
-import confirmMiddleware from './common/middleware/confirm'
+import confirmMiddleware from './redux/common/middleware/confirm'
 import './index.css'
 import App from './App'
 

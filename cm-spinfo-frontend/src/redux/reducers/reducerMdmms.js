@@ -17,7 +17,7 @@ const mdmmsReducer = (state = initialState, action) => {
         {
           ...action.payload.mdmms,
           searchHistory: [action.payload.searchHistory, ...state.searchHistory].slice(0,30),
-          isLoading: false,
+          isLoading: true,
           error: '',
         }
       )

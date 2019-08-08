@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
-import './MdmmTable.css'
+import './Mdmm.css'
 
 const Mdmm = (props) => {
 
