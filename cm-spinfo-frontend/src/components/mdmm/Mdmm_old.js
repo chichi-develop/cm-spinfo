@@ -7,9 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import './MdmmTable.css'
 
-const MdmmTable = (props) => {
+const Mdmm = (props) => {
 
-  let mdmms = props.mdmms.mdmms.cm_mdmms
+  let mdmms = props.state.cm_mdmms
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
@@ -27,7 +27,7 @@ const MdmmTable = (props) => {
         <button className='mdmmTable-addButton'>新規メモ登録</button>
 
       </div>
-      { props.mdmms.mdmms.cm_mdmms ?
+      { props.state.cm_mdmms ?
           <div>
             <Test mdmms={mdmms} mdmmDelete={props.mdmmDelete} />
           </div>
@@ -197,4 +197,4 @@ const Test = (props) => {
   );
 }
 
-export default MdmmTable
+export default Mdmm

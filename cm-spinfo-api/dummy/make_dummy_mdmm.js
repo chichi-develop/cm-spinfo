@@ -13,7 +13,7 @@ var options = {
   form: {
   "md_idmdmm": "",
   // "md_cdcstm": casual.integer(from = 20900001, to = 20999999) ,
-  "md_cdcstm": 22222222,
+  "md_cdcstm": 33333333,
   "md_nommrb": casual.integer(from = 1, to = 9),
   "md_nmmmbr": casual.random_element(['問い合わせ', '要望', 'その他メモ']) ,
   "md_txmdmm": casual.random_element(['セミナーメモ', '大会メモ', '物販メモ']) ,

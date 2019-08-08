@@ -37,6 +37,7 @@
 }
 
 .mdmmTable-thead th {
+  font-size: 12px;
   color:white; /*文字色*/
   background-color: hsl(60, 3%, 27%); /*背景色*/
   border:solid 1px #aaaaaa;

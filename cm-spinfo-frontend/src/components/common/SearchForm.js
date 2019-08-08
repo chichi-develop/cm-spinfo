@@ -26,9 +26,9 @@ function SearchForm (props) {
       </form>
       <div className="searchForm-currentContainer">
 
-        { props.mdmms.mdmms.cm_mdmms ?
+        { props.state.cm_mdmms ?
             <>
-              <p className="searchForm-currentData">{props.mdmms.mdmms.cm_mdmms[0].md_cdcstm}</p>
+              <p className="searchForm-currentData">{props.state.cm_mdmms[0].md_cdcstm}</p>
               <p className="searchForm-currentMessage">様の履歴一覧です。</p>
             </>
           :
