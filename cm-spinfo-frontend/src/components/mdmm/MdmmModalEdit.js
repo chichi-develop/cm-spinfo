@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import moment from 'moment'
 
-import './MdmmEdit.css'
+import './MdmmModal.css'
 
 export const useInput = initialValue => {
   const [value, setValue] = useState(initialValue)
@@ -19,31 +19,7 @@ export const useInput = initialValue => {
   };
 };
 
-
-// 13   form: {
-//   14   "md_idmdmm": "",
-//   15   // "md_cdcstm": casual.integer(from = 20900001, to = 20999999) ,
-//   16   "md_cdcstm": 33333333,
-//   17   "md_nommrb": casual.integer(from = 1, to = 9),
-//   18   "md_nmmmbr": casual.random_element(['問い合わせ', '要望', 'その他メモ']) ,
-//   19   "md_txmdmm": casual.random_element(['セミナーメモ', '大会メモ', '物販メモ']) ,
-//   20   "md_fganch": casual.integer(from = 1, to = 9),
-//   21   "md_clmdmm": casual.random_element(['Red', 'Blue', 'Green']) ,
-//   22   "md_ccdate": moment().format("YYYY-MM-DD"),
-//   23   "md_ccadip": "127.0.0.1",
-//   24   "md_ccmodu": "post-test",
-//   25   //"createdAt": 2019-04-24,
-//   26   //"createdAt": casual.date(format = 'YYYY-MM-DD'),
-//   27   "createdAt": moment().format("YYYY-MM-DD"),
-//   28   "updatedAt": moment().format("YYYY-MM-DD")
-//   29   //"updatedAt": ""
-//   30   }
-
 export const MdmmEdit = (props) => {
-
-  // 更新日付	メモ連番	メモ分類	内容	編集	削除
-  console.log('here!!!!!!!!!!')
-  console.log(props.mdmm)
 
   // TODO: 日付が正しく表示されない
   const { value:mdIdmdmm, bind:bindMdIdmdmm, reset:resetMdIdmdmm } = useInput(props.mdmm.md_idmdmm)
@@ -95,80 +71,76 @@ export const MdmmEdit = (props) => {
     // TODO: CSSちゃんと当てる
     // TODO: 更新前に確認メッセージ
     // TODO: 更新後に閉じる
-    <div className="mdmmEdit-formContainer">
-      <div className="mdmmEdit-form-close">
+    <div className="mdmmModal-formContainer">
+      <div className="mdmmModal-form-close">
         {props.children}
       </div>
-      <div className="mdmmEdit-form-header">
+      <div className="mdmmModal-form-header">
         編集画面
       </div>
-      <form className="mdmmEdit-form" onSubmit={handleSubmit}>
-        <div className="mdmmEdit-form-data">
-          {/* 更新日付	メモ連番	メモ分類	内容	編集	削除 */}
-          <label className="mdmmEdit-form-label">
+      <form className="mdmmModal-form" onSubmit={handleSubmit}>
+        <div className="mdmmModal-form-data">
+          <label className="mdmmModal-form-label">
             md_idmdmm:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdIdmdmm} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdIdmdmm} />
           </label>
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_cdcstm:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdCdcstm} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdCdcstm} />
           </label>
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_nommrb:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdNommrb} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdNommrb} />
           </label>
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_nmmmbr:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdNmmmbr} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdNmmmbr} />
           </label>
 
-
-
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_txmdmm:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdTxmdmm} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdTxmdmm} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_fganch:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdFganch} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdFganch} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_clmdmm:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdClmdmm} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdClmdmm} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_ccdate:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdCcdate} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdCcdate} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_ccadip:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdCcadip} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdCcadip} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             md_ccmodu:
-            <input className="mdmmEdit-form-input" type="text" {...bindMdCcmodu} />
+            <input className="mdmmModal-form-input" type="text" {...bindMdCcmodu} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             createAt:
-            <input className="mdmmEdit-form-input" type="text" {...bindCreateAt} />
+            <input className="mdmmModal-form-input" type="text" {...bindCreateAt} />
           </label>
 
-          <label className="mdmmEdit-form-label">
+          <label className="mdmmModal-form-label">
             updateAt:
-            <input className="mdmmEdit-form-input" type="text" {...bindUpdateAt} />
+            <input className="mdmmModal-form-input" type="text" {...bindUpdateAt} />
           </label>
-
-
         </div>
+
         {/* TODO: 更新後にモーダルを閉じる */}
-        <div className="mdmmEdit-form-submit">
-          <input className="mdmmEdit-form-submit" type="submit" value="更新する" />
+        <div className="mdmmModal-form-submit">
+          <input className="mdmmModal-form-submit" type="submit" value="更新する" />
         </div>
       </form>
     </div>

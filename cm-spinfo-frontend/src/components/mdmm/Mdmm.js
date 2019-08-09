@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import ReactDOM from 'react-dom'
 
 // import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -10,8 +9,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import CloseIcon from '@material-ui/icons/Close'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
-import MdmmEdit from './MdmmEdit'
-import MdmmAdd from './MdmmAdd'
+import { ToggleContent, Modal } from '../common/Modal'
+
+import MdmmEdit from './MdmmModalEdit'
+import MdmmAdd from './MdmmModalAdd'
 import './Mdmm.css'
 
 const Mdmm = (props) => {
@@ -32,18 +33,17 @@ const Mdmm = (props) => {
     <div className='mdmmTable'>
       <div className='mdmmTable-header'>
         <p className='mdmmTable-title'>お客様窓口メモ</p>
-        <button className='mdmmTable-addButton'>新規メモ登録</button>
-                    <ToggleContent
-                      toggle={show => <EditIcon style={{fontSize: '1.5em', color: '#668ad8'}} onClick={show} />}
-                      content={hide => (
-                        <Modal>
-                          {/* <MdmmEdit mdmm={mdmm} mdmmAdd={props.mdmmAdd}> */}
-                          <MdmmAdd mdmmAdd={props.mdmmAdd}>
-                            <button onClick={hide}><CloseIcon/></button>
-                          </MdmmAdd>
-                        </Modal>
-                      )}
-                    />
+          <ToggleContent
+            toggle={show => <button className='mdmmTable-addButton' onClick={show}>新規メモ登録</button>}
+            content={hide => (
+              <Modal>
+                {/* <MdmmEdit mdmm={mdmm} mdmmAdd={props.mdmmAdd}> */}
+                <MdmmAdd mdmmAdd={props.mdmmAdd}>
+                  <button onClick={hide}><CloseIcon/></button>
+                </MdmmAdd>
+              </Modal>
+            )}
+          />
       </div>
 
       {/* { props.state.isLoading && (
@@ -73,7 +73,6 @@ const MdmmTable = (props) => {
     setNmmmbrs( _.uniq(_.map(props.mdmms, 'md_nmmmbr')) )
     setFilterQuery({md_nmmmbr_key:""})
     setSort({})
-    console.log( "Nmmmbrs:" + _.uniq(_.map(props.mdmms, 'md_nmmmbr')) )
 
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
@@ -222,7 +221,6 @@ const MdmmTable = (props) => {
                       )}
                     />
                   </td>
-                  {/* TODO: delete前に確認メッセージ */}
                   {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                     <DeleteIcon style={{fontSize: '1.5em', color: '#668ad8'}}
@@ -240,27 +238,5 @@ const MdmmTable = (props) => {
     </>
   )
 }
-
-const ToggleContent = ({ toggle, content }) => {
-  const [isShown, setIsShown] = useState(false);
-  const hide = () => setIsShown(false);
-  const show = () => setIsShown(true);
-
-  return (
-    <>
-      {toggle(show)}
-      {isShown && content(hide)}
-    </>
-  );
-};
-
-const Modal = ({ children }) => (
-  ReactDOM.createPortal(
-    <div className="modal">
-      {children}
-    </div>,
-    document.getElementById('modal-root')
-  )
-);
 
 export default Mdmm

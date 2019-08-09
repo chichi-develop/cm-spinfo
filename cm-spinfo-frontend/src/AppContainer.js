@@ -5,7 +5,6 @@ import * as Actions from './redux/actions/actionsMdmms'
 
 import SearchForm from './components/common/SearchForm'
 import Mdmm from './components/mdmm/Mdmm'
-// import MdmmEdit from './components/mdmm/MdmmEdit'
 
 import './AppContainer.css';
 
@@ -16,7 +15,6 @@ const AppContainer = () => {
 
   const mdmmSearch = useCallback(
     (cdcstm) => dispatch( Actions.GetMdmms.start(cdcstm) ),
-    // (cdcstm) => dispatch({ type: ActionType.GET_MDMMS_START, payload: cdcstm }),
     [dispatch]
   )
 

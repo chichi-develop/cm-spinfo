@@ -5,7 +5,7 @@ const initialState = {
   isLoading: false,
   isUpdating: false,
   searchHistory: [],
-  error: ''
+  error: '',
 }
 
 const mdmmsReducer = (state = initialState, action) => {
@@ -31,7 +31,7 @@ const mdmmsReducer = (state = initialState, action) => {
     case ActionType.ADD_MDMMS_SUCCEED:
       return (Object.assign({}, state,
         {
-					...action.payload.mdmms,
+          ...action.payload.mdmms,
           isUpdating: false,
           error: '',
         }

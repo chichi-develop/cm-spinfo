@@ -8,11 +8,8 @@ function* runGetMdmms(action) {
   try {
     const mdmms = yield call(getMdmmsFactory, cdcstm )
     const searchHistory = cdcstm
-
-    // yield put(Actions.getMdmmsSucceed({searchHistory, mdmms}))
     yield put(Actions.GetMdmms.succeed({searchHistory, mdmms}))
   } catch (error) {
-    // yield put(Actions.getMdmmsFail({error}))
     yield put(Actions.GetMdmms.fail({error}))
   }
 }
@@ -25,11 +22,8 @@ function* runDeleteMdmms(action) {
   const { cdcstm, nommrb } = action.payload
   try {
     const mdmms = yield call(deleteMdmmsFactory, cdcstm, nommrb )
-
-    // yield put(Actions.GetMdmms.start({cdcstm}))
     yield put(Actions.DeleteMdmms.succeed({mdmms}))
   } catch (error) {
-    // yield put(Actions.getMdmmsFail({error}))
     yield put(Actions.DeleteMdmms.fail({error}))
   }
 }
@@ -42,11 +36,8 @@ function* runEditMdmms(action) {
   const { cdcstm, nommrb, mdmm } = action.payload
   try {
     const mdmms = yield call(editMdmmsFactory, cdcstm, nommrb, mdmm )
-
-    // yield put(Actions.GetMdmms.start({cdcstm}))
     yield put(Actions.EditMdmms.succeed({mdmms}))
   } catch (error) {
-    // yield put(Actions.getMdmmsFail({error}))
     yield put(Actions.EditMdmms.fail({error}))
   }
 }
@@ -58,16 +49,10 @@ export function* watchEditMdmms() {
 
 function* runAddMdmms(action) {
   const mdmm = action.payload
-  console.log('saga')
-  console.log(mdmm)
-  console.log(action.payload)
   try {
     const mdmms = yield call(addMdmmsFactory, mdmm )
-
-    // yield put(Actions.GetMdmms.start({cdcstm}))
     yield put(Actions.AddMdmms.succeed({mdmms}))
   } catch (error) {
-    // yield put(Actions.getMdmmsFail({error}))
     yield put(Actions.AddMdmms.fail({error}))
   }
 }

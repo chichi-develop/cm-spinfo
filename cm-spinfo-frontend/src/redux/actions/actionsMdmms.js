@@ -13,7 +13,7 @@ export const EditMdmms = {
 }
 
 export const DeleteMdmms = {
-  start: (payload) => ({ type: ActionType.DELETE_MDMMS_START, payload }),
+  start: (payload) => ({ type: ActionType.DELETE_MDMMS_START, payload, meta:{confirm:'削除してよろしいですか？'} }),
   succeed: (payload) => ({ type: ActionType.DELETE_MDMMS_SUCCEED, payload }),
   fail: (payload) => ({ type: ActionType.DELETE_MDMMS_FAIL, payload })
 }
