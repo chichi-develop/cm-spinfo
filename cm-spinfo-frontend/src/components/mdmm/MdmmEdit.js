@@ -62,6 +62,22 @@ export const MdmmEdit = (props) => {
   const handleSubmit = (evt) => {
       evt.preventDefault();
       alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreateAt} ${mdUpdateAt}`)
+      props.mdmmEdit({cdcstm:mdCdcstm, nommrb:mdNommrb,
+        mdmm: {
+          md_idmdmm: mdIdmdmm,
+          md_cdcstm: mdCdcstm,
+          md_nommrb: mdNommrb,
+          md_nmmmbr: mdNmmmbr,
+          md_txmdmm: mdTxmdmm,
+          md_fganch: mdFganch,
+          md_clmdmm: mdClmdmm,
+          md_ccdate: moment().format("YYYY-MM-DD"),
+          md_ccadip: mdCcadip,
+          md_ccmodu: mdCcmodu,
+          createdAt: moment().format("YYYY-MM-DD"),
+          updatedAt: moment().format("YYYY-MM-DD")
+        }
+      })
       resetMdIdmdmm()
       resetMdCdcstm()
       resetMdNommrb()

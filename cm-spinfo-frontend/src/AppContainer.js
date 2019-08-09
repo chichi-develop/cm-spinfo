@@ -25,6 +25,16 @@ const AppContainer = () => {
     [dispatch]
   )
 
+  const mdmmEdit = useCallback(
+    ({cdcstm, nommrb, mdmm}) => dispatch( Actions.EditMdmms.start({cdcstm, nommrb, mdmm}) ),
+    [dispatch]
+  )
+
+  const mdmmAdd = useCallback(
+    (mdmm) => dispatch( Actions.AddMdmms.start(mdmm) ),
+    [dispatch]
+  )
+
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
@@ -52,7 +62,7 @@ const AppContainer = () => {
 
       <div className="app-body-container">
         {/* <Route exact path='/' component={mdmmContainer} /> */}
-        <Route exact path='/' render={() => <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} />} />
+        <Route exact path='/' render={() => <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} mdmmEdit={mdmmEdit} mdmmAdd={mdmmAdd}/>} />
         {/* TODO: renderからcomponentに変えたが、再レンダリングが増えた(mdmm.js/mdmmTableの再render)ため、戻した */}
         <Route exact path='/AddForm' component={AddForm} />
         {/* <Route path='/EditForm' component={EditForm} /> */}

@@ -1,7 +1,7 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import * as ActionType from '../actions/actionsConsMdmms';
 import * as Actions from '../actions/actionsMdmms';
-import { getMdmmsFactory, deleteMdmmsFactory } from './mdmmApi';
+import { getMdmmsFactory, deleteMdmmsFactory, editMdmmsFactory, addMdmmsFactory } from './mdmmApi';
 
 function* runGetMdmms(action) {
   const cdcstm = action.payload
@@ -38,6 +38,44 @@ export function* watchDeleteMdmms() {
   yield takeLatest(ActionType.DELETE_MDMMS_START, runDeleteMdmms)
 }
 
+function* runEditMdmms(action) {
+  const { cdcstm, nommrb, mdmm } = action.payload
+  try {
+    const mdmms = yield call(editMdmmsFactory, cdcstm, nommrb, mdmm )
+
+    // yield put(Actions.GetMdmms.start({cdcstm}))
+    yield put(Actions.EditMdmms.succeed({mdmms}))
+  } catch (error) {
+    // yield put(Actions.getMdmmsFail({error}))
+    yield put(Actions.EditMdmms.fail({error}))
+  }
+}
+
+export function* watchEditMdmms() {
+  yield takeLatest(ActionType.EDIT_MDMMS_START, runEditMdmms)
+}
+
+
+function* runAddMdmms(action) {
+  const mdmm = action.payload
+  console.log('saga')
+  console.log(mdmm)
+  console.log(action.payload)
+  try {
+    const mdmms = yield call(addMdmmsFactory, mdmm )
+
+    // yield put(Actions.GetMdmms.start({cdcstm}))
+    yield put(Actions.AddMdmms.succeed({mdmms}))
+  } catch (error) {
+    // yield put(Actions.getMdmmsFail({error}))
+    yield put(Actions.AddMdmms.fail({error}))
+  }
+}
+
+export function* watchAddMdmms() {
+  yield takeLatest(ActionType.ADD_MDMMS_START, runAddMdmms)
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchGetMdmms),fork(watchDeleteMdmms)])
+  yield all([fork(watchGetMdmms),fork(watchDeleteMdmms),fork(watchEditMdmms),fork(watchAddMdmms)])
 }

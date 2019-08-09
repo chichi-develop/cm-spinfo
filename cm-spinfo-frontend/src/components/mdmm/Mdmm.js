@@ -11,6 +11,7 @@ import CloseIcon from '@material-ui/icons/Close'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import MdmmEdit from './MdmmEdit'
+import MdmmAdd from './MdmmAdd'
 import './Mdmm.css'
 
 const Mdmm = (props) => {
@@ -32,7 +33,17 @@ const Mdmm = (props) => {
       <div className='mdmmTable-header'>
         <p className='mdmmTable-title'>お客様窓口メモ</p>
         <button className='mdmmTable-addButton'>新規メモ登録</button>
-
+                    <ToggleContent
+                      toggle={show => <EditIcon style={{fontSize: '1.5em', color: '#668ad8'}} onClick={show} />}
+                      content={hide => (
+                        <Modal>
+                          {/* <MdmmEdit mdmm={mdmm} mdmmAdd={props.mdmmAdd}> */}
+                          <MdmmAdd mdmmAdd={props.mdmmAdd}>
+                            <button onClick={hide}><CloseIcon/></button>
+                          </MdmmAdd>
+                        </Modal>
+                      )}
+                    />
       </div>
 
       {/* { props.state.isLoading && (
@@ -43,7 +54,7 @@ const Mdmm = (props) => {
       } */}
 
       { props.state.cm_mdmms ? (
-          <MdmmTable mdmms={mdmms} mdmmDelete={props.mdmmDelete} />
+          <MdmmTable mdmms={mdmms} mdmmDelete={props.mdmmDelete} mdmmEdit={props.mdmmEdit}/>
         ) : (
           <p>data nothing</p>
         )
@@ -204,7 +215,7 @@ const MdmmTable = (props) => {
                       toggle={show => <EditIcon style={{fontSize: '1.5em', color: '#668ad8'}} onClick={show} />}
                       content={hide => (
                         <Modal>
-                          <MdmmEdit mdmm={mdmm}>
+                          <MdmmEdit mdmm={mdmm} mdmmEdit={props.mdmmEdit}>
                             <button onClick={hide}><CloseIcon/></button>
                           </MdmmEdit>
                         </Modal>

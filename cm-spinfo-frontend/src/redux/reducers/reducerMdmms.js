@@ -31,6 +31,7 @@ const mdmmsReducer = (state = initialState, action) => {
     case ActionType.ADD_MDMMS_SUCCEED:
       return (Object.assign({}, state,
         {
+					...action.payload.mdmms,
           isUpdating: false,
           error: '',
         }
@@ -60,7 +61,7 @@ const mdmmsReducer = (state = initialState, action) => {
 		case ActionType.EDIT_MDMMS_SUCCEED:
 			return (Object.assign({}, state,
 				{
-					mdmms: action.payload.mdmms,
+					...action.payload.mdmms,
 					isUpdating: false,
 					error: '',
 				}
