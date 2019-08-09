@@ -189,6 +189,7 @@ const MdmmTable = (props) => {
             filteredMdmm.map((mdmm) => {
               return(
                 <tr key={mdmm.md_idmdmm}>
+                  {/* TODO: 日付が正しく表示されない */}
                   <td>{moment(mdmm.updateAt).format('YYYY/MM/DD')}</td>
                   <td>{mdmm.md_nommrb}</td>
                   <td>{mdmm.md_nmmmbr}</td>
@@ -210,6 +211,8 @@ const MdmmTable = (props) => {
                       )}
                     />
                   </td>
+                  {/* TODO: delete前に確認メッセージ */}
+                  {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                     <DeleteIcon style={{fontSize: '1.5em', color: '#668ad8'}}
                                 onClick={(e) => {

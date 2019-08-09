@@ -5,7 +5,7 @@ import * as Actions from './redux/actions/actionsMdmms'
 
 import SearchForm from './components/common/SearchForm'
 import Mdmm from './components/mdmm/Mdmm'
-import MdmmEdit from './components/mdmm/MdmmEdit'
+// import MdmmEdit from './components/mdmm/MdmmEdit'
 
 import './AppContainer.css';
 
@@ -37,7 +37,7 @@ const AppContainer = () => {
   })
 
   const AddForm = () => <div>AddForm</div>;
-  const EditForm = () => <MdmmEdit/>
+  // const EditForm = () => <MdmmEdit/>
 
   // react-router-domの定義をrenderからcomponentに変えたが、再レンダリングが増えたため、戻した
   // const mdmmContainer = () => (
@@ -46,17 +46,17 @@ const AppContainer = () => {
 
   return (
     <>
-        <div className="app-body-header">
-          <SearchForm state={mdmmState} mdmmSearch={mdmmSearch} />
-        </div>
+      <div className="app-body-header">
+        <SearchForm state={mdmmState} mdmmSearch={mdmmSearch} />
+      </div>
 
-        <div className="app-body-container">
-          {/* <Route exact path='/' component={mdmmContainer} /> */}
-          <Route exact path='/' render={() => <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} />} />
-          {/* renderからcomponentに変えたが、再レンダリングが増えたため、戻した */}
-          <Route exact path='/AddForm' component={AddForm} />
-          <Route path='/EditForm' component={EditForm} />
-        </div>
+      <div className="app-body-container">
+        {/* <Route exact path='/' component={mdmmContainer} /> */}
+        <Route exact path='/' render={() => <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} />} />
+        {/* TODO: renderからcomponentに変えたが、再レンダリングが増えた(mdmm.js/mdmmTableの再render)ため、戻した */}
+        <Route exact path='/AddForm' component={AddForm} />
+        {/* <Route path='/EditForm' component={EditForm} /> */}
+      </div>
 
     </>
   )
