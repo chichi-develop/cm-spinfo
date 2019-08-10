@@ -4,8 +4,11 @@ import React, { useEffect, useState, useMemo } from 'react'
 import moment from 'moment'
 import _ from 'lodash'
 
-import { Delete, Edit } from '@material-ui/icons'
-// import CloseIcon from '@material-ui/icons/Close'
+import { makeStyles } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
+
+
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Modal from '../common/Modal'
@@ -14,7 +17,27 @@ import MdmmEdit from './MdmmModalEdit'
 import MdmmAdd from './MdmmModalAdd'
 import './Mdmm.css'
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  icon: {
+    margin: theme.spacing(1),
+  },
+  iconHover: {
+    margin: theme.spacing(1),
+    color: '#668ad8',
+    '&:hover': {
+      // color: '#0b7dda',
+      color: blue[800], 
+    },
+  },
+}));
+
 const Mdmm = (props) => {
+
 
   let mdmms = props.state.cm_mdmms
   useEffect(() => {
@@ -61,6 +84,9 @@ const Mdmm = (props) => {
 }
 
 const MdmmTable = (props) => {
+
+  const classes = useStyles();
+
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
@@ -205,17 +231,17 @@ const MdmmTable = (props) => {
                         md_nmmmbrs.find(c => c.id === mdmm.md_nmmmbr).title : ''
                   } */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
-                    {/* <Link to={`/EditForm/${mdmm.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link> */}
                     <Modal
                       title="メモ編集"
-                      open={handleOpenModal => <Edit style={{fontSize: '1.5em', color: '#668ad8'}} onClick={handleOpenModal} />}
-                      content={() => <MdmmEdit mdmm={mdmm} mdmmEdit={props.mdmmEdit}/>}
+                      // open={handleOpenModal => <EditIcon className={classes.iconHover} style={{fontSize: '1.5em', color: '#668ad8'}} onClick={handleOpenModal} />}
+                      open={handleOpenModal => <EditIcon className={classes.iconHover} style={{fontSize: '1.5em'}} onClick={handleOpenModal} />}
+                      content={() => <MdmmEdit className={classes.iconHover} mdmm={mdmm} mdmmEdit={props.mdmmEdit}/>}
                       outClickClose={false}
                     />
                   </td>
                   {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
-                    <Delete style={{fontSize: '1.5em', color: '#668ad8'}}
+                    <DeleteIcon className={classes.iconHover} style={{fontSize: '1.5em'}}
                                 onClick={(e) => {
                                   e.preventDefault();
                                   props.mdmmDelete({cdcstm:mdmm.md_cdcstm, nommrb:mdmm.md_nommrb});

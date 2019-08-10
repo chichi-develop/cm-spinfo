@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 
 import { makeStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
+// import { blue } from '@material-ui/core/colors';
 import { Close } from '@material-ui/icons'
 
 import './Modal.css'
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
   iconHover: {
     margin: theme.spacing(1),
     '&:hover': {
-      color: blue[800],
-      // color: black,
+      // color: blue[800],
+      color: 'black',
     },
   },
 }));
@@ -67,9 +67,7 @@ export const Modal = (props) => {
       >
         <div className="modal-header">
           <p className="modal-header-title">{props.title}</p>
-          <Close className={classes.iconHover} color="disabled" style={{ fontSize: 20 }} onClick={handleCloseModal}/>
-          {/* <CloseIcon className='modal-header-closeButton' onClick={handleCloseModal}/> */}
-
+          <Close className={classes.iconHover} fontSize="large" color="disabled" style={{ fontSize: 20 }} onClick={handleCloseModal}/>
         </div>
         <div className="modal-body">
           {props.content()}
