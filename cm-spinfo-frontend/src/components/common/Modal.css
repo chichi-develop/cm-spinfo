@@ -1,12 +1,30 @@
-.modal {
-  position: absolute;
+.modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  top: 50%;
-  left: 50%;
-  height: 100%;
-  width: 100%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
+  align-content: center;
+  box-sizing: border-box;
+  /* height: 34px; */
+  margin:0 auto;
+}
+
+.modal-header-title {
+  display: block;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 0.5em;
+}
+
+/* .modal-header-closeButton {
+  top: 20px;
+  right: 20px;
+  size: 30px;
+  width: 30px;
+  color: black;
+} */
+
+.modal-body {
+  margin: 0;
+  padding: 0;
 }

@@ -5,8 +5,8 @@
   align-items: center;
   flex-direction: column;
 
-  height: 80%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   /* background-color: #edf2f3a8; */
   background-color: white;
   max-height:800px;

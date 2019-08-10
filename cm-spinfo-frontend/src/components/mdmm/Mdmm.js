@@ -4,12 +4,11 @@ import React, { useEffect, useState, useMemo } from 'react'
 import moment from 'moment'
 import _ from 'lodash'
 
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
-import CloseIcon from '@material-ui/icons/Close'
+import { Delete, Edit } from '@material-ui/icons'
+// import CloseIcon from '@material-ui/icons/Close'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { ToggleContent, Modal } from '../common/Modal'
+import Modal from '../common/Modal'
 
 import MdmmEdit from './MdmmModalEdit'
 import MdmmAdd from './MdmmModalAdd'
@@ -33,17 +32,14 @@ const Mdmm = (props) => {
     <div className='mdmmTable'>
       <div className='mdmmTable-header'>
         <p className='mdmmTable-title'>お客様窓口メモ</p>
-          <ToggleContent
-            toggle={show => <button className='mdmmTable-addButton' onClick={show}>新規メモ登録</button>}
-            content={hide => (
-              <Modal>
-                {/* <MdmmEdit mdmm={mdmm} mdmmAdd={props.mdmmAdd}> */}
-                <MdmmAdd mdmmAdd={props.mdmmAdd}>
-                  <button onClick={hide}><CloseIcon/></button>
-                </MdmmAdd>
-              </Modal>
-            )}
-          />
+
+        <Modal
+          title="新規メモ登録"
+          open={handleOpenModal => <button className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</button>}
+          content={() => <MdmmAdd mdmmAdd={props.mdmmAdd}/>}
+          outClickClose={false}
+        />
+
       </div>
 
       {/* { props.state.isLoading && (
@@ -210,20 +206,16 @@ const MdmmTable = (props) => {
                   } */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                     {/* <Link to={`/EditForm/${mdmm.md_idmdmm}`}><EditIcon style={{fontSize: '1.5em'}}/></Link> */}
-                    <ToggleContent
-                      toggle={show => <EditIcon style={{fontSize: '1.5em', color: '#668ad8'}} onClick={show} />}
-                      content={hide => (
-                        <Modal>
-                          <MdmmEdit mdmm={mdmm} mdmmEdit={props.mdmmEdit}>
-                            <button onClick={hide}><CloseIcon/></button>
-                          </MdmmEdit>
-                        </Modal>
-                      )}
+                    <Modal
+                      title="メモ編集"
+                      open={handleOpenModal => <Edit style={{fontSize: '1.5em', color: '#668ad8'}} onClick={handleOpenModal} />}
+                      content={() => <MdmmEdit mdmm={mdmm} mdmmEdit={props.mdmmEdit}/>}
+                      outClickClose={false}
                     />
                   </td>
                   {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
-                    <DeleteIcon style={{fontSize: '1.5em', color: '#668ad8'}}
+                    <Delete style={{fontSize: '1.5em', color: '#668ad8'}}
                                 onClick={(e) => {
                                   e.preventDefault();
                                   props.mdmmDelete({cdcstm:mdmm.md_cdcstm, nommrb:mdmm.md_nommrb});
