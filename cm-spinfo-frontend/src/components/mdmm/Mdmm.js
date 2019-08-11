@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
 
-
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Modal from '../common/Modal'
@@ -38,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 
 const Mdmm = (props) => {
 
-
   let mdmms = props.state.cm_mdmms
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
@@ -58,7 +56,8 @@ const Mdmm = (props) => {
 
         <Modal
           title="新規メモ登録"
-          open={handleOpenModal => <button className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</button>}
+          // open={handleOpenModal => <button className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</button>}
+          open={handleOpenModal => <p className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</p>}
           content={() => <MdmmAdd mdmmAdd={props.mdmmAdd}/>}
           outClickClose={false}
         />
