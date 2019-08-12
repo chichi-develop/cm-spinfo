@@ -1,28 +1,42 @@
 .modal-header {
   display: flex;
-  justify-content: space-between;
-  align-content: center;
+  justify-content: center;
   box-sizing: border-box;
-  /* height: 34px; */
-  margin:0 auto;
+  margin: 0;
+  line-height: 40px;
 }
 
 .modal-header-title {
+  position: relative;
   display: block;
+  box-sizing: border-box;
+  line-height: 40px;
+  width: 100%;
+
+  text-align: center;
   font-size: 18px;
-  color: black;
-  font-weight: bold;
+  font-weight: 400;
+  /* color: rgb(107, 119, 140); */
+  color: rgb(23, 43, 77);
   text-decoration: none;
+
+  border-bottom-color: rgba(9, 30, 66, 0.13);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
   margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
-/* .modal-header-closeButton {
-  top: 20px;
-  right: 20px;
-  size: 30px;
-  width: 30px;
-  color: black;
-} */
+.modal-header-closeIcon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  right: 0px;
+  cursor: pointer;
+  margin: auto;
+}
 
 .modal-body {
   margin: 0;

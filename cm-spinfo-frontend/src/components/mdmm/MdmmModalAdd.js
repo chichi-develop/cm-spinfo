@@ -77,10 +77,7 @@ export const MdmmAdd = (props) => {
       <div className="mdmmModal-form-close">
         {props.children}
       </div>
-      <div className="mdmmModal-form-header">
-        新規メモ登録画面
-      </div>
-      <form className="mdmmModal-form" onSubmit={handleSubmit}>
+      <form className="mdmmModal-form-body" onSubmit={handleSubmit}>
         <div className="mdmmModal-form-data">
           {/* <label className="mdmmModal-form-label">
             md_idmdmm:
@@ -141,8 +138,10 @@ export const MdmmAdd = (props) => {
 
         </div>
         {/* TODO: 更新後にモーダルを閉じる */}
-        <div className="mdmmModal-form-submit">
-          <input className="mdmmModal-form-submit" type="submit" value="登録する" />
+        <div className="mdmmModal-form-footer">
+          <div className="mdmmModal-form-submit">
+            <input className="mdmmModal-form-submitButton" type="submit" value="登録する" />
+          </div>
         </div>
       </form>
     </div>

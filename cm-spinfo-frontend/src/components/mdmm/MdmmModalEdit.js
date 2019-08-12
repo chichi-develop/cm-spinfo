@@ -75,10 +75,7 @@ export const MdmmEdit = (props) => {
       <div className="mdmmModal-form-close">
         {props.children}
       </div>
-      <div className="mdmmModal-form-header">
-        編集画面
-      </div>
-      <form className="mdmmModal-form" onSubmit={handleSubmit}>
+      <form className="mdmmModal-form-body" onSubmit={handleSubmit}>
         <div className="mdmmModal-form-data">
           <label className="mdmmModal-form-label">
             md_idmdmm:
@@ -139,8 +136,10 @@ export const MdmmEdit = (props) => {
         </div>
 
         {/* TODO: 更新後にモーダルを閉じる */}
-        <div className="mdmmModal-form-submit">
-          <input className="mdmmModal-form-submit" type="submit" value="更新する" />
+        <div className="mdmmModal-form-footer">
+          <div className="mdmmModal-form-submit">
+            <input className="mdmmModal-form-submitButton" type="submit" value="更新する" />
+          </div>
         </div>
       </form>
     </div>

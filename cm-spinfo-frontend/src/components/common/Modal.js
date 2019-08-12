@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     '&:hover': {
       // color: blue[800],
-      color: 'black',
+      color: '#172b4d',
     },
   },
 }));
@@ -56,18 +56,23 @@ export const Modal = (props) => {
             content: {
               flexDirection: 'column',
               minHeight: '80%',
-              maxWidth: '800px',
+              maxWidth: '600px',
               padding: '0',
               top: 'auto',
               left: 'auto',
               bottom: 'auto',
               right: 'auto',
+              // background: 'rgb(244, 245, 247)',
+              background: 'rgb(255, 255, 255)',
             }
           }}
       >
         <div className="modal-header">
-          <p className="modal-header-title">{props.title}</p>
-          <CloseIcon className={classes.iconHover} fontSize="large" color="disabled" style={{ fontSize: 20 }} onClick={handleCloseModal}/>
+          <span className="modal-header-title">{props.title}</span>
+          {/* <p className="modal-header-closeIcon"><CloseIcon className={`modal-header-closeIcon ${classes.iconHover}`} fontSize="large" color="disabled" style={{ fontSize: 20 }} onClick={handleCloseModal}/> */}
+          <p className="modal-header-closeIcon">
+            <CloseIcon className={classes.iconHover} fontSize="large" color="disabled" style={{ fontSize: 20 }} onClick={handleCloseModal}/>
+          </p>
         </div>
         <div className="modal-body">
           {props.content()}
