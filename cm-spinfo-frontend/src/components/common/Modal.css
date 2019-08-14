@@ -1,24 +1,18 @@
 .modal-header {
   display: flex;
   justify-content: center;
-  box-sizing: border-box;
-  margin: 0;
   line-height: 40px;
+  margin: 0;
 }
 
 .modal-header-title {
-  position: relative;
   display: block;
-  box-sizing: border-box;
-  line-height: 40px;
-  width: 100%;
-
   text-align: center;
+  width: 100%;
   font-size: 18px;
   font-weight: 400;
-  /* color: rgb(107, 119, 140); */
   color: rgb(23, 43, 77);
-  text-decoration: none;
+  /* color: rgb(107, 119, 140); */
 
   border-bottom-color: rgba(9, 30, 66, 0.13);
   border-bottom-style: solid;

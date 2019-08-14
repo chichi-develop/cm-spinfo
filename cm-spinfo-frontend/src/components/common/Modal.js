@@ -55,8 +55,9 @@ export const Modal = (props) => {
             },
             content: {
               flexDirection: 'column',
-              minHeight: '80%',
-              maxWidth: '600px',
+              // minHeight: '80%',
+              // minHeight: '600px',
+              minWidth: '600px',
               padding: '0',
               top: 'auto',
               left: 'auto',

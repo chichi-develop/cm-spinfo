@@ -75,64 +75,56 @@ export const MdmmEdit = (props) => {
       <div className="mdmmModal-form-close">
         {props.children}
       </div>
-      <form className="mdmmModal-form-body" onSubmit={handleSubmit}>
+      <form className="mdmmModal-form" onSubmit={handleSubmit}>
         <div className="mdmmModal-form-data">
-          <label className="mdmmModal-form-label">
-            md_idmdmm:
+          <div>
+            <label className="mdmmModal-form-label"> md_idmdmm: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdIdmdmm} />
-          </label>
-          <label className="mdmmModal-form-label">
-            md_cdcstm:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_cdcstm: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCdcstm} />
-          </label>
-          <label className="mdmmModal-form-label">
-            md_nommrb:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_nommrb: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdNommrb} />
-          </label>
-          <label className="mdmmModal-form-label">
-            md_nmmmbr:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_nmmmbr: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdNmmmbr} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_txmdmm:
-            <input className="mdmmModal-form-input" type="text" {...bindMdTxmdmm} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_fganch:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_txmdmm: </label>
+            <textarea className="mdmmModal-form-input" type="text" {...bindMdTxmdmm} />
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_fganch: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdFganch} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_clmdmm:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_clmdmm: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdClmdmm} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_ccdate:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_ccdate: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcdate} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_ccadip:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_ccadip: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcadip} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            md_ccmodu:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> md_ccmodu: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcmodu} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            createAt:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> createAt: </label>
             <input className="mdmmModal-form-input" type="text" {...bindCreateAt} />
-          </label>
-
-          <label className="mdmmModal-form-label">
-            updateAt:
+          </div>
+          <div>
+            <label className="mdmmModal-form-label"> updateAt: </label>
             <input className="mdmmModal-form-input" type="text" {...bindUpdateAt} />
-          </label>
+          </div>
         </div>
 
         {/* TODO: 更新後にモーダルを閉じる */}
