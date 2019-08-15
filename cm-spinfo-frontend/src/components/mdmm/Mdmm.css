@@ -50,6 +50,39 @@
   padding: 0.5em 1em;
 }
 
+.mdmmTable-thead select {
+  font-size: 11px;
+  outline:none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  vertical-align: middle;
+  background: none transparent;
+  appearance: none;
+  padding: 5px 10px;
+  /* border:1px solid #ddd; */
+  border:1px solid #aaaaaa;
+  /* color:#828c9a; */
+  color:#d6d8db;
+  width:100%;
+  border-radius:2px;
+}
+
+.mdmmTable-thead input {
+  font-size: 11px;
+  outline:none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  vertical-align: middle;
+  background: none transparent;
+  padding: 5px 10px;
+  /* border:1px solid #ddd; */
+  border:1px solid #aaaaaa;
+  /* color:#828c9a; */
+  color:#d6d8db;
+  width:100%;
+  border-radius:2px;
+}
+
 .mdmmTable-tbody td {
   border:solid 1px #aaaaaa;
   padding: 0.5em 1em;
