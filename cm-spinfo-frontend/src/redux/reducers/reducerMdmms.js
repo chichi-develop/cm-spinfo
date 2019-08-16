@@ -5,6 +5,7 @@ const initialState = {
   showList: false,
   isLoading: false,
   isUpdating: false,
+  clearSortFilter: true,
   searchHistory: [],
   error: '',
 }
@@ -33,7 +34,9 @@ const mdmmsReducer = (state = initialState, action) => {
       return (Object.assign({}, state,
         {
           ...action.payload.mdmms,
+          showList: true,
           isUpdating: false,
+          clearSortFilter: true,
           error: '',
         }
       )
@@ -46,15 +49,23 @@ const mdmmsReducer = (state = initialState, action) => {
     case ActionType.DELETE_MDMMS_SUCCEED:
       return (Object.assign({}, state,
         {
-					// ...action.payload.mdmms,
+          ...action.payload.mdmms,
           isUpdating: false,
+          showList: true,
+          clearSortFilter: false,
           error: '',
         }
       )
     )
     case ActionType.DELETE_MDMMS_FAIL:
-      return (Object.assign({}, state, {isUpdating: false, error: action.payload.error}))
-
+      return (Object.assign({}, state,
+        {
+          isUpdating: false,
+          showList: action.payload.error.status===404 ? false : true,
+          error: action.payload.error
+        }
+      )
+    )
 		case ActionType.EDIT_MDMMS_START:
 			return (Object.assign({}, state, {isUpdating: true, error: ''}))
 		case ActionType.EDIT_MDMMS_SUCCEED:
@@ -62,6 +73,7 @@ const mdmmsReducer = (state = initialState, action) => {
 				{
 					...action.payload.mdmms,
 					isUpdating: false,
+          clearSortFilter: false,
 					error: '',
 				}
 			)

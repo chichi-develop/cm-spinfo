@@ -58,7 +58,7 @@ const Mdmm = (props) => {
           title="新規メモ登録"
           // open={handleOpenModal => <button className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</button>}
           open={handleOpenModal => <p className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</p>}
-          content={() => <MdmmAdd mdmmAdd={props.mdmmAdd}/>}
+          content={(handleCloseModal) => <MdmmAdd mdmmAdd={props.mdmmAdd} handleCloseModal={handleCloseModal}/>}
           outClickClose={false}
         />
 
@@ -72,7 +72,7 @@ const Mdmm = (props) => {
       } */}
 
       { props.state.showList ? (
-          <MdmmTable mdmms={mdmms} mdmmDelete={props.mdmmDelete} mdmmEdit={props.mdmmEdit}/>
+          <MdmmTable mdmms={mdmms} mdmmDelete={props.mdmmDelete} mdmmEdit={props.mdmmEdit} clearSortFilter={props.state.clearSortFilter}/>
         ) : (
           <p>data nothing</p>
         )
@@ -92,14 +92,14 @@ const MdmmTable = (props) => {
     console.log('MdmmTable render!');
     setMdmms( props.mdmms )
     setNmmmbrs( _.uniq(_.map(props.mdmms, 'md_nmmmbr')) )
-    setFilterQuery({md_nmmmbr_key:""})
-    setSort({})
+    props.clearSortFilter && setFilterQuery({md_nmmmbr_key:""})
+    props.clearSortFilter && setSort({})
 
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
     // Reactはアンマウントの直前にそれを呼び出す
     return () => console.log('unmounting...');
-  }, [props.mdmms])
+  }, [props.mdmms, props.clearSortFilter])
 
   const initialState = {
     mdmms: [],
@@ -233,11 +233,10 @@ const MdmmTable = (props) => {
                       title="メモ編集"
                       // open={handleOpenModal => <EditIcon className={classes.iconHover} style={{fontSize: '1.5em', color: '#668ad8'}} onClick={handleOpenModal} />}
                       open={handleOpenModal => <EditIcon className={classes.iconHover} style={{fontSize: '1.5em'}} onClick={handleOpenModal} />}
-                      content={() => <MdmmEdit className={classes.iconHover} mdmm={mdmm} mdmmEdit={props.mdmmEdit}/>}
+                      content={(handleCloseModal) => <MdmmEdit className={classes.iconHover} mdmm={mdmm} mdmmEdit={props.mdmmEdit} handleCloseModal={handleCloseModal}/>}
                       outClickClose={false}
                     />
                   </td>
-                  {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                     <DeleteIcon className={classes.iconHover} style={{fontSize: '1.5em'}}
                                 onClick={(e) => {

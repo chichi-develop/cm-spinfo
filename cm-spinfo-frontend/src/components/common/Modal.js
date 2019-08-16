@@ -76,7 +76,7 @@ export const Modal = (props) => {
           </p>
         </div>
         <div className="modal-body">
-          {props.content()}
+          {props.content(handleCloseModal)}
         </div>
       </ReactModal>
     </div>

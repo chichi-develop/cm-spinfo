@@ -9,7 +9,7 @@ export const useInput = initialValue => {
   return {
     value,
     setValue,
-    reset: () => setValue(""),
+    // reset: () => setValue(""),
     bind: {
       value,
       onChange: event => {
@@ -21,23 +21,22 @@ export const useInput = initialValue => {
 
 export const MdmmEdit = (props) => {
 
-  // TODO: 日付が正しく表示されない
-  const { value:mdIdmdmm, bind:bindMdIdmdmm, reset:resetMdIdmdmm } = useInput(props.mdmm.md_idmdmm)
-  const { value:mdCdcstm, bind:bindMdCdcstm, reset:resetMdCdcstm } = useInput(props.mdmm.md_cdcstm)
-  const { value:mdNommrb, bind:bindMdNommrb, reset:resetMdNommrb } = useInput(props.mdmm.md_nommrb)
-  const { value:mdNmmmbr, bind:bindMdNmmmbr, reset:resetMdNmmmbr } = useInput(props.mdmm.md_nmmmbr)
-  const { value:mdTxmdmm, bind:bindMdTxmdmm, reset:resetMdTxmdmm } = useInput(props.mdmm.md_txmdmm)
-  const { value:mdFganch, bind:bindMdFganch, reset:resetMdFganch } = useInput(props.mdmm.md_fganch)
-  const { value:mdClmdmm, bind:bindMdClmdmm, reset:resetMdClmdmm } = useInput(props.mdmm.md_clmdmm)
-  const { value:mdCcdate, bind:bindMdCcdate, reset:resetMdCcdate } = useInput(moment(props.mdmm.md_ccdate).format('YYYY/MM/DD'))
-  const { value:mdCcadip, bind:bindMdCcadip, reset:resetMdCcadip } = useInput(props.mdmm.md_ccadip)
-  const { value:mdCcmodu, bind:bindMdCcmodu, reset:resetMdCcmodu } = useInput(props.mdmm.md_ccmodu)
-  const { value:mdCreatedAt, bind:bindCreatedAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createdAt).format('YYYY/MM/DD'))
-  const { value:mdUpdatedAt, bind:bindUpdatedAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updatedAt).format('YYYY/MM/DD'))
+  const { value:mdIdmdmm, bind:bindMdIdmdmm } = useInput(props.mdmm.md_idmdmm)
+  const { value:mdCdcstm, bind:bindMdCdcstm } = useInput(props.mdmm.md_cdcstm)
+  const { value:mdNommrb, bind:bindMdNommrb } = useInput(props.mdmm.md_nommrb)
+  const { value:mdNmmmbr, bind:bindMdNmmmbr } = useInput(props.mdmm.md_nmmmbr)
+  const { value:mdTxmdmm, bind:bindMdTxmdmm } = useInput(props.mdmm.md_txmdmm)
+  const { value:mdFganch, bind:bindMdFganch } = useInput(props.mdmm.md_fganch)
+  const { value:mdClmdmm, bind:bindMdClmdmm } = useInput(props.mdmm.md_clmdmm)
+  // const { value:mdCcdate, bind:bindMdCcdate, reset:resetMdCcdate } = useInput(moment(props.mdmm.md_ccdate).format('YYYY/MM/DD'))
+  const { value:mdCcadip, bind:bindMdCcadip } = useInput(props.mdmm.md_ccadip)
+  const { value:mdCcmodu, bind:bindMdCcmodu } = useInput(props.mdmm.md_ccmodu)
+  // const { value:mdCreatedAt, bind:bindCreatedAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createdAt).format('YYYY/MM/DD'))
+  // const { value:mdUpdatedAt, bind:bindUpdatedAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updatedAt).format('YYYY/MM/DD'))
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreatedAt} ${mdUpdatedAt}`)
+      // alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreatedAt} ${mdUpdatedAt}`)
       props.mdmmEdit({cdcstm:mdCdcstm, nommrb:mdNommrb,
         mdmm: {
           md_idmdmm: mdIdmdmm,
@@ -50,26 +49,24 @@ export const MdmmEdit = (props) => {
           md_ccdate: moment().format("YYYY-MM-DD"),
           md_ccadip: mdCcadip,
           md_ccmodu: mdCcmodu,
-          createdAt: moment().format("YYYY-MM-DD"),
+          createdAt: moment(props.mdmm.createdAt).format("YYYY-MM-DD"),
           updatedAt: moment().format("YYYY-MM-DD")
         }
-      })
-      resetMdIdmdmm()
-      resetMdCdcstm()
-      resetMdNommrb()
-      resetMdNmmmbr()
-      resetMdTxmdmm()
-      resetMdFganch()
-      resetMdClmdmm()
-      resetMdCcdate()
-      resetMdCcadip()
-      resetMdCcmodu()
-      resetCreatedAt()
-      resetUpdatedAt()
+      }) && props.handleCloseModal()
+      // resetMdIdmdmm()
+      // resetMdCdcstm()
+      // resetMdNommrb()
+      // resetMdNmmmbr()
+      // resetMdTxmdmm()
+      // resetMdFganch()
+      // resetMdClmdmm()
+      // // resetMdCcdate()
+      // resetMdCcadip()
+      // resetMdCcmodu()
+      // // resetCreatedAt()
+      // // resetUpdatedAt()
   }
   return (
-    // TODO: 更新前に確認メッセージ
-    // TODO: 更新後に閉じる
     <div className="mdmmModal-formContainer">
       <div className="mdmmModal-form-close">
         {props.children}
@@ -104,10 +101,10 @@ export const MdmmEdit = (props) => {
             <label className="mdmmModal-form-label"> md_clmdmm: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdClmdmm} />
           </div>
-          <div>
+          {/* <div>
             <label className="mdmmModal-form-label"> md_ccdate: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcdate} />
-          </div>
+          </div> */}
           <div>
             <label className="mdmmModal-form-label"> md_ccadip: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcadip} />
@@ -116,17 +113,16 @@ export const MdmmEdit = (props) => {
             <label className="mdmmModal-form-label"> md_ccmodu: </label>
             <input className="mdmmModal-form-input" type="text" {...bindMdCcmodu} />
           </div>
-          <div>
+          {/* <div>
             <label className="mdmmModal-form-label"> createdAt: </label>
             <input className="mdmmModal-form-input" type="text" {...bindCreatedAt} />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label className="mdmmModal-form-label"> updatedAt: </label>
             <input className="mdmmModal-form-input" type="text" {...bindUpdatedAt} />
-          </div>
+          </div> */}
         </div>
 
-        {/* TODO: 更新後にモーダルを閉じる */}
         <div className="mdmmModal-form-footer">
           <div className="mdmmModal-form-submit">
             <input className="mdmmModal-form-submitButton" type="submit" value="更新する" />

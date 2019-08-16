@@ -7,7 +7,7 @@ export const GetMdmms = {
 }
 
 export const EditMdmms = {
-  start: (payload) => ({ type: ActionType.EDIT_MDMMS_START, payload }),
+  start: (payload) => ({ type: ActionType.EDIT_MDMMS_START, payload, meta:{confirm:'更新してよろしいですか？'} }),
   succeed: (payload) => ({ type: ActionType.EDIT_MDMMS_SUCCEED, payload }),
   fail: (payload) => ({ type: ActionType.EDIT_MDMMS_FAIL, payload })
 }
@@ -19,7 +19,7 @@ export const DeleteMdmms = {
 }
 
 export const AddMdmms = {
-  start: (payload) => ({ type: ActionType.ADD_MDMMS_START, payload }),
+  start: (payload) => ({ type: ActionType.ADD_MDMMS_START, payload, meta:{confirm:'登録してよろしいですか？'} }),
   succeed: (payload) => ({ type: ActionType.ADD_MDMMS_SUCCEED, payload }),
   fail: (payload) => ({ type: ActionType.ADD_MDMMS_FAIL, payload })
 }

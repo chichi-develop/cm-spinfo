@@ -5,7 +5,8 @@ export async function getMdmmsFactory(cdcstm) {
   try {
     const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`)
     return res.data
-  } catch (error) {
+  } catch (res) {
+    const error=res.response
     throw error
   }
 }
@@ -13,8 +14,10 @@ export async function getMdmmsFactory(cdcstm) {
 export async function deleteMdmmsFactory(cdcstm, nommrb) {
   try {
     await axios.delete(`${baseUrlMdmms}/${cdcstm}/${nommrb}`)
-    return
-  } catch (error) {
+    const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`)
+    return res.data
+  } catch (res) {
+    const error=res.response
     throw error
   }
 }
@@ -24,7 +27,8 @@ export async function editMdmmsFactory(cdcstm, nommrb, mdmm) {
     await axios.put(`${baseUrlMdmms}/${cdcstm}/${nommrb}`, mdmm)
     const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`)
     return res.data
-  } catch (error) {
+  } catch (res) {
+    const error=res.response
     throw error
   }
 }
@@ -34,7 +38,8 @@ export async function addMdmmsFactory(mdmm) {
     await axios.post(`${baseUrlMdmms}`, mdmm)
     const res = await axios.get(`${baseUrlMdmms}/${mdmm.md_cdcstm}`)
     return res.data
-  } catch (error) {
+  } catch (res) {
+    const error=res.response
     throw error
   }
 }
