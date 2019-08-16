@@ -50,6 +50,14 @@
   padding: 0.5em 1em;
 }
 
+.mdmmTable-thead p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
 .mdmmTable-thead select {
   font-size: 12px;
   outline:none;

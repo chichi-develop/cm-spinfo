@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
-import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
+import { Delete as DeleteIcon, Edit as EditIcon, ArrowDropUp as ArrowDropUpIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons'
 
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -165,11 +165,12 @@ const MdmmTable = (props) => {
   // 選択したカラムをSortに入れる
   const handleSort = column => {
     if (sort.key === column) {
-      setSort({ ...sort, order: -sort.order });
+      setSort({ ...sort, order: -sort.order, icon: -sort.order===1 ? <ArrowDropUpIcon/> : <ArrowDropDownIcon/> });
     } else {
       setSort({
         key: column,
-        order: 1
+        order: 1,
+        icon: <ArrowDropUpIcon/>,
       })
     }
   };
@@ -178,12 +179,12 @@ const MdmmTable = (props) => {
       <table className='mdmmTable-table'>
         <thead className='mdmmTable-thead'>
         <tr>
-          <th rowSpan="2" onClick={() => handleSort('updatedAt')}>更新日付</th>
-          <th rowSpan="2" onClick={() => handleSort('md_nommrb')}>メモ連番</th>
-          <th onClick={() => handleSort('md_nmmmbr')}>メモ分類</th>
-          <th onClick={() => handleSort('md_txmdmm')}>内容</th>
-          <th rowSpan="2" style={{padding: '0', width: '4em'}}>編集</th>
-          <th rowSpan="2" style={{padding: '0', width: '4em'}}>削除</th>
+          <th rowSpan="2" onClick={() => handleSort('updatedAt')}><p>更新日付 {sort.key==='updatedAt' ? sort.icon : ""}</p></th>
+          <th rowSpan="2" onClick={() => handleSort('md_nommrb')}><p>メモ連番 {sort.key==='md_nommrb' ? sort.icon : ""}</p></th>
+          <th onClick={() => handleSort('md_nmmmbr')}><p>メモ分類 {sort.key==='md_nmmmbr' ? sort.icon : ""}</p></th>
+          <th onClick={() => handleSort('md_txmdmm')}><p>内容 {sort.key==='md_txmdmm' ? sort.icon : ""}</p></th>
+          <th rowSpan="2" style={{padding: '0', width: '4em'}}><p>編集</p></th>
+          <th rowSpan="2" style={{padding: '0', width: '4em'}}><p>削除</p></th>
         </tr>
         <tr>
           <th>
