@@ -21,8 +21,9 @@ export function* watchGetMdmms() {
 function* runDeleteMdmms(action) {
   const { cdcstm, nommrb } = action.payload
   try {
-    const mdmms = yield call(deleteMdmmsFactory, cdcstm, nommrb )
-    yield put(Actions.DeleteMdmms.succeed({mdmms}))
+    yield call(deleteMdmmsFactory, cdcstm, nommrb )
+    yield put(Actions.DeleteMdmms.succeed())
+    yield put(Actions.GetMdmms.start(cdcstm))
   } catch (error) {
     yield put(Actions.DeleteMdmms.fail({error}))
   }

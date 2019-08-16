@@ -71,7 +71,7 @@ const Mdmm = (props) => {
         )
       } */}
 
-      { props.state.cm_mdmms ? (
+      { props.state.showList ? (
           <MdmmTable mdmms={mdmms} mdmmDelete={props.mdmmDelete} mdmmEdit={props.mdmmEdit}/>
         ) : (
           <p>data nothing</p>
@@ -186,7 +186,6 @@ const MdmmTable = (props) => {
           <th rowSpan="2" style={{padding: '0', width: '4em'}}>削除</th>
         </tr>
         <tr>
-          {/* TODO:select,optionにcss当てる */}
           <th>
             <select 
               name="md_nmmmbr_key"
@@ -221,8 +220,7 @@ const MdmmTable = (props) => {
             filteredMdmm.map((mdmm) => {
               return(
                 <tr key={mdmm.md_idmdmm}>
-                  {/* TODO: 日付が正しく表示されない */}
-                  <td>{moment(mdmm.updateAt).format('YYYY/MM/DD')}</td>
+                  <td>{moment(mdmm.updatedAt).format('YYYY/MM/DD')}</td>
                   <td>{mdmm.md_nommrb}</td>
                   <td>{mdmm.md_nmmmbr}</td>
                   <td>{mdmm.md_txmdmm}</td>
@@ -240,7 +238,6 @@ const MdmmTable = (props) => {
                     />
                   </td>
                   {/* TODO: delete後にフィルタ、ソートが解除されてしまう */}
-                  {/* TODO: memoが1件の時にdeleteするとfindでエラーになる */}
                   <td style={{padding: '0', textAlign: 'center', width: '3em'}}>
                     <DeleteIcon className={classes.iconHover} style={{fontSize: '1.5em'}}
                                 onClick={(e) => {

@@ -49,7 +49,7 @@ const AppContainer = () => {
 
   // react-router-domの定義をrenderからcomponentに変えたが、再レンダリングが増えたため、戻した
   // const mdmmContainer = () => (
-  //   <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} />
+  //   <Mdmm state={mdmmState} mdmmDelete={mdmmDelete} mdmmEdit={mdmmEdit} mdmmAdd={mdmmAdd}/>
   // )
 
   return (

@@ -21,7 +21,6 @@ export const useInput = initialValue => {
 
 export const MdmmAdd = (props) => {
 
-  // TODO: 日付が正しく表示されない
   // const { value:mdIdmdmm, bind:bindMdIdmdmm, reset:resetMdIdmdmm } = useInput(props.mdmm.md_idmdmm)
   const { value:mdCdcstm, bind:bindMdCdcstm, reset:resetMdCdcstm } = useInput('44444444')
   // const { value:mdNommrb, bind:bindMdNommrb, reset:resetMdNommrb } = useInput(props.mdmm.md_nommrb)
@@ -32,12 +31,12 @@ export const MdmmAdd = (props) => {
   const { value:mdCcdate, bind:bindMdCcdate, reset:resetMdCcdate } = useInput('2019/08/08')
   const { value:mdCcadip, bind:bindMdCcadip, reset:resetMdCcadip } = useInput('2019/08/08')
   const { value:mdCcmodu, bind:bindMdCcmodu, reset:resetMdCcmodu } = useInput('2019/08/08')
-  // const { value:mdCreateAt, bind:bindCreateAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createAt).format('YYYY/MM/DD'))
-  // const { value:mdUpdateAt, bind:bindUpdateAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updateAt).format('YYYY/MM/DD'))
+  // const { value:mdCreatedAt, bind:bindCreatedAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createdAt).format('YYYY/MM/DD'))
+  // const { value:mdUpdatedAt, bind:bindUpdatedAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updatedAt).format('YYYY/MM/DD'))
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      // alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreateAt} ${mdUpdateAt}`)
+      // alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreatedAt} ${mdUpdatedAt}`)
       alert(`Submitting Name ${mdCdcstm} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu}`)
 
       props.mdmmAdd({
@@ -70,7 +69,6 @@ export const MdmmAdd = (props) => {
       // resetUpdatedAt()
   }
   return (
-    // TODO: CSSちゃんと当てる
     // TODO: 更新前に確認メッセージ
     // TODO: 更新後に閉じる
     <div className="mdmmModal-formContainer">
@@ -121,13 +119,13 @@ export const MdmmAdd = (props) => {
           </div>
 
           {/* <label className="mdmmModal-form-label">
-            createAt:
-            <input className="mdmmModal-form-input" type="text" {...bindCreateAt} />
+            createdAt:
+            <input className="mdmmModal-form-input" type="text" {...bindCreatedAt} />
           </label>
 
           <label className="mdmmModal-form-label">
-            updateAt:
-            <input className="mdmmModal-form-input" type="text" {...bindUpdateAt} />
+            updatedAt:
+            <input className="mdmmModal-form-input" type="text" {...bindUpdatedAt} />
           </label> */}
 
         </div>

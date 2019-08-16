@@ -32,12 +32,12 @@ export const MdmmEdit = (props) => {
   const { value:mdCcdate, bind:bindMdCcdate, reset:resetMdCcdate } = useInput(moment(props.mdmm.md_ccdate).format('YYYY/MM/DD'))
   const { value:mdCcadip, bind:bindMdCcadip, reset:resetMdCcadip } = useInput(props.mdmm.md_ccadip)
   const { value:mdCcmodu, bind:bindMdCcmodu, reset:resetMdCcmodu } = useInput(props.mdmm.md_ccmodu)
-  const { value:mdCreateAt, bind:bindCreateAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createAt).format('YYYY/MM/DD'))
-  const { value:mdUpdateAt, bind:bindUpdateAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updateAt).format('YYYY/MM/DD'))
+  const { value:mdCreatedAt, bind:bindCreatedAt, reset:resetCreatedAt } = useInput(moment(props.mdmm.createdAt).format('YYYY/MM/DD'))
+  const { value:mdUpdatedAt, bind:bindUpdatedAt, reset:resetUpdatedAt } = useInput(moment(props.mdmm.updatedAt).format('YYYY/MM/DD'))
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreateAt} ${mdUpdateAt}`)
+      alert(`Submitting Name ${mdIdmdmm} ${mdCdcstm} ${mdNommrb} ${mdNmmmbr} ${mdTxmdmm} ${mdFganch} ${mdClmdmm} ${mdCcdate} ${mdCcadip} ${mdCcmodu} ${mdCreatedAt} ${mdUpdatedAt}`)
       props.mdmmEdit({cdcstm:mdCdcstm, nommrb:mdNommrb,
         mdmm: {
           md_idmdmm: mdIdmdmm,
@@ -68,7 +68,6 @@ export const MdmmEdit = (props) => {
       resetUpdatedAt()
   }
   return (
-    // TODO: CSSちゃんと当てる
     // TODO: 更新前に確認メッセージ
     // TODO: 更新後に閉じる
     <div className="mdmmModal-formContainer">
@@ -118,12 +117,12 @@ export const MdmmEdit = (props) => {
             <input className="mdmmModal-form-input" type="text" {...bindMdCcmodu} />
           </div>
           <div>
-            <label className="mdmmModal-form-label"> createAt: </label>
-            <input className="mdmmModal-form-input" type="text" {...bindCreateAt} />
+            <label className="mdmmModal-form-label"> createdAt: </label>
+            <input className="mdmmModal-form-input" type="text" {...bindCreatedAt} />
           </div>
           <div>
-            <label className="mdmmModal-form-label"> updateAt: </label>
-            <input className="mdmmModal-form-input" type="text" {...bindUpdateAt} />
+            <label className="mdmmModal-form-label"> updatedAt: </label>
+            <input className="mdmmModal-form-input" type="text" {...bindUpdatedAt} />
           </div>
         </div>
 
