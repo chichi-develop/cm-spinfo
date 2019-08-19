@@ -139,6 +139,10 @@
   border-radius: 3px;
 }
 
+.mdmmModal-form-submitButton:focus {
+  outline: none;
+}
+
 .mdmmModal-form-submitButton:hover {
   /* background: #0b7dda; */
   background: #1565c0;

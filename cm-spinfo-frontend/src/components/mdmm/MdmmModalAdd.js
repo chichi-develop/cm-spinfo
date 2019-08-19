@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import moment from 'moment'
 
 import './MdmmModal.css'
-// import './demo.css'
-
 
 export const MyForm = props => {
   const {
@@ -123,7 +121,7 @@ const MdmmAdd = withFormik({
     md_clmdmm: Yup
       .string()
       .required('Enter a md_clmdmm'),
-}),
+  }),
   handleSubmit: ( values, { setSubmitting, resetForm, setErrors }) => {
     setTimeout(() => {
       // if(values.email === 'test@test.test') {
@@ -153,21 +151,5 @@ const MdmmAdd = withFormik({
 
   displayName: 'BasicForm', // helps with React DevTools
 })(MyForm)
-
-export const useInput = initialValue => {
-  const [value, setValue] = useState(initialValue)
-
-  return {
-    value,
-    setValue,
-    // reset: () => setValue(""),
-    bind: {
-      value,
-      onChange: event => {
-        setValue(event.target.value)
-      }
-    }
-  }
-}
 
 export default MdmmAdd
