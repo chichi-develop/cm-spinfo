@@ -27,6 +27,7 @@ export async function deleteMdmmsFactory(cdcstm: string, nommrb: string) {
 export async function editMdmmsFactory(
   cdcstm: string,
   nommrb: string,
+  // TODO: any
   mdmm: any,
 ) {
   try {
@@ -40,6 +41,7 @@ export async function editMdmmsFactory(
   }
 }
 
+// TODO: any
 export async function addMdmmsFactory(mdmm: any) {
   try {
     await axios.post(`${baseUrlMdmms}`, mdmm);

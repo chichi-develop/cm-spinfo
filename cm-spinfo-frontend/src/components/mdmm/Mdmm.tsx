@@ -21,6 +21,8 @@ import MdmmEdit from './MdmmModalEdit';
 import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
+// TODO: interfaceの整理、入れ子の対応調査
+// TODO: any
 interface Mdmm {
   md_idmdmm: string;
   md_cdcstm: string;

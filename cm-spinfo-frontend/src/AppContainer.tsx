@@ -9,6 +9,7 @@ import Mdmm from './components/mdmm/Mdmm';
 import './AppContainer.css';
 
 const AppContainer: React.FC = () => {
+  // TODO: any
   const mdmmState = useSelector((state: any) => state.mdmms);
   const dispatch = useDispatch();
 
@@ -47,7 +48,7 @@ const AppContainer: React.FC = () => {
   const AddForm = () => <div>AddForm</div>;
   // const EditForm = () => <MdmmEdit/>
 
-  // react-router-domの定義をrenderからcomponentに変えたが、再レンダリングが増えたため、戻した
+  // TODO: <question> renderからcomponentに変えたが、再レンダリングが増えた(mdmm.js/mdmmTableの再render)ため、戻した
   // const mdmmContainer: React.FC = () => (
   //   <Mdmm
   //     {...mdmmState}

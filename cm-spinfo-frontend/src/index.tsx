@@ -18,7 +18,7 @@ import App from './App';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [logger, thunk, confirmMiddleware, sagaMiddleware];
 
-export const Store = createStore(
+const store = createStore(
   persistReducer,
   compose(
     applyMiddleware(...middlewares),
@@ -31,11 +31,11 @@ export const Store = createStore(
     /* eslint-enable */
   ),
 );
-const pstore = persistStore(Store);
+const pstore = persistStore(store);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-  <Provider store={Store}>
+  <Provider store={store}>
     <ConnectedRouter history={history}>
       <PersistGate loading={<p>loading...</p>} persistor={pstore}>
         <BrowserRouter>

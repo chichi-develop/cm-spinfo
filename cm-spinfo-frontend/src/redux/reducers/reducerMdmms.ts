@@ -11,6 +11,7 @@ export const initialState = {
   error: '',
 };
 
+// TODO: any
 const mdmmsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ActionType.GET_MDMMS_START:

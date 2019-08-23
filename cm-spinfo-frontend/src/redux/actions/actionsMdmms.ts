@@ -1,6 +1,7 @@
 import * as ActionType from './actionsConsMdmms';
 
 export const GetMdmms = {
+  // TODO: any 多数
   start: (payload: any) => ({
     type: ActionType.GET_MDMMS_START,
     payload,
