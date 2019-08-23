@@ -33,11 +33,17 @@
   cursor: pointer;
 }
 
+.searchForm button:focus {
+  outline: none;
+}
+
+
 .searchForm-currentContainer {
   display: flex;
   align-items: flex-end;
   margin-bottom: 2px;
 }
+
 .searchForm-currentData {
   /* height: 100%; */
   display: inline-block;

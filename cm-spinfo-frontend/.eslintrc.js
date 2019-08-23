@@ -53,12 +53,21 @@ module.exports = {
     'no-console': 'warn',
     'require-yield': 'error',
 
+    // add
+    'consistent-return': 'warn',
+    'no-nested-ternary': 'warn',
+    'no-param-reassign': 'warn',
+    'no-unused-expressions': 'warn',
+
     // @typescript-eslint
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
     indent: 'off',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+
+    // add
+    '@typescript-eslint/camelcase': 'warn',
 
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [
@@ -83,6 +92,9 @@ module.exports = {
     'react/prop-types': 'off',
     'react/prefer-stateless-function': 'off',
 
+    // add
+    'jsx-a11y/label-has-for': 'warn',
+
     // react hooks
     'react-hooks/rules-of-hooks': 'error',
 
@@ -103,7 +115,7 @@ module.exports = {
     'prettier/prettier': [
       'error', {
         bracketSpacing: true,
-        printWidth: 80,
+        // printWidth: 80,
         semi: true,
         singleQuote: true,
         trailingComma: 'all',

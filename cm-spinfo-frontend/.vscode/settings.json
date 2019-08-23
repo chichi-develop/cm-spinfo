@@ -1,6 +1,6 @@
 {
   // "css.validate": true,
-  // "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.autoFixOnSave": true,
   "eslint.enable": true,
   "eslint.validate": [

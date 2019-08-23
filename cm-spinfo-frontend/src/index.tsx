@@ -18,23 +18,24 @@ import App from './App';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [logger, thunk, confirmMiddleware, sagaMiddleware];
 
-const store = createStore(
+export const Store = createStore(
   persistReducer,
   compose(
     applyMiddleware(...middlewares),
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
-    /* eslint-disable no-underscore-dangle */
+    // TODO: <question> disable以外の方法はあるか？
+    /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
       (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
     /* eslint-enable */
   ),
 );
-const pstore = persistStore(store);
+const pstore = persistStore(Store);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={Store}>
     <ConnectedRouter history={history}>
       <PersistGate loading={<p>loading...</p>} persistor={pstore}>
         <BrowserRouter>

@@ -9,9 +9,9 @@ import AppContainer from './AppContainer';
 
 import './App.css';
 
-const App = () => {
+const App: React.FC = () => {
   const title = '「致知」顧客情報参照システム';
-  const footer = 'Chichi Publishing Co.,Ltd. © 2019';
+  const footerText = 'Chichi Publishing Co.,Ltd. © 2019';
 
   return (
     <div className="app">
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/" component={AppContainer} />
       </div>
 
-      <Footer footer={footer} />
+      <Footer footerText={footerText} />
     </div>
   );
 };
