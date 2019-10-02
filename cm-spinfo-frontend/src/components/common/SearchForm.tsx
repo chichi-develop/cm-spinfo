@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './SearchForm.css';
+// import Mdmm from '../mdmm/Mdmm';
 
 interface Mdmm {
   md_idmdmm: string;
@@ -15,19 +16,42 @@ interface Mdmm {
   createdAt: Date;
   updatedAt: Date;
 }
+interface Aclg {
+  al_idactv: string;
+  al_nmactv: string;
+  al_noactv: string;
+  al_dtactv: Date;
+  al_cdsqsk: string;
+  al_nmsqsk: string;
+  al_nmsqbu: string;
+  al_nmsqtn: string;
+  al_txactv: string;
+  al_susury: number;
+  al_kgtnka: number;
+  al_kggoke: number;
+  al_txbiko: string;
+  al_cdcstm: string;
+  al_nmcstm: string;
+  al_nmtnbu: string;
+  al_nmtnto: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 interface SearchProps {
   cm_mdmms: Mdmm[];
+  cm_aclgs: Aclg[];
   showList: boolean;
   searchHistory: [number];
   mdmmSearch: Function;
+  aclgSearch: Function;
 }
 
 export const SearchForm: React.FC<SearchProps> = ({
   cm_mdmms,
-  showList,
-  searchHistory,
+  cm_aclgs,
   mdmmSearch,
+  aclgSearch,
 }) => {
   const [searchKey, setSearchKey] = useState('0');
 
@@ -57,25 +81,42 @@ export const SearchForm: React.FC<SearchProps> = ({
           onClick={e => {
             e.preventDefault();
             mdmmSearch(searchKey);
+            aclgSearch(searchKey);
           }}
         >
           <i className="material-icons">search</i>
         </button>
       </form>
       <div className="searchForm-currentContainer">
-        {showList ? (
-          <>
-            <p className="searchForm-currentData">{cm_mdmms[0].md_cdcstm}</p>
-            <p className="searchForm-currentMessage">様の履歴一覧です。</p>
-          </>
-        ) : (
-          <p className="searchForm-currentMessage">
-            読者番号を入力し、検索してください。
-          </p>
-        )}
+        {/*
+        {() => {
+          if (!cm_aclgs) {
+            return null;
+          }
+          // TODO: not complete
+
+          return (
+            <div>
+              <p className="searchForm-currentData">{cm_aclgs[0].al_nmsqsk}</p>
+              <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+            </div>
+          );
+        }}
+      */}
+        {/*
+        {() => {
+          // TODO: not complete
+        */}
+        {() => {
+          return (
+            <div>
+              <p className="searchForm-currentData">{cm_mdmms[0].md_cdcstm}</p>
+              <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+            </div>
+          );
+        }}
       </div>
     </div>
   );
 };
-
 export default SearchForm;

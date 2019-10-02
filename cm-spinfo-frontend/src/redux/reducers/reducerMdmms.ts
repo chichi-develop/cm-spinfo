@@ -4,6 +4,7 @@ export const initialState = {
   // eslint-disable-next-line @typescript-eslint/camelcase
   cm_mdmms: {},
   showList: false,
+  // showList: true,
   isLoading: false,
   isUpdating: false,
   clearSortFilter: true,

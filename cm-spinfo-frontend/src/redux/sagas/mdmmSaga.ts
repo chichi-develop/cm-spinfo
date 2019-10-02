@@ -7,6 +7,7 @@ import {
   editMdmmsFactory,
   addMdmmsFactory,
 } from './mdmmApi';
+import { getAclgsFactory } from './aclgApi';
 
 // TODO: any 多数
 function* runGetMdmms(action: any) {
@@ -22,6 +23,21 @@ function* runGetMdmms(action: any) {
 
 export function* watchGetMdmms() {
   yield takeLatest(ActionType.GET_MDMMS_START, runGetMdmms);
+}
+
+function* runGetAclgs(action: any) {
+  const cdcstm = action.payload;
+  try {
+    const aclgs = yield call(getAclgsFactory, cdcstm);
+    const searchHistory = cdcstm;
+    yield put(Actions.GetAclgs.succeed({ searchHistory, aclgs }));
+  } catch (error) {
+    yield put(Actions.GetAclgs.fail({ error }));
+  }
+}
+
+export function* watchGetAclgs() {
+  yield takeLatest(ActionType.GET_ACLGS_START, runGetAclgs);
 }
 
 function* runDeleteMdmms(action: any) {
@@ -68,6 +84,7 @@ export function* watchAddMdmms() {
 
 export default function* rootSaga() {
   yield all([
+    fork(watchGetAclgs),
     fork(watchGetMdmms),
     fork(watchDeleteMdmms),
     fork(watchEditMdmms),

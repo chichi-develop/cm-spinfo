@@ -213,7 +213,6 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
     // 入力した文字は小文字にする
     const filterTxmdmm: string | undefined = filterQuery.md_txmdmm;
 
-    // 絞り込み検索
     tmpMdmms = tmpMdmms.filter(row => {
       // タイトルで絞り込み
       if (
@@ -228,8 +227,6 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
       // カテゴリーで絞り込み
       if (
         filterQuery.md_nmmmbr_key &&
-        // row.md_nmmmbr !== parseInt(filterQuery.md_nmmmbr_key)
-        // row.md_nmmmbr !== md_nmmmbrs[parseInt(filterQuery.md_nmmmbr_key)].title
         row.md_nmmmbr !== filterQuery.md_nmmmbr_key
       ) {
         return false;
@@ -335,7 +332,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
             return (
               <tr key={mdmm.md_idmdmm}>
                 <td>{moment(mdmm.updatedAt).format('YYYY/MM/DD')}</td>
-                <td>{mdmm.md_nommrb}</td>
+                <td style={{ textAlign: 'right' }}>{mdmm.md_nommrb}</td>
                 <td>{mdmm.md_nmmmbr}</td>
                 <td>{mdmm.md_txmdmm}</td>
                 {/* {

@@ -1,5 +1,21 @@
 import * as ActionType from './actionsConsMdmms';
 
+export const GetAclgs = {
+  // TODO: any 多数
+  start: (payload: any) => ({
+    type: ActionType.GET_ACLGS_START,
+    payload,
+  }),
+  succeed: (payload: any) => ({
+    type: ActionType.GET_ACLGS_SUCCEED,
+    payload,
+  }),
+  fail: (payload: any) => ({
+    type: ActionType.GET_ACLGS_FAIL,
+    payload,
+  }),
+};
+
 export const GetMdmms = {
   // TODO: any 多数
   start: (payload: any) => ({

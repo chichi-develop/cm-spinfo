@@ -5,18 +5,30 @@ import * as Actions from './redux/actions/actionsMdmms';
 
 import SearchForm from './components/common/SearchForm';
 import Mdmm from './components/mdmm/Mdmm';
+import Aclg from './components/mdmm/Aclg';
 
 import './AppContainer.css';
 
 const AppContainer: React.FC = () => {
   // TODO: any
   const mdmmState = useSelector((state: any) => state.mdmms);
+  const aclgState = useSelector((state: any) => state.aclgs);
   const dispatch = useDispatch();
 
   const mdmmSearch = useCallback(
-    cdcstm => dispatch(Actions.GetMdmms.start(cdcstm)),
+    (cdcstm: any) => dispatch(Actions.GetMdmms.start(cdcstm)),
+    // dispatch(Actions.GetAclgs.start(cdcstm)),
     [dispatch],
   );
+  const aclgSearch = useCallback(
+    (cdcstm: any) => dispatch(Actions.GetAclgs.start(cdcstm)),
+    [dispatch],
+  );
+
+  // const aclgSearch = useCallback(
+  //   cdcstm => dispatch(Actions.GetAclgs.start(cdcstm)),
+  //   [dispatch],
+  // );
 
   const mdmmDelete = useCallback(
     ({ cdcstm, nommrb }) =>
@@ -61,7 +73,13 @@ const AppContainer: React.FC = () => {
   return (
     <>
       <div className="app-body-header">
-        <SearchForm {...mdmmState} mdmmSearch={mdmmSearch} />
+        <SearchForm
+          // {...aclgState}
+          {...mdmmState}
+          {...aclgState}
+          mdmmSearch={mdmmSearch}
+          aclgSearch={aclgSearch}
+        />
       </div>
 
       <div className="app-body-container">
@@ -70,12 +88,17 @@ const AppContainer: React.FC = () => {
           exact
           path="/"
           render={() => (
-            <Mdmm
-              {...mdmmState}
-              mdmmDelete={mdmmDelete}
-              mdmmEdit={mdmmEdit}
-              mdmmAdd={mdmmAdd}
-            />
+            <div>
+              <Mdmm
+                {...mdmmState}
+                mdmmDelete={mdmmDelete}
+                mdmmEdit={mdmmEdit}
+                mdmmAdd={mdmmAdd}
+              />
+              <br></br>
+              <h3>書籍・セミナー・大会履歴</h3>
+              <Aclg {...aclgState} />
+            </div>
           )}
         />
         {/* TODO: <question> renderからcomponentに変えたが、再レンダリングが増えた(mdmm.js/mdmmTableの再render)ため、戻した */}

@@ -1,3 +1,7 @@
+export const GET_ACLGS_START = 'GET_ACLGS_START';
+export const GET_ACLGS_SUCCEED = 'GET_ACLGS_SUCCEED';
+export const GET_ACLGS_FAIL = 'GET_ACLGS_FAIL';
+
 export const GET_MDMMS_START = 'GET_MDMMS_START';
 export const GET_MDMMS_SUCCEED = 'GET_MDMMS_SUCCEED';
 export const GET_MDMMS_FAIL = 'GET_MDMMS_FAIL';
