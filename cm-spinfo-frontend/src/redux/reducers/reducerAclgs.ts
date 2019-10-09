@@ -4,7 +4,7 @@ export const initialState = {
   // eslint-disable-next-line @typescript-eslint/camelcase
   // cm_mdmms: {},
   cm_aclgs: {},
-  showList: false,
+  showListAclgs: false,
   // showList: true,
   // isLoading: false,
   // isUpdating: false,
@@ -45,7 +45,7 @@ const aclgsReducer = (state = initialState, action: any) => {
 
     case ActionType.GET_ACLGS_START:
       return Object.assign({}, state, {
-        showList: false,
+        showListAclgs: false,
         isLoading: true,
         error: '',
       });
@@ -53,7 +53,7 @@ const aclgsReducer = (state = initialState, action: any) => {
       return Object.assign({}, state, {
         ...action.payload.aclgs,
         // ...action.payload.mdmms,
-        showList: true,
+        showListAclgs: true,
         searchHistory: [
           action.payload.searchHistory,
           ...state.searchHistory,
@@ -65,7 +65,7 @@ const aclgsReducer = (state = initialState, action: any) => {
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
         cm_aclgs: {},
-        showList: false,
+        showListAclgs: false,
         isLoading: false,
         error: action.payload.error,
       });

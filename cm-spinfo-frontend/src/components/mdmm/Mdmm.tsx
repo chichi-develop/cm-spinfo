@@ -39,7 +39,7 @@ interface Mdmm {
 
 interface MdmmProps {
   cm_mdmms: Mdmm[];
-  showList: boolean;
+  showListMdmm: boolean;
   clearSortFilter: boolean;
   mdmmAdd: Function;
   mdmmEdit: Function;
@@ -77,7 +77,7 @@ const Mdmm: React.FC<MdmmProps> = ({
   mdmmAdd,
   mdmmEdit,
   mdmmDelete,
-  showList,
+  showListMdmm,
   clearSortFilter,
 }) => {
   useEffect(() => {
@@ -122,7 +122,7 @@ const Mdmm: React.FC<MdmmProps> = ({
         )
       } */}
 
-      {showList ? (
+      {showListMdmm ? (
         <MdmmTable
           cm_mdmms={cm_mdmms}
           mdmmDelete={mdmmDelete}

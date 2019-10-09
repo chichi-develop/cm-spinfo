@@ -59,7 +59,7 @@ interface Aclg {
 interface AclgProps {
   cm_aclgs: Aclg[];
   // cm_mdmms: Mdmm[];
-  showList: boolean;
+  showListAclgs: boolean;
   clearSortFilter: boolean;
   // mdmmAdd: Function;
   // mdmmEdit: Function;
@@ -100,7 +100,7 @@ const Aclg: React.FC<AclgProps> = ({
   // mdmmEdit,
   // mdmmDelete,
   cm_aclgs,
-  showList,
+  showListAclgs,
   clearSortFilter,
 }) => {
   useEffect(() => {
@@ -116,7 +116,7 @@ const Aclg: React.FC<AclgProps> = ({
 
   return (
     <div className="mdmmTable">
-      {showList ? (
+      {showListAclgs ? (
         <AclgTable cm_aclgs={cm_aclgs} clearSortFilter={clearSortFilter} />
       ) : (
         <p>data nothing</p>

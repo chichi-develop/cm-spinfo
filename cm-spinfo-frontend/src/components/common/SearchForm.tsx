@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import './SearchForm.css';
-// import Mdmm from '../mdmm/Mdmm';
 
 interface Mdmm {
   md_idmdmm: string;
@@ -41,7 +40,8 @@ interface Aclg {
 interface SearchProps {
   cm_mdmms: Mdmm[];
   cm_aclgs: Aclg[];
-  showList: boolean;
+  showListMdmm: boolean;
+  showListAclgs: boolean;
   searchHistory: [number];
   mdmmSearch: Function;
   aclgSearch: Function;
@@ -50,6 +50,9 @@ interface SearchProps {
 export const SearchForm: React.FC<SearchProps> = ({
   cm_mdmms,
   cm_aclgs,
+  showListMdmm,
+  showListAclgs,
+  searchHistory,
   mdmmSearch,
   aclgSearch,
 }) => {
@@ -87,36 +90,29 @@ export const SearchForm: React.FC<SearchProps> = ({
           <i className="material-icons">search</i>
         </button>
       </form>
-      <div className="searchForm-currentContainer">
-        {/*
-        {() => {
-          if (!cm_aclgs) {
-            return null;
-          }
-          // TODO: not complete
 
-          return (
-            <div>
-              <p className="searchForm-currentData">{cm_aclgs[0].al_nmsqsk}</p>
-              <p className="searchForm-currentMessage">様の履歴一覧です。</p>
-            </div>
-          );
-        }}
-      */}
-        {/*
-        {() => {
-          // TODO: not complete
-        */}
-        {() => {
-          return (
-            <div>
-              <p className="searchForm-currentData">{cm_mdmms[0].md_cdcstm}</p>
-              <p className="searchForm-currentMessage">様の履歴一覧です。</p>
-            </div>
-          );
-        }}
+      <div className="searchForm-currentContainer">
+        {showListAclgs && (
+          <>
+            <p className="searchForm-currentData">{cm_aclgs[0].al_nmsqsk}</p>
+            <p className="searchForm-currentData">{cm_aclgs[0].al_nmsqtn}</p>
+            <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+          </>
+        )}
+        {!showListAclgs && showListMdmm && (
+          <>
+            <p className="searchForm-currentData">{cm_mdmms[0].md_cdcstm}</p>
+            <p className="searchForm-currentMessage">様の履歴一覧です。</p>
+          </>
+        )}
+        {!showListAclgs && !showListMdmm && (
+          <p className="searchForm-currentMessage">
+            読者番号を入力し、検索してください。
+          </p>
+        )}
       </div>
     </div>
   );
 };
+
 export default SearchForm;

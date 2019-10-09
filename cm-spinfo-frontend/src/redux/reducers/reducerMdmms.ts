@@ -3,7 +3,7 @@ import * as ActionType from '../actions/actionsConsMdmms';
 export const initialState = {
   // eslint-disable-next-line @typescript-eslint/camelcase
   cm_mdmms: {},
-  showList: false,
+  showListMdmm: false,
   // showList: true,
   isLoading: false,
   isUpdating: false,
@@ -17,14 +17,14 @@ const mdmmsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ActionType.GET_MDMMS_START:
       return Object.assign({}, state, {
-        showList: false,
+        showListMdmm: false,
         isLoading: true,
         error: '',
       });
     case ActionType.GET_MDMMS_SUCCEED:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
-        showList: true,
+        showListMdmm: true,
         searchHistory: [
           action.payload.searchHistory,
           ...state.searchHistory,
@@ -36,7 +36,7 @@ const mdmmsReducer = (state = initialState, action: any) => {
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
         cm_mdmms: {},
-        showList: false,
+        showListMdmm: false,
         isLoading: false,
         error: action.payload.error,
       });
@@ -46,7 +46,7 @@ const mdmmsReducer = (state = initialState, action: any) => {
     case ActionType.ADD_MDMMS_SUCCEED:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
-        showList: true,
+        showListMdmm: true,
         isUpdating: false,
         clearSortFilter: true,
         error: '',
@@ -63,14 +63,14 @@ const mdmmsReducer = (state = initialState, action: any) => {
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         isUpdating: false,
-        showList: true,
+        showListMdmm: true,
         clearSortFilter: false,
         error: '',
       });
     case ActionType.DELETE_MDMMS_FAIL:
       return Object.assign({}, state, {
         isUpdating: false,
-        showList: action.payload.error.status !== 404,
+        showListMdmm: action.payload.error.status !== 404,
         error: action.payload.error,
       });
     case ActionType.EDIT_MDMMS_START:

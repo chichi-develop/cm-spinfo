@@ -74,7 +74,6 @@ const AppContainer: React.FC = () => {
     <>
       <div className="app-body-header">
         <SearchForm
-          // {...aclgState}
           {...mdmmState}
           {...aclgState}
           mdmmSearch={mdmmSearch}
