@@ -28,6 +28,10 @@
   border-radius: 3px;
 }
 
+.mdmmTable-addButton:focus {
+  outline: none;
+}
+
 .mdmmTable-addButton:hover {
   /* background: #0b7dda; */
   background: #1565c0;
