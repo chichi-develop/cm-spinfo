@@ -1,93 +1,70 @@
-import * as ActionType from './actionsConsMdmms';
+import types from './actionsConsMdmms';
+import { Mdmms, Mdmm } from './models';
 
-export const GetAclgs = {
-  // TODO: any 多数
-  start: (payload: any) => ({
-    type: ActionType.GET_ACLGS_START,
-    payload,
-  }),
-  succeed: (payload: any) => ({
-    type: ActionType.GET_ACLGS_SUCCEED,
-    payload,
-  }),
-  fail: (payload: any) => ({
-    type: ActionType.GET_ACLGS_FAIL,
-    payload,
-  }),
-};
+export const getAclgsStart = (cdcstm: string) => ({
+  type: types.getAclgsStart,
+  payload: { cdcstm },
+});
+export const getAclgsSucceed = (searchHistory: object, aclgs: object) => ({
+  type: types.getAclgsSucceed,
+  payload: { searchHistory, aclgs },
+});
+export const getAclgsFail = (error: object) => ({
+  type: types.getAclgsFail,
+  payload: { error },
+});
 
-export const GetMdmms = {
-  // TODO: any 多数
-  start: (payload: any) => ({
-    type: ActionType.GET_MDMMS_START,
-    payload,
-  }),
-  succeed: (payload: any) => ({
-    type: ActionType.GET_MDMMS_SUCCEED,
-    payload,
-  }),
-  fail: (payload: any) => ({
-    type: ActionType.GET_MDMMS_FAIL,
-    payload,
-  }),
-};
+export const getMdmmsStart = (cdcstm: string) => ({
+  type: types.getMdmmsStart,
+  payload: { cdcstm },
+});
+export const getMdmmsSucceed = (searchHistory: object, mdmms: Mdmms) => ({
+  type: types.getMdmmsSucceed,
+  payload: { searchHistory, mdmms },
+});
+export const getMdmmsFail = (error: object) => ({
+  type: types.getMdmmsFail,
+  payload: { error },
+});
 
-export const EditMdmms = {
-  start: (payload: any) => ({
-    type: ActionType.EDIT_MDMMS_START,
-    payload,
-    meta: { confirm: '更新してよろしいですか？' },
-  }),
-  succeed: (payload: any) => ({
-    type: ActionType.EDIT_MDMMS_SUCCEED,
-    payload,
-  }),
-  fail: (payload: any) => ({
-    type: ActionType.EDIT_MDMMS_FAIL,
-    payload,
-  }),
-};
+export const editMdmmsStart = (cdcstm: string, nommrb: number, mdmm: Mdmm) => ({
+  type: types.editMdmmsStart,
+  payload: { cdcstm, nommrb, mdmm },
+  meta: { confirm: '更新してよろしいですか？' },
+});
+export const editMdmmsSucceed = (mdmms: Mdmms) => ({
+  type: types.editMdmmsSucceed,
+  payload: { mdmms },
+});
+export const editMdmmsFail = (error: object) => ({
+  type: types.editMdmmsFail,
+  payload: { error },
+});
 
-export const DeleteMdmms = {
-  start: (payload: any) => ({
-    type: ActionType.DELETE_MDMMS_START,
-    payload,
-    meta: { confirm: '削除してよろしいですか？' },
-  }),
-  succeed: (payload: any) => ({
-    type: ActionType.DELETE_MDMMS_SUCCEED,
-    payload,
-  }),
-  fail: (payload: any) => ({
-    type: ActionType.DELETE_MDMMS_FAIL,
-    payload,
-  }),
-};
+export const deleteMdmmsStart = (cdcstm: string, nommrb: number) => ({
+  type: types.deleteMdmmsStart,
+  payload: { cdcstm, nommrb },
+  meta: { confirm: '削除してよろしいですか？' },
+});
+export const deleteMdmmsSucceed = (mdmms: Mdmms) => ({
+  type: types.deleteMdmmsSucceed,
+  payload: { mdmms },
+});
+export const deleteMdmmsFail = (error: object, showListMdmm: boolean) => ({
+  type: types.deleteMdmmsFail,
+  payload: { error, showListMdmm },
+});
 
-export const AddMdmms = {
-  start: (payload: any) => ({
-    type: ActionType.ADD_MDMMS_START,
-    payload,
-    meta: { confirm: '登録してよろしいですか？' },
-  }),
-  succeed: (payload: any) => ({
-    type: ActionType.ADD_MDMMS_SUCCEED,
-    payload,
-  }),
-  fail: (payload: any) => ({
-    type: ActionType.ADD_MDMMS_FAIL,
-    payload,
-  }),
-};
-
-// export function getMdmmsStart(payload) {
-//   return { type: ActionType.GET_MDMMS_START, payload }
-// }
-
-// export function getMdmmsSucceed(payload) {
-//   return { type: ActionType.GET_MDMMS_SUCCEED, payload }
-// }
-
-// export function getMdmmsFail(payload) {
-//   return { type: ActionType.GET_MDMMS_FAIL, payload }
-// }
+export const addMdmmsStart = (mdmm: Mdmm) => ({
+  type: types.addMdmmsStart,
+  payload: { mdmm },
+  meta: { confirm: '登録してよろしいですか？' },
+});
+export const addMdmmsSucceed = (mdmms: Mdmms) => ({
+  type: types.addMdmmsSucceed,
+  payload: { mdmms },
+});
+export const addMdmmsFail = (error: object) => ({
+  type: types.addMdmmsFail,
+  payload: { error },
+});

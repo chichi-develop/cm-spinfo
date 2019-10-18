@@ -68,6 +68,7 @@ module.exports = {
 
     // add
     '@typescript-eslint/camelcase': 'warn',
+    '@typescript-eslint/prefer-interface': 'off',
 
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [

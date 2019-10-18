@@ -1,19 +1,21 @@
-export const GET_ACLGS_START = 'GET_ACLGS_START';
-export const GET_ACLGS_SUCCEED = 'GET_ACLGS_SUCCEED';
-export const GET_ACLGS_FAIL = 'GET_ACLGS_FAIL';
+export default {
+  getAclgsStart: 'GET_ACLGS_START',
+  getAclgsSucceed: 'GET_ACLGS_SUCCEED',
+  getAclgsFail: 'GET_ACLGS_FAIL',
 
-export const GET_MDMMS_START = 'GET_MDMMS_START';
-export const GET_MDMMS_SUCCEED = 'GET_MDMMS_SUCCEED';
-export const GET_MDMMS_FAIL = 'GET_MDMMS_FAIL';
+  getMdmmsStart: 'GET_MDMMS_START',
+  getMdmmsSucceed: 'GET_MDMMS_SUCCEED',
+  getMdmmsFail: 'GET_MDMMS_FAIL',
 
-export const EDIT_MDMMS_START = 'EDIT_MDMMS_START';
-export const EDIT_MDMMS_SUCCEED = 'EDIT_MDMMS_SUCCEED';
-export const EDIT_MDMMS_FAIL = 'EDIT_MDMMS_FAIL';
+  editMdmmsStart: 'EDIT_MDMMS_START',
+  editMdmmsSucceed: 'EDIT_MDMMS_SUCCEED',
+  editMdmmsFail: 'EDIT_MDMMS_FAIL',
 
-export const DELETE_MDMMS_START = 'DELETE_MDMMS_START';
-export const DELETE_MDMMS_SUCCEED = 'DELETE_MDMMS_SUCCEED';
-export const DELETE_MDMMS_FAIL = 'DELETE_MDMMS_FAIL';
+  deleteMdmmsStart: 'DELETE_MDMMS_START',
+  deleteMdmmsSucceed: 'DELETE_MDMMS_SUCCEED',
+  deleteMdmmsFail: 'DELETE_MDMMS_FAIL',
 
-export const ADD_MDMMS_START = 'ADD_MDMMS_START';
-export const ADD_MDMMS_SUCCEED = 'ADD_MDMMS_SUCCEED';
-export const ADD_MDMMS_FAIL = 'ADD_MDMMS_FAIL';
+  addMdmmsStart: 'ADD_MDMMS_START',
+  addMdmmsSucceed: 'ADD_MDMMS_SUCCEED',
+  addMdmmsFail: 'ADD_MDMMS_FAIL',
+} as const;

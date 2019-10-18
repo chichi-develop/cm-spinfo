@@ -1,50 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { Mdmms, Aclgs } from '../../redux/actions/models';
 
 import './SearchForm.css';
 
-interface Mdmm {
-  md_idmdmm: string;
-  md_cdcstm: string;
-  md_nommrb: string;
-  md_nmmmbr: string;
-  md_txmdmm: string;
-  md_fganch: string;
-  md_clmdmm: string;
-  md_ccadip: string;
-  md_ccmodu: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-interface Aclg {
-  al_idactv: string;
-  al_nmactv: string;
-  al_noactv: string;
-  al_dtactv: Date;
-  al_cdsqsk: string;
-  al_nmsqsk: string;
-  al_nmsqbu: string;
-  al_nmsqtn: string;
-  al_txactv: string;
-  al_susury: number;
-  al_kgtnka: number;
-  al_kggoke: number;
-  al_txbiko: string;
-  al_cdcstm: string;
-  al_nmcstm: string;
-  al_nmtnbu: string;
-  al_nmtnto: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import * as actions from '../../redux/actions/actionsMdmms';
 
 interface SearchProps {
-  cm_mdmms: Mdmm[];
-  cm_aclgs: Aclg[];
+  cm_mdmms: Mdmms | {};
+  cm_aclgs: Aclgs | {};
   showListMdmm: boolean;
   showListAclgs: boolean;
-  searchHistory: [number];
-  mdmmSearch: Function;
-  aclgSearch: Function;
+  searchHistory: string[];
+  mdmmSearch: typeof actions.getMdmmsStart;
+  aclgSearch: typeof actions.getAclgsStart;
 }
 
 export const SearchForm: React.FC<SearchProps> = ({
