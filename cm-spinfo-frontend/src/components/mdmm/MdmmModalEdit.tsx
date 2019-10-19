@@ -3,7 +3,7 @@ import { withFormik, Form, Field, InjectedFormikProps } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 
-import { Mdmm } from '../../redux/actions/models';
+// import { Mdmm } from '../../redux/actions/models';
 
 import './MdmmModal.css';
 
@@ -13,12 +13,12 @@ interface MdmmEditValues {
   md_nommrb: number;
   md_nmmmbr: string;
   md_txmdmm: string;
-  md_fganch: string;
-  md_clmdmm: string;
+  md_fganch: number | null;
+  md_clmdmm: string | null;
   md_ccadip: string;
   md_ccmodu: string;
   createdAt: Date;
-  // updatedAt: Date;;
+  // updatedAt?: Date;
 }
 
 interface MdmmEditProps {
@@ -26,8 +26,8 @@ interface MdmmEditProps {
   md_cdcstm?: string;
   md_nommrb?: number;
   md_nmmmbr?: string;
-  md_txmdmm?: string;
-  md_fganch?: string;
+  md_txmdmm?: string | null;
+  md_fganch?: number | null;
   md_clmdmm?: string;
   md_ccadip?: string;
   md_ccmodu?: string;

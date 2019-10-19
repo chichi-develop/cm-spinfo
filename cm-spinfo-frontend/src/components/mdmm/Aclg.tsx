@@ -24,7 +24,7 @@ import { Aclgs } from '../../redux/actions/models';
 import './Mdmm.css';
 
 interface AclgProps {
-  cm_aclgs: Aclgs | {};
+  cm_aclgs: Aclgs;
   // cm_mdmms: Mdmm[];
   showListAclgs: boolean;
   clearSortFilter: boolean;
@@ -34,7 +34,7 @@ interface AclgProps {
 }
 
 interface AclgTableProps {
-  cm_aclgs: Aclgs | {};
+  cm_aclgs: Aclgs;
   // cm_mdmms: Mdmm[];
   clearSortFilter: boolean;
   // mdmmEdit: Function;

@@ -3,7 +3,7 @@ import { Actions } from '../actions/actions';
 import { Aclgs } from '../actions/models';
 
 interface AclgsState {
-  cm_aclgs: Aclgs | {};
+  cm_aclgs: Aclgs | [];
   showListAclgs: boolean;
   clearSortFilter: boolean;
   searchHistory: [];
@@ -12,7 +12,7 @@ interface AclgsState {
 
 export const initialState = (injects?: AclgsState): AclgsState => ({
   // eslint-disable-next-line @typescript-eslint/camelcase
-  cm_aclgs: {},
+  cm_aclgs: [],
   showListAclgs: false,
   // showList: true,
   // isLoading: false,
@@ -55,7 +55,7 @@ export const aclgsReducer = (state = initialState(), action: Actions) => {
       return Object.assign({}, state, {
         showListAclgs: false,
         isLoading: true,
-        error: '',
+        error: {},
       });
     case types.getAclgsSucceed:
       return Object.assign({}, state, {
@@ -67,7 +67,7 @@ export const aclgsReducer = (state = initialState(), action: Actions) => {
           ...state.searchHistory,
         ].slice(0, 30),
         isLoading: false,
-        error: '',
+        error: {},
       });
     case types.getAclgsFail:
       return Object.assign({}, state, {

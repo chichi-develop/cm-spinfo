@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -20,16 +21,7 @@ const middlewares = [logger, thunk, confirmMiddleware, sagaMiddleware];
 
 const store = createStore(
   persistReducer,
-  compose(
-    applyMiddleware(...middlewares),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-
-    // TODO: <question> disable以外の方法はあるか？
-    /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-      (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
-    /* eslint-enable */
-  ),
+  composeWithDevTools(applyMiddleware(...middlewares)),
 );
 const pstore = persistStore(store);
 sagaMiddleware.run(rootSaga);
