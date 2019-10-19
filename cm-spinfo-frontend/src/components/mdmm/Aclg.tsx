@@ -13,6 +13,8 @@ import {
   ArrowDropDown as ArrowDropDownIcon,
 } from '@material-ui/icons';
 
+import { Aclgs } from '../../redux/actions/models';
+
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 // import Modal from '../common/Modal';
@@ -21,43 +23,8 @@ import {
 // import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
-// TODO: interfaceの整理、入れ子の対応調査
-// TODO: any
-interface Aclg {
-  // md_idmdmm: string;
-  // md_cdcstm: string;
-  // md_nommrb: string;
-  // md_nmmmbr: string;
-  // md_txmdmm: string;
-  // md_fganch: string;
-  // md_clmdmm: string;
-  // md_ccadip: string;
-  // md_ccmodu: string;
-  // createdAt: Date;
-  // updatedAt: Date;
-  al_idactv: string;
-  al_nmactv: string;
-  al_noactv: string;
-  al_dtactv: Date;
-  al_cdsqsk: string;
-  al_nmsqsk: string;
-  al_nmsqbu: string;
-  al_nmsqtn: string;
-  al_txactv: string;
-  al_susury: number;
-  al_kgtnka: number;
-  al_kggoke: number;
-  al_txbiko: string;
-  al_cdcstm: string;
-  al_nmcstm: string;
-  al_nmtnbu: string;
-  al_nmtnto: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 interface AclgProps {
-  cm_aclgs: Aclg[];
+  cm_aclgs: Aclgs | {};
   // cm_mdmms: Mdmm[];
   showListAclgs: boolean;
   clearSortFilter: boolean;
@@ -67,7 +34,7 @@ interface AclgProps {
 }
 
 interface AclgTableProps {
-  cm_aclgs: Aclg[];
+  cm_aclgs: Aclgs | {};
   // cm_mdmms: Mdmm[];
   clearSortFilter: boolean;
   // mdmmEdit: Function;

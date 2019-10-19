@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { Mdmm, Mdmms } from '../actions/models';
 
 const baseUrlMdmms = 'http://localhost:8340/api/v1/cm_mdmms';
 // const baseUrlMdmms = 'http://localhost:8340/api/v1/cm_aclgs';
-export async function getMdmmsFactory(cdcstm: string) {
+export async function getMdmmsFactory(cdcstm: string): Promise<Mdmms | object> {
   try {
-    const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`);
+    const res = await axios.get<Mdmms>(`${baseUrlMdmms}/${cdcstm}`);
 
     return res.data;
   } catch (res) {
@@ -13,10 +14,10 @@ export async function getMdmmsFactory(cdcstm: string) {
   }
 }
 
-export async function deleteMdmmsFactory(cdcstm: string, nommrb: string) {
+export async function deleteMdmmsFactory(cdcstm: string, nommrb: number) {
   try {
     await axios.delete(`${baseUrlMdmms}/${cdcstm}/${nommrb}`);
-    const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`);
+    const res = await axios.get<Mdmms>(`${baseUrlMdmms}/${cdcstm}`);
 
     return res.data;
   } catch (res) {
@@ -27,13 +28,12 @@ export async function deleteMdmmsFactory(cdcstm: string, nommrb: string) {
 
 export async function editMdmmsFactory(
   cdcstm: string,
-  nommrb: string,
-  // TODO: any
-  mdmm: any,
+  nommrb: number,
+  mdmm: Mdmm,
 ) {
   try {
     await axios.put(`${baseUrlMdmms}/${cdcstm}/${nommrb}`, mdmm);
-    const res = await axios.get(`${baseUrlMdmms}/${cdcstm}`);
+    const res = await axios.get<Mdmms>(`${baseUrlMdmms}/${cdcstm}`);
 
     return res.data;
   } catch (res) {
@@ -42,11 +42,10 @@ export async function editMdmmsFactory(
   }
 }
 
-// TODO: any
-export async function addMdmmsFactory(mdmm: any) {
+export async function addMdmmsFactory(mdmm: Mdmm) {
   try {
     await axios.post(`${baseUrlMdmms}`, mdmm);
-    const res = await axios.get(`${baseUrlMdmms}/${mdmm.md_cdcstm}`);
+    const res = await axios.get<Mdmms>(`${baseUrlMdmms}/${mdmm.md_cdcstm}`);
 
     return res.data;
   } catch (res) {

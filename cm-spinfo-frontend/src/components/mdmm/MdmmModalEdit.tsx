@@ -3,18 +3,14 @@ import { withFormik, Form, Field, InjectedFormikProps } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 
+import { Mdmm } from '../../redux/actions/models';
+
 import './MdmmModal.css';
 
-interface MyFormProps {
-  touched: any;
-  errors: any;
-  isSubmitting: boolean;
-}
-
 interface MdmmEditValues {
-  md_idmdmm: string;
+  md_idmdmm: number;
   md_cdcstm: string;
-  md_nommrb: string;
+  md_nommrb: number;
   md_nmmmbr: string;
   md_txmdmm: string;
   md_fganch: string;
@@ -26,9 +22,9 @@ interface MdmmEditValues {
 }
 
 interface MdmmEditProps {
-  md_idmdmm?: string;
+  md_idmdmm?: number;
   md_cdcstm?: string;
-  md_nommrb?: string;
+  md_nommrb?: number;
   md_nmmmbr?: string;
   md_txmdmm?: string;
   md_fganch?: string;
@@ -37,8 +33,7 @@ interface MdmmEditProps {
   md_ccmodu?: string;
   createdAt?: Date;
   // updatedAt: Date;
-  className: any;
-  mdmm: any;
+  mdmm: MdmmEditValues;
   mdmmEdit: Function;
   handleCloseModal: Function;
 }
@@ -195,9 +190,10 @@ const MdmmEdit = withFormik<MdmmEditProps, MdmmEditValues>({
   // mapPropsToValues: () => ({ email: '', password: '', newsletter: true }),
 
   mapPropsToValues: ({
-    mdmmEdit,
     mdmm,
+    mdmmEdit,
     handleCloseModal,
+
     md_idmdmm,
     md_cdcstm,
     md_nommrb,
@@ -226,8 +222,8 @@ const MdmmEdit = withFormik<MdmmEditProps, MdmmEditValues>({
   validationSchema: Yup.object().shape({
     md_idmdmm: Yup.number().required('Enter a md_idmdmm'),
     md_cdcstm: Yup.string()
-      // .matches(/^[0-9]{8}/,('md_cdcstm is 8-digit numbar'))
-      .matches(/^2[0-9]{7}/, '8-digit numbar starting from 2 [2XXXXXXX]')
+      // .matches(/^[0-9]{8}/,('md_cdcstm is 8-digit number'))
+      .matches(/^2[0-9]{7}/, '8-digit number starting from 2 [2XXXXXXX]')
       .length(8, 'md_cdcstm is 8 characters')
       .required('Enter a md_cdcstm'),
     md_nommrb: Yup.string().required('Enter a md_nmmmbr'),

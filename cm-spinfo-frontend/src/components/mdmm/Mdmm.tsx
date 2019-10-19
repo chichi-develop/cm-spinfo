@@ -13,6 +13,9 @@ import {
   ArrowDropDown as ArrowDropDownIcon,
 } from '@material-ui/icons';
 
+import { Mdmms } from '../../redux/actions/models';
+import * as actions from '../../redux/actions/actionsMdmms';
+
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Modal from '../common/Modal';
@@ -21,36 +24,20 @@ import MdmmEdit from './MdmmModalEdit';
 import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
-// TODO: interfaceの整理、入れ子の対応調査
-// TODO: any
-interface Mdmm {
-  md_idmdmm: string;
-  md_cdcstm: string;
-  md_nommrb: string;
-  md_nmmmbr: string;
-  md_txmdmm: string;
-  md_fganch: string;
-  md_clmdmm: string;
-  md_ccadip: string;
-  md_ccmodu: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 interface MdmmProps {
-  cm_mdmms: Mdmm[];
+  cm_mdmms: Mdmms | {};
   showListMdmm: boolean;
   clearSortFilter: boolean;
-  mdmmAdd: Function;
-  mdmmEdit: Function;
-  mdmmDelete: Function;
+  mdmmAdd: typeof actions.addMdmmsStart;
+  mdmmEdit: typeof actions.editMdmmsStart;
+  mdmmDelete: typeof actions.deleteMdmmsStart;
 }
 
 interface MdmmTableProps {
-  cm_mdmms: Mdmm[];
+  cm_mdmms: Mdmms | {};
   clearSortFilter: boolean;
-  mdmmEdit: Function;
-  mdmmDelete: Function;
+  mdmmEdit: typeof actions.editMdmmsStart;
+  mdmmDelete: typeof actions.deleteMdmmsStart;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -197,7 +184,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
 
     if (clearSortFilter) {
       setFilterQuery({ md_nmmmbr_key: '' });
-      setSort({ key: 'md_nmmmrb', order: 0, icon: '' });
+      setSort({ key: 'md_nmmmbr', order: 0, icon: '' });
     }
 
     // componentWillUnmountを実装したければ
@@ -352,7 +339,6 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
                     )}
                     content={(handleCloseModal: Function) => (
                       <MdmmEdit
-                        className={classes.iconHover}
                         mdmm={mdmm}
                         mdmmEdit={mdmmEdit}
                         handleCloseModal={handleCloseModal}

@@ -31,10 +31,6 @@ const App: React.FC = () => {
   );
 };
 
-// TODO: typescript reduxの型付けを見直す
-// TODO: typescript アサーションを使う
-// TODO: typescript anyを見直す
-// TODO: typescript 共通interfaceをファイルに移すか検討
 // TODO: eslint warningを見直す
 // TODO: buttonをinput type=buttonに見直す
 

@@ -1,6 +1,18 @@
-import * as ActionType from '../actions/actionsConsMdmms';
+import types from '../actions/actionsConsMdmms';
+import { Actions } from '../actions/actions';
+import { Mdmms } from '../actions/models';
 
-export const initialState = {
+interface MdmmsState {
+  cm_mdmms: Mdmms | {};
+  showListMdmm: boolean;
+  isLoading: boolean;
+  isUpdating: boolean;
+  clearSortFilter: boolean;
+  searchHistory: [];
+  error: {};
+}
+
+export const initialState = (injects?: MdmmsState): MdmmsState => ({
   // eslint-disable-next-line @typescript-eslint/camelcase
   cm_mdmms: {},
   showListMdmm: false,
@@ -9,19 +21,19 @@ export const initialState = {
   isUpdating: false,
   clearSortFilter: true,
   searchHistory: [],
-  error: '',
-};
+  error: {},
+  ...injects,
+});
 
-// TODO: any
-const mdmmsReducer = (state = initialState, action: any) => {
+export const mdmmsReducer = (state = initialState(), action: Actions) => {
   switch (action.type) {
-    case ActionType.GET_MDMMS_START:
+    case types.getMdmmsStart:
       return Object.assign({}, state, {
         showListMdmm: false,
         isLoading: true,
-        error: '',
+        error: {},
       });
-    case ActionType.GET_MDMMS_SUCCEED:
+    case types.getMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         showListMdmm: true,
@@ -30,9 +42,9 @@ const mdmmsReducer = (state = initialState, action: any) => {
           ...state.searchHistory,
         ].slice(0, 30),
         isLoading: false,
-        error: '',
+        error: {},
       });
-    case ActionType.GET_MDMMS_FAIL:
+    case types.getMdmmsFail:
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
         cm_mdmms: {},
@@ -41,48 +53,48 @@ const mdmmsReducer = (state = initialState, action: any) => {
         error: action.payload.error,
       });
 
-    case ActionType.ADD_MDMMS_START:
+    case types.addMdmmsStart:
       return Object.assign({}, state, { isUpdating: true, error: '' });
-    case ActionType.ADD_MDMMS_SUCCEED:
+    case types.addMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         showListMdmm: true,
         isUpdating: false,
         clearSortFilter: true,
-        error: '',
+        error: {},
       });
-    case ActionType.ADD_MDMMS_FAIL:
+    case types.addMdmmsFail:
       return Object.assign({}, state, {
         isUpdating: false,
         error: action.payload.error,
       });
 
-    case ActionType.DELETE_MDMMS_START:
+    case types.deleteMdmmsStart:
       return Object.assign({}, state, { isUpdating: true, error: '' });
-    case ActionType.DELETE_MDMMS_SUCCEED:
+    case types.deleteMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         isUpdating: false,
         showListMdmm: true,
         clearSortFilter: false,
-        error: '',
+        error: {},
       });
-    case ActionType.DELETE_MDMMS_FAIL:
+    case types.deleteMdmmsFail:
       return Object.assign({}, state, {
         isUpdating: false,
-        showListMdmm: action.payload.error.status !== 404,
+        showListMdmm: action.payload.showListMdmm,
         error: action.payload.error,
       });
-    case ActionType.EDIT_MDMMS_START:
+    case types.editMdmmsStart:
       return Object.assign({}, state, { isUpdating: true, error: '' });
-    case ActionType.EDIT_MDMMS_SUCCEED:
+    case types.editMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         isUpdating: false,
         clearSortFilter: false,
-        error: '',
+        error: {},
       });
-    case ActionType.EDIT_MDMMS_FAIL:
+    case types.editMdmmsFail:
       return Object.assign({}, state, {
         isUpdating: false,
         error: action.payload.error,

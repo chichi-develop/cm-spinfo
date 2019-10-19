@@ -1,6 +1,6 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import * as ActionType from '../actions/actionsConsMdmms';
-import * as Actions from '../actions/actionsMdmms';
+import types from '../actions/actionsConsMdmms';
+import * as actions from '../actions/actionsMdmms';
 import {
   getMdmmsFactory,
   deleteMdmmsFactory,
@@ -9,77 +9,104 @@ import {
 } from './mdmmApi';
 import { getAclgsFactory } from './aclgApi';
 
-// TODO: any 多数
-function* runGetMdmms(action: any) {
-  const cdcstm = action.payload;
+function* runGetMdmms(action: ReturnType<typeof actions.getMdmmsStart>) {
   try {
-    const mdmms = yield call(getMdmmsFactory, cdcstm);
-    const searchHistory = cdcstm;
-    yield put(Actions.GetMdmms.succeed({ searchHistory, mdmms }));
+    // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
+    const mdmms = yield call(getMdmmsFactory, action.payload.cdcstm);
+    yield put({
+      type: types.getMdmmsSucceed,
+      searchHistory: action.payload.cdcstm,
+      mdmms,
+    });
   } catch (error) {
-    yield put(Actions.GetMdmms.fail({ error }));
+    yield put({ type: types.getMdmmsFail, error });
   }
 }
 
 export function* watchGetMdmms() {
-  yield takeLatest(ActionType.GET_MDMMS_START, runGetMdmms);
+  yield takeLatest(types.getMdmmsStart, runGetMdmms);
 }
 
-function* runGetAclgs(action: any) {
-  const cdcstm = action.payload;
+function* runGetAclgs(action: ReturnType<typeof actions.getAclgsStart>) {
   try {
-    const aclgs = yield call(getAclgsFactory, cdcstm);
-    const searchHistory = cdcstm;
-    yield put(Actions.GetAclgs.succeed({ searchHistory, aclgs }));
+    // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
+    const aclgs = yield call(getAclgsFactory, action.payload.cdcstm);
+    yield put({
+      type: types.getAclgsSucceed,
+      searchHistory: action.payload.cdcstm,
+      aclgs,
+    });
   } catch (error) {
-    yield put(Actions.GetAclgs.fail({ error }));
+    yield put({ type: types.getAclgsFail, error });
   }
 }
 
 export function* watchGetAclgs() {
-  yield takeLatest(ActionType.GET_ACLGS_START, runGetAclgs);
+  yield takeLatest(types.getAclgsStart, runGetAclgs);
 }
 
-function* runDeleteMdmms(action: any) {
+function* runDeleteMdmms(action: ReturnType<typeof actions.deleteMdmmsStart>) {
   const { cdcstm, nommrb } = action.payload;
   try {
+    // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
     const mdmms = yield call(deleteMdmmsFactory, cdcstm, nommrb);
-    yield put(Actions.DeleteMdmms.succeed({ mdmms }));
+    yield put({
+      type: types.deleteMdmmsSucceed,
+      mdmms,
+    });
   } catch (error) {
-    yield put(Actions.DeleteMdmms.fail({ error }));
+    yield put({
+      type: types.deleteMdmmsFail,
+      showListMdmm: error.status !== 404,
+      error,
+    });
   }
 }
 
 export function* watchDeleteMdmms() {
-  yield takeLatest(ActionType.DELETE_MDMMS_START, runDeleteMdmms);
+  yield takeLatest(types.deleteMdmmsStart, runDeleteMdmms);
 }
 
-function* runEditMdmms(action: any) {
+function* runEditMdmms(action: ReturnType<typeof actions.editMdmmsStart>) {
   const { cdcstm, nommrb, mdmm } = action.payload;
   try {
+    // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
     const mdmms = yield call(editMdmmsFactory, cdcstm, nommrb, mdmm);
-    yield put(Actions.EditMdmms.succeed({ mdmms }));
+    yield put({
+      type: types.editMdmmsSucceed,
+      mdmms,
+    });
   } catch (error) {
-    yield put(Actions.EditMdmms.fail({ error }));
+    yield put({
+      type: types.editMdmmsFail,
+      error,
+    });
   }
 }
 
 export function* watchEditMdmms() {
-  yield takeLatest(ActionType.EDIT_MDMMS_START, runEditMdmms);
+  yield takeLatest(types.editMdmmsStart, runEditMdmms);
 }
 
-function* runAddMdmms(action: any) {
-  const mdmm = action.payload;
+function* runAddMdmms(action: ReturnType<typeof actions.addMdmmsStart>) {
+  const { mdmm } = action.payload;
   try {
+    // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
     const mdmms = yield call(addMdmmsFactory, mdmm);
-    yield put(Actions.AddMdmms.succeed({ mdmms }));
+    yield put({
+      type: types.addMdmmsSucceed,
+      mdmms,
+    });
   } catch (error) {
-    yield put(Actions.AddMdmms.fail({ error }));
+    yield put({
+      type: types.addMdmmsFail,
+      error,
+    });
   }
 }
 
 export function* watchAddMdmms() {
-  yield takeLatest(ActionType.ADD_MDMMS_START, runAddMdmms);
+  yield takeLatest(types.addMdmmsStart, runAddMdmms);
 }
 
 export default function* rootSaga() {

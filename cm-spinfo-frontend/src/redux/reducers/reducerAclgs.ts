@@ -1,8 +1,17 @@
-import * as ActionType from '../actions/actionsConsMdmms';
+import types from '../actions/actionsConsMdmms';
+import { Actions } from '../actions/actions';
+import { Aclgs } from '../actions/models';
 
-export const initialState = {
+interface AclgsState {
+  cm_aclgs: Aclgs | {};
+  showListAclgs: boolean;
+  clearSortFilter: boolean;
+  searchHistory: [];
+  error: {};
+}
+
+export const initialState = (injects?: AclgsState): AclgsState => ({
   // eslint-disable-next-line @typescript-eslint/camelcase
-  // cm_mdmms: {},
   cm_aclgs: {},
   showListAclgs: false,
   // showList: true,
@@ -10,12 +19,11 @@ export const initialState = {
   // isUpdating: false,
   clearSortFilter: true,
   searchHistory: [],
-  error: '',
-};
+  error: {},
+  ...injects,
+});
 
-// TODO: any
-// const mdmmsReducer = (state = initialState, action: any) => {
-const aclgsReducer = (state = initialState, action: any) => {
+export const aclgsReducer = (state = initialState(), action: Actions) => {
   switch (action.type) {
     // case ActionType.GET_MDMMS_START:
     //   return Object.assign({}, state, {
@@ -43,13 +51,13 @@ const aclgsReducer = (state = initialState, action: any) => {
     //     error: action.payload.error,
     //   });
 
-    case ActionType.GET_ACLGS_START:
+    case types.getAclgsStart:
       return Object.assign({}, state, {
         showListAclgs: false,
         isLoading: true,
         error: '',
       });
-    case ActionType.GET_ACLGS_SUCCEED:
+    case types.getAclgsSucceed:
       return Object.assign({}, state, {
         ...action.payload.aclgs,
         // ...action.payload.mdmms,
@@ -61,7 +69,7 @@ const aclgsReducer = (state = initialState, action: any) => {
         isLoading: false,
         error: '',
       });
-    case ActionType.GET_ACLGS_FAIL:
+    case types.getAclgsFail:
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
         cm_aclgs: {},

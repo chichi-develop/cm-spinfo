@@ -6,22 +6,22 @@ import * as Actions from './redux/actions/actionsMdmms';
 import SearchForm from './components/common/SearchForm';
 import Mdmm from './components/mdmm/Mdmm';
 import Aclg from './components/mdmm/Aclg';
+import { StoreState } from './redux/reducers';
 
 import './AppContainer.css';
 
 const AppContainer: React.FC = () => {
-  // TODO: any
-  const mdmmState = useSelector((state: any) => state.mdmms);
-  const aclgState = useSelector((state: any) => state.aclgs);
+  const mdmmState = useSelector((state: StoreState) => state.mdmms);
+  const aclgState = useSelector((state: StoreState) => state.aclgs);
   const dispatch = useDispatch();
 
   const mdmmSearch = useCallback(
-    (cdcstm: any) => dispatch(Actions.GetMdmms.start(cdcstm)),
+    (cdcstm: string) => dispatch(Actions.getMdmmsStart(cdcstm)),
     // dispatch(Actions.GetAclgs.start(cdcstm)),
     [dispatch],
   );
   const aclgSearch = useCallback(
-    (cdcstm: any) => dispatch(Actions.GetAclgs.start(cdcstm)),
+    (cdcstm: string) => dispatch(Actions.getAclgsStart(cdcstm)),
     [dispatch],
   );
 
@@ -31,18 +31,17 @@ const AppContainer: React.FC = () => {
   // );
 
   const mdmmDelete = useCallback(
-    ({ cdcstm, nommrb }) =>
-      dispatch(Actions.DeleteMdmms.start({ cdcstm, nommrb })),
+    ({ cdcstm, nommrb }) => dispatch(Actions.deleteMdmmsStart(cdcstm, nommrb)),
     [dispatch],
   );
 
   const mdmmEdit = useCallback(
     ({ cdcstm, nommrb, mdmm }) =>
-      dispatch(Actions.EditMdmms.start({ cdcstm, nommrb, mdmm })),
+      dispatch(Actions.editMdmmsStart(cdcstm, nommrb, mdmm)),
     [dispatch],
   );
 
-  const mdmmAdd = useCallback(mdmm => dispatch(Actions.AddMdmms.start(mdmm)), [
+  const mdmmAdd = useCallback(mdmm => dispatch(Actions.addMdmmsStart(mdmm)), [
     dispatch,
   ]);
 
