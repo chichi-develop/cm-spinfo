@@ -3,8 +3,8 @@ import { Actions } from '../actions/actions';
 import { Mdmms } from '../actions/models';
 
 interface MdmmsState {
-  cm_mdmms: Mdmms | {};
-  showListMdmm: boolean;
+  cm_mdmms: Mdmms | [];
+  showListMdmms: boolean;
   isLoading: boolean;
   isUpdating: boolean;
   clearSortFilter: boolean;
@@ -14,8 +14,8 @@ interface MdmmsState {
 
 export const initialState = (injects?: MdmmsState): MdmmsState => ({
   // eslint-disable-next-line @typescript-eslint/camelcase
-  cm_mdmms: {},
-  showListMdmm: false,
+  cm_mdmms: [],
+  showListMdmms: false,
   // showList: true,
   isLoading: false,
   isUpdating: false,
@@ -29,14 +29,14 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
   switch (action.type) {
     case types.getMdmmsStart:
       return Object.assign({}, state, {
-        showListMdmm: false,
+        showListMdmms: false,
         isLoading: true,
         error: {},
       });
     case types.getMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
-        showListMdmm: true,
+        showListMdmms: true,
         searchHistory: [
           action.payload.searchHistory,
           ...state.searchHistory,
@@ -48,7 +48,7 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
         cm_mdmms: {},
-        showListMdmm: false,
+        showListMdmms: false,
         isLoading: false,
         error: action.payload.error,
       });
@@ -58,7 +58,7 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
     case types.addMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
-        showListMdmm: true,
+        showListMdmms: true,
         isUpdating: false,
         clearSortFilter: true,
         error: {},
@@ -75,14 +75,14 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
       return Object.assign({}, state, {
         ...action.payload.mdmms,
         isUpdating: false,
-        showListMdmm: true,
+        showListMdmms: true,
         clearSortFilter: false,
         error: {},
       });
     case types.deleteMdmmsFail:
       return Object.assign({}, state, {
         isUpdating: false,
-        showListMdmm: action.payload.showListMdmm,
+        showListMdmms: action.payload.showListMdmms,
         error: action.payload.error,
       });
     case types.editMdmmsStart:

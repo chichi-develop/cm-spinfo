@@ -25,8 +25,8 @@ import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
 interface MdmmProps {
-  cm_mdmms: Mdmms | {};
-  showListMdmm: boolean;
+  cm_mdmms: Mdmms;
+  showListMdmms: boolean;
   clearSortFilter: boolean;
   mdmmAdd: typeof actions.addMdmmsStart;
   mdmmEdit: typeof actions.editMdmmsStart;
@@ -34,7 +34,7 @@ interface MdmmProps {
 }
 
 interface MdmmTableProps {
-  cm_mdmms: Mdmms | {};
+  cm_mdmms: Mdmms;
   clearSortFilter: boolean;
   mdmmEdit: typeof actions.editMdmmsStart;
   mdmmDelete: typeof actions.deleteMdmmsStart;
@@ -64,7 +64,7 @@ const Mdmm: React.FC<MdmmProps> = ({
   mdmmAdd,
   mdmmEdit,
   mdmmDelete,
-  showListMdmm,
+  showListMdmms,
   clearSortFilter,
 }) => {
   useEffect(() => {
@@ -109,7 +109,7 @@ const Mdmm: React.FC<MdmmProps> = ({
         )
       } */}
 
-      {showListMdmm ? (
+      {showListMdmms ? (
         <MdmmTable
           cm_mdmms={cm_mdmms}
           mdmmDelete={mdmmDelete}
@@ -195,6 +195,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
 
   const filteredMdmm = useMemo(() => {
     // const filteredMdmm = (() => {
+
     let tmpMdmms = mdmms;
 
     // 入力した文字は小文字にする
@@ -353,10 +354,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
                     style={{ fontSize: '1.5em' }}
                     onClick={e => {
                       e.preventDefault();
-                      mdmmDelete({
-                        cdcstm: mdmm.md_cdcstm,
-                        nommrb: mdmm.md_nommrb,
-                      });
+                      mdmmDelete(mdmm.md_cdcstm, mdmm.md_nommrb);
                     }}
                   />
                 </td>

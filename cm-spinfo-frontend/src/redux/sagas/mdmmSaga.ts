@@ -10,16 +10,22 @@ import {
 import { getAclgsFactory } from './aclgApi';
 
 function* runGetMdmms(action: ReturnType<typeof actions.getMdmmsStart>) {
+  const { cdcstm } = action.payload;
   try {
     // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
-    const mdmms = yield call(getMdmmsFactory, action.payload.cdcstm);
+    const mdmms = yield call(getMdmmsFactory, cdcstm);
+    console.log('getMdmms OK!!!');
+    console.log(mdmms);
     yield put({
       type: types.getMdmmsSucceed,
-      searchHistory: action.payload.cdcstm,
-      mdmms,
+      payload: {
+        searchHistory: cdcstm,
+        // mdmms: mdmms.cm_mdmms,
+        mdmms,
+      },
     });
   } catch (error) {
-    yield put({ type: types.getMdmmsFail, error });
+    yield put({ type: types.getMdmmsFail, payload: { error } });
   }
 }
 
@@ -28,16 +34,28 @@ export function* watchGetMdmms() {
 }
 
 function* runGetAclgs(action: ReturnType<typeof actions.getAclgsStart>) {
+  const { cdcstm } = action.payload;
   try {
     // TODO: TS データかエラーが返ってくる場合にはどう型を付けるべきか
-    const aclgs = yield call(getAclgsFactory, action.payload.cdcstm);
+    const aclgs = yield call(getAclgsFactory, cdcstm);
+    console.log('getAclgs OK!!!');
+    console.log(aclgs);
     yield put({
       type: types.getAclgsSucceed,
-      searchHistory: action.payload.cdcstm,
-      aclgs,
+      payload: {
+        searchHistory: cdcstm,
+        // aclgs: aclgs.cm_aclgs,
+        aclgs,
+      },
     });
   } catch (error) {
-    yield put({ type: types.getAclgsFail, error });
+    yield put({
+      type: types.getAclgsFail,
+      payload: {
+        showListAclgs: error.status !== 404,
+        error,
+      },
+    });
   }
 }
 
@@ -52,13 +70,16 @@ function* runDeleteMdmms(action: ReturnType<typeof actions.deleteMdmmsStart>) {
     const mdmms = yield call(deleteMdmmsFactory, cdcstm, nommrb);
     yield put({
       type: types.deleteMdmmsSucceed,
+      // mdmms: mdmms.cm_mdmms,
       mdmms,
     });
   } catch (error) {
     yield put({
       type: types.deleteMdmmsFail,
-      showListMdmm: error.status !== 404,
-      error,
+      payload: {
+        showListMdmms: error.status !== 404,
+        error,
+      },
     });
   }
 }
@@ -74,12 +95,13 @@ function* runEditMdmms(action: ReturnType<typeof actions.editMdmmsStart>) {
     const mdmms = yield call(editMdmmsFactory, cdcstm, nommrb, mdmm);
     yield put({
       type: types.editMdmmsSucceed,
-      mdmms,
+      // payload: { mdmms: mdmms.cm_mdmms },
+      payload: { mdmms },
     });
   } catch (error) {
     yield put({
       type: types.editMdmmsFail,
-      error,
+      payload: { error },
     });
   }
 }
@@ -95,12 +117,12 @@ function* runAddMdmms(action: ReturnType<typeof actions.addMdmmsStart>) {
     const mdmms = yield call(addMdmmsFactory, mdmm);
     yield put({
       type: types.addMdmmsSucceed,
-      mdmms,
+      payload: { mdmms },
     });
   } catch (error) {
     yield put({
       type: types.addMdmmsFail,
-      error,
+      payload: { error },
     });
   }
 }

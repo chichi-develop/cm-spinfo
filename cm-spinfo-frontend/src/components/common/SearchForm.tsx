@@ -5,20 +5,20 @@ import './SearchForm.css';
 
 import * as actions from '../../redux/actions/actionsMdmms';
 
-interface SearchProps {
-  cm_mdmms: Mdmms | {};
-  cm_aclgs: Aclgs | {};
-  showListMdmm: boolean;
+type Props = {
+  cm_mdmms: Mdmms;
+  cm_aclgs: Aclgs;
+  showListMdmms: boolean;
   showListAclgs: boolean;
   searchHistory: string[];
   mdmmSearch: typeof actions.getMdmmsStart;
   aclgSearch: typeof actions.getAclgsStart;
-}
+};
 
-export const SearchForm: React.FC<SearchProps> = ({
+export const SearchForm: React.FC<Props> = ({
   cm_mdmms,
   cm_aclgs,
-  showListMdmm,
+  showListMdmms,
   showListAclgs,
   searchHistory,
   mdmmSearch,
@@ -67,13 +67,13 @@ export const SearchForm: React.FC<SearchProps> = ({
             <p className="searchForm-currentMessage">様の履歴一覧です。</p>
           </>
         )}
-        {!showListAclgs && showListMdmm && (
+        {!showListAclgs && showListMdmms && (
           <>
             <p className="searchForm-currentData">{cm_mdmms[0].md_cdcstm}</p>
             <p className="searchForm-currentMessage">様の履歴一覧です。</p>
           </>
         )}
-        {!showListAclgs && !showListMdmm && (
+        {!showListAclgs && !showListMdmms && (
           <p className="searchForm-currentMessage">
             読者番号を入力し、検索してください。
           </p>

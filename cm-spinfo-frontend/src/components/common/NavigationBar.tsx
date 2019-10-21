@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import './NavigationBar.css';
 
-interface NavigationProps {
+type Props = {
   title: string;
-}
+};
 
-const NavigationBar: React.FC<NavigationProps> = ({ title }) => {
+const NavigationBar: React.FC<Props> = ({ title }) => {
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）

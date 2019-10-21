@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import './Footer.css';
 
-interface FooterProps {
+type Props = {
   footerText: string;
-}
+};
 
-const Footer: React.FC<FooterProps> = ({ footerText }) => {
+const Footer: React.FC<Props> = ({ footerText }) => {
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）

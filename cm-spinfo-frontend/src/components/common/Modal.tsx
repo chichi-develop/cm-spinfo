@@ -9,12 +9,12 @@ import './Modal.css';
 
 ReactModal.setAppElement('#modal-root');
 
-interface ModalProps {
+type Props = {
   title: string;
   open: Function;
   content: Function;
   outClickClose: boolean;
-}
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FC<Props> = ({
   title,
   open,
   content,

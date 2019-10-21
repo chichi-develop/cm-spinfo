@@ -50,9 +50,9 @@ export const deleteMdmmsSucceed = (mdmms: Mdmms) => ({
   type: types.deleteMdmmsSucceed,
   payload: { mdmms },
 });
-export const deleteMdmmsFail = (error: object, showListMdmm: boolean) => ({
+export const deleteMdmmsFail = (error: object, showListMdmms: boolean) => ({
   type: types.deleteMdmmsFail,
-  payload: { error, showListMdmm },
+  payload: { error, showListMdmms },
 });
 
 export const addMdmmsStart = (mdmm: Mdmm) => ({
