@@ -50,7 +50,7 @@ module.exports = {
   rules: {
     // eslint official
     'newline-before-return': 'error',
-    'no-console': 'warn',
+    'no-console': 'off', // 暫定:warn
     'require-yield': 'error',
 
     // add
@@ -67,7 +67,7 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
 
     // add
-    '@typescript-eslint/camelcase': 'warn',
+    '@typescript-eslint/camelcase': 'off', // 暫定:warn
     '@typescript-eslint/prefer-interface': 'off',
 
     // prefer-arrow

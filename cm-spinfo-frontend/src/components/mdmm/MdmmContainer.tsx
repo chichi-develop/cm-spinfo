@@ -24,21 +24,21 @@ import MdmmEdit from './MdmmModalEdit';
 import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
-interface MdmmProps {
+type MdmmProps = {
   cm_mdmms: Mdmms;
   showListMdmms: boolean;
   clearSortFilter: boolean;
   mdmmAdd: typeof actions.addMdmmsStart;
   mdmmEdit: typeof actions.editMdmmsStart;
   mdmmDelete: typeof actions.deleteMdmmsStart;
-}
+};
 
-interface MdmmTableProps {
+type MdmmTableProps = {
   cm_mdmms: Mdmms;
   clearSortFilter: boolean;
   mdmmEdit: typeof actions.editMdmmsStart;
   mdmmDelete: typeof actions.deleteMdmmsStart;
-}
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Mdmm: React.FC<MdmmProps> = ({
+const MdmmContainer: React.FC<MdmmProps> = ({
   cm_mdmms,
   mdmmAdd,
   mdmmEdit,
@@ -70,7 +70,7 @@ const Mdmm: React.FC<MdmmProps> = ({
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
-    console.log('Mdmm render!');
+    console.log('MdmmContainer render!');
 
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
@@ -86,7 +86,7 @@ const Mdmm: React.FC<MdmmProps> = ({
         <Modal
           title="新規メモ登録"
           // open={handleOpenModal => <button className='mdmmTable-addButton' onClick={handleOpenModal}>新規メモ登録</button>}
-          open={(handleOpenModal: any) => (
+          open={(handleOpenModal: () => void) => (
             <button
               className="mdmmTable-addButton"
               type="button"
@@ -95,7 +95,7 @@ const Mdmm: React.FC<MdmmProps> = ({
               新規メモ登録
             </button>
           )}
-          content={(handleCloseModal: Function) => (
+          content={(handleCloseModal: () => void) => (
             <MdmmAdd mdmmAdd={mdmmAdd} handleCloseModal={handleCloseModal} />
           )}
           outClickClose={false}
@@ -129,7 +129,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
   mdmmDelete,
   clearSortFilter,
 }) => {
-  interface FilterQuery {
+  type FilterQuery = {
     md_nmmmbr_key: string;
     md_idmdmm?: string;
     md_cdcstm?: string;
@@ -142,13 +142,13 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
     md_ccmodu?: string;
     createdAt?: Date;
     updatedAt?: Date;
-  }
+  };
 
-  interface Sort {
+  type Sort = {
     key: string;
     order: number;
-    icon?: any;
-  }
+    icon: JSX.Element;
+  };
 
   const classes = useStyles();
 
@@ -158,7 +158,7 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
     sort: {
       key: 'md_nommrb',
       order: 0,
-      icon: '',
+      icon: <span />,
     },
     filterQuery: {
       md_nmmmbr_key: '',
@@ -184,7 +184,8 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
 
     if (clearSortFilter) {
       setFilterQuery({ md_nmmmbr_key: '' });
-      setSort({ key: 'md_nmmmbr', order: 0, icon: '' });
+      setSort({ key: 'md_nmmmbr', order: 0, icon: <span /> });
+      setSort({ key: 'md_nmmmbr', order: 0, icon: <span /> });
     }
 
     // componentWillUnmountを実装したければ
@@ -226,10 +227,10 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
     // ソート
     if (sort.key) {
       tmpMdmms = tmpMdmms.sort((a: any, b: any) => {
-        a = a[sort.key];
-        b = b[sort.key];
+        const A = a[sort.key];
+        const B = b[sort.key];
 
-        return (a === b ? 0 : a > b ? 1 : -1) * sort.order;
+        return (A === B ? 0 : A > B ? 1 : -1) * sort.order;
       });
     }
 
@@ -238,7 +239,9 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
   // })();
 
   // 入力した情報をfilterQueryに入れる
-  const handleFilter = (e: any) => {
+  const handleFilter = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFilterQuery({ ...filterQuery, [name]: value });
   };
@@ -266,16 +269,16 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
         <thead className="mdmmTable-thead">
           <tr>
             <th rowSpan={2} onClick={() => handleSort('updatedAt')}>
-              <p>更新日付 {sort.key === 'updatedAt' ? sort.icon : ''}</p>
+              <p>更新日付 {sort.key === 'updatedAt' ? sort.icon : <span />}</p>
             </th>
             <th rowSpan={2} onClick={() => handleSort('md_nommrb')}>
-              <p>メモ連番 {sort.key === 'md_nommrb' ? sort.icon : ''}</p>
+              <p>メモ連番 {sort.key === 'md_nommrb' ? sort.icon : <span />}</p>
             </th>
             <th onClick={() => handleSort('md_nmmmbr')}>
-              <p>メモ分類 {sort.key === 'md_nmmmbr' ? sort.icon : ''}</p>
+              <p>メモ分類 {sort.key === 'md_nmmmbr' ? sort.icon : <span />}</p>
             </th>
             <th onClick={() => handleSort('md_txmdmm')}>
-              <p>内容 {sort.key === 'md_txmdmm' ? sort.icon : ''}</p>
+              <p>内容 {sort.key === 'md_txmdmm' ? sort.icon : <span />}</p>
             </th>
             <th rowSpan={2} style={{ padding: '0', width: '4em' }}>
               <p>編集</p>
@@ -331,14 +334,14 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
                   <Modal
                     title="メモ編集"
                     // open={handleOpenModal => <EditIcon className={classes.iconHover} style={{fontSize: '1.5em', color: '#668ad8'}} onClick={handleOpenModal} />}
-                    open={(handleOpenModal: any) => (
+                    open={(handleOpenModal: () => void) => (
                       <EditIcon
                         className={classes.iconHover}
                         style={{ fontSize: '1.5em' }}
                         onClick={handleOpenModal}
                       />
                     )}
-                    content={(handleCloseModal: Function) => (
+                    content={(handleCloseModal: () => void) => (
                       <MdmmEdit
                         mdmm={mdmm}
                         mdmmEdit={mdmmEdit}
@@ -367,4 +370,4 @@ const MdmmTable: React.FC<MdmmTableProps> = ({
   );
 };
 
-export default Mdmm;
+export default MdmmContainer;

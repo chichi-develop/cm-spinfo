@@ -71,7 +71,7 @@ function* runDeleteMdmms(action: ReturnType<typeof actions.deleteMdmmsStart>) {
     yield put({
       type: types.deleteMdmmsSucceed,
       // mdmms: mdmms.cm_mdmms,
-      mdmms,
+      payload: { mdmms },
     });
   } catch (error) {
     yield put({
