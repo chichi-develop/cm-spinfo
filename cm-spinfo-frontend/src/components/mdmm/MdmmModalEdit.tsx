@@ -2,12 +2,13 @@ import React from 'react';
 import { withFormik, Form, Field, InjectedFormikProps } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
+import * as actions from '../../redux/actions/actionsMdmms';
 
 // import { Mdmm } from '../../redux/actions/models';
 
 import './MdmmModal.css';
 
-interface MdmmEditValues {
+type MdmmEditValues = {
   md_idmdmm: number;
   md_cdcstm: string;
   md_nommrb: number;
@@ -17,11 +18,11 @@ interface MdmmEditValues {
   md_clmdmm: string | null;
   md_ccadip: string;
   md_ccmodu: string;
-  createdAt: Date;
+  createdAt: string;
   // updatedAt?: Date;
-}
+};
 
-interface MdmmEditProps {
+type MdmmEditProps = {
   md_idmdmm?: number;
   md_cdcstm?: string;
   md_nommrb?: number;
@@ -31,12 +32,12 @@ interface MdmmEditProps {
   md_clmdmm?: string;
   md_ccadip?: string;
   md_ccmodu?: string;
-  createdAt?: Date;
+  createdAt?: string;
   // updatedAt: Date;
   mdmm: MdmmEditValues;
-  mdmmEdit: Function;
+  mdmmEdit: typeof actions.editMdmmsStart;
   handleCloseModal: Function;
-}
+};
 
 const MyForm: React.FC<InjectedFormikProps<MdmmEditProps, MdmmEditValues>> = ({
   touched,
@@ -234,25 +235,24 @@ const MdmmEdit = withFormik<MdmmEditProps, MdmmEditValues>({
     md_ccadip: Yup.string().required('Enter a md_ccadip'),
     md_ccmodu: Yup.string().required('Enter a md_ccmodu'),
   }),
-  handleSubmit: (values, { props, setSubmitting, resetForm, setErrors }) => {
-    setTimeout(() => {
-      props.mdmmEdit({
-        cdcstm: values.md_cdcstm,
-        nommrb: values.md_nommrb,
-        mdmm: {
-          md_idmdmm: values.md_idmdmm,
-          md_cdcstm: values.md_cdcstm,
-          md_nommrb: values.md_nommrb,
-          md_nmmmbr: values.md_nmmmbr,
-          md_txmdmm: values.md_txmdmm,
-          md_fganch: values.md_fganch,
-          md_clmdmm: values.md_clmdmm,
-          md_ccadip: values.md_ccadip,
-          md_ccmodu: values.md_ccmodu,
-          createdAt: moment(props.createdAt).format('YYYY-MM-DD'),
-          updatedAt: moment().format('YYYY-MM-DD'),
-        },
-      }) && props.handleCloseModal();
+  // handleSubmit: (values, { props, setSubmitting, resetForm, setErrors }) => {
+  handleSubmit: (values, { props, setSubmitting }) => {
+    setTimeout(async () => {
+      await props.mdmmEdit(values.md_cdcstm, values.md_nommrb, {
+        md_idmdmm: values.md_idmdmm,
+        md_cdcstm: values.md_cdcstm,
+        md_nommrb: values.md_nommrb,
+        md_nmmmbr: values.md_nmmmbr,
+        md_txmdmm: values.md_txmdmm,
+        md_fganch: values.md_fganch,
+        md_clmdmm: values.md_clmdmm,
+        md_ccadip: values.md_ccadip,
+        md_ccmodu: values.md_ccmodu,
+        createdAt: moment(props.createdAt).format('YYYY-MM-DD'),
+        updatedAt: moment().format('YYYY-MM-DD'),
+      });
+      // }) && props.handleCloseModal();
+      props.handleCloseModal();
       // alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 1000);

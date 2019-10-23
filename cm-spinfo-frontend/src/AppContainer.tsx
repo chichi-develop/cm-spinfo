@@ -2,10 +2,11 @@ import React, { useEffect, useCallback } from 'react';
 import { Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from './redux/actions/actionsMdmms';
+import { Mdmm } from './redux/actions/models';
 
 import SearchForm from './components/common/SearchForm';
-import Mdmm from './components/mdmm/Mdmm';
-import Aclg from './components/mdmm/Aclg';
+import MdmmContainer from './components/mdmm/MdmmContainer';
+import AclgContainer from './components/mdmm/AclgContainer';
 import { StoreState } from './redux/reducers';
 
 import './AppContainer.css';
@@ -31,19 +32,21 @@ const AppContainer: React.FC = () => {
   // );
 
   const mdmmDelete = useCallback(
-    ({ cdcstm, nommrb }) => dispatch(Actions.deleteMdmmsStart(cdcstm, nommrb)),
+    (cdcstm: string, nommrb: number) =>
+      dispatch(Actions.deleteMdmmsStart(cdcstm, nommrb)),
     [dispatch],
   );
 
   const mdmmEdit = useCallback(
-    ({ cdcstm, nommrb, mdmm }) =>
+    (cdcstm: string, nommrb: number, mdmm) =>
       dispatch(Actions.editMdmmsStart(cdcstm, nommrb, mdmm)),
     [dispatch],
   );
 
-  const mdmmAdd = useCallback(mdmm => dispatch(Actions.addMdmmsStart(mdmm)), [
-    dispatch,
-  ]);
+  const mdmmAdd = useCallback(
+    (mdmm: Mdmm) => dispatch(Actions.addMdmmsStart(mdmm)),
+    [dispatch],
+  );
 
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
@@ -87,7 +90,7 @@ const AppContainer: React.FC = () => {
           path="/"
           render={() => (
             <div>
-              <Mdmm
+              <MdmmContainer
                 {...mdmmState}
                 mdmmDelete={mdmmDelete}
                 mdmmEdit={mdmmEdit}
@@ -95,7 +98,7 @@ const AppContainer: React.FC = () => {
               />
               <br></br>
               <h3>書籍・セミナー・大会履歴</h3>
-              <Aclg {...aclgState} />
+              <AclgContainer {...aclgState} />
             </div>
           )}
         />

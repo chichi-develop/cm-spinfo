@@ -23,7 +23,7 @@ import { Aclgs } from '../../redux/actions/models';
 // import MdmmAdd from './MdmmModalAdd';
 import './Mdmm.css';
 
-interface AclgProps {
+type AclgProps = {
   cm_aclgs: Aclgs;
   // cm_mdmms: Mdmm[];
   showListAclgs: boolean;
@@ -31,15 +31,15 @@ interface AclgProps {
   // mdmmAdd: Function;
   // mdmmEdit: Function;
   // mdmmDelete: Function;
-}
+};
 
-interface AclgTableProps {
+type AclgTableProps = {
   cm_aclgs: Aclgs;
   // cm_mdmms: Mdmm[];
   clearSortFilter: boolean;
   // mdmmEdit: Function;
   // mdmmDelete: Function;
-}
+};
 
 // const useStyles = makeStyles(theme => ({
 //   root: {
@@ -61,7 +61,7 @@ interface AclgTableProps {
 // }));
 
 // const Mdmm: React.FC<MdmmProps> = ({
-const Aclg: React.FC<AclgProps> = ({
+const AclgContainer: React.FC<AclgProps> = ({
   // cm_mdmms,
   // mdmmAdd,
   // mdmmEdit,
@@ -73,7 +73,7 @@ const Aclg: React.FC<AclgProps> = ({
   useEffect(() => {
     // 初期状態では、レンダリングごとに呼ばれる
     // （初回とその後の毎回）
-    console.log('Aclg render!');
+    console.log('AclgContainer render!');
 
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
@@ -116,7 +116,7 @@ const AclgTable: React.FC<AclgTableProps> = ({
     al_idactv?: string;
     al_nmactv?: string;
     al_noactv?: string;
-    al_dtactv?: Date;
+    al_dtactv?: string;
     al_cdsqsk?: string;
     al_nmsqsk?: string;
     al_nmsqbu?: string;
@@ -130,14 +130,14 @@ const AclgTable: React.FC<AclgTableProps> = ({
     al_nmcstm?: string;
     al_nmtnbu?: string;
     al_nmtnto?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt?: string;
+    updatedAt?: string;
   }
 
   interface Sort {
     key: string;
     order: number;
-    icon?: any;
+    icon?: JSX.Element;
   }
 
   const initialState = {
@@ -146,7 +146,7 @@ const AclgTable: React.FC<AclgTableProps> = ({
     sort: {
       key: 'al_nmactv',
       order: 0,
-      icon: '',
+      icon: <span />,
     },
     filterQuery: {
       al_nmactv_key: '',
@@ -170,7 +170,7 @@ const AclgTable: React.FC<AclgTableProps> = ({
     setNmactvs(_.uniq(_.map(cm_aclgs, 'al_nmactv')));
     if (clearSortFilter) {
       setFilterQuery({ al_nmactv_key: '' });
-      setSort({ key: 'al_nmactv', order: 0, icon: '' });
+      setSort({ key: 'al_nmactv', order: 0, icon: <span /> });
     }
     // componentWillUnmountを実装したければ
     // ここから関数を返すと
@@ -209,10 +209,10 @@ const AclgTable: React.FC<AclgTableProps> = ({
     // ソート
     if (sort.key) {
       tmpAclgs = tmpAclgs.sort((a: any, b: any) => {
-        a = a[sort.key];
-        b = b[sort.key];
+        const A = a[sort.key];
+        const B = b[sort.key];
 
-        return (a === b ? 0 : a > b ? 1 : -1) * sort.order;
+        return (A === B ? 0 : A > B ? 1 : -1) * sort.order;
       });
     }
 
@@ -220,7 +220,9 @@ const AclgTable: React.FC<AclgTableProps> = ({
   }, [filterQuery, sort, aclgs]);
 
   // 入力した情報をfilterQueryに入れる
-  const handleFilter = (e: any) => {
+  const handleFilter = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFilterQuery({ ...filterQuery, [name]: value });
   };
@@ -250,17 +252,17 @@ const AclgTable: React.FC<AclgTableProps> = ({
             <th rowSpan={2} onClick={() => handleSort('al_dtactv')}>
               <p>
                 日付
-                {sort.key === 'al_dtactv' ? sort.icon : ''}
+                {sort.key === 'al_dtactv' ? sort.icon : <span />}
               </p>
             </th>
             <th rowSpan={2} onClick={() => handleSort('al_noactv')}>
-              <p>メモ連番 {sort.key === 'al_noactv' ? sort.icon : ''}</p>
+              <p>メモ連番 {sort.key === 'al_noactv' ? sort.icon : <span />}</p>
             </th>
             <th onClick={() => handleSort('al_nmactv')}>
-              <p>区分{sort.key === 'al_nmactv' ? sort.icon : ''}</p>
+              <p>区分{sort.key === 'al_nmactv' ? sort.icon : <span />}</p>
             </th>
             <th onClick={() => handleSort('al_txactv')}>
-              <p>商品名{sort.key === 'al_txactv' ? sort.icon : ''}</p>
+              <p>商品名{sort.key === 'al_txactv' ? sort.icon : <span />}</p>
             </th>
             <th rowSpan={2}>
               <p>送り先</p>
@@ -324,4 +326,4 @@ const AclgTable: React.FC<AclgTableProps> = ({
   );
 };
 
-export default Aclg;
+export default AclgContainer;

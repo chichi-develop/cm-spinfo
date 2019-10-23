@@ -54,7 +54,7 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
       });
 
     case types.addMdmmsStart:
-      return Object.assign({}, state, { isUpdating: true, error: '' });
+      return Object.assign({}, state, { isUpdating: true, error: {} });
     case types.addMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
@@ -70,7 +70,7 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
       });
 
     case types.deleteMdmmsStart:
-      return Object.assign({}, state, { isUpdating: true, error: '' });
+      return Object.assign({}, state, { isUpdating: true, error: {} });
     case types.deleteMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,
@@ -86,7 +86,7 @@ export const mdmmsReducer = (state = initialState(), action: Actions) => {
         error: action.payload.error,
       });
     case types.editMdmmsStart:
-      return Object.assign({}, state, { isUpdating: true, error: '' });
+      return Object.assign({}, state, { isUpdating: true, error: {} });
     case types.editMdmmsSucceed:
       return Object.assign({}, state, {
         ...action.payload.mdmms,

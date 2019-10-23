@@ -20,7 +20,7 @@ export const SearchForm: React.FC<Props> = ({
   cm_aclgs,
   showListMdmms,
   showListAclgs,
-  searchHistory,
+  // searchHistory,
   mdmmSearch,
   aclgSearch,
 }) => {

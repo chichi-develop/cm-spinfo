@@ -8,8 +8,8 @@ export type Mdmm = {
   md_clmdmm: string | null; // '窓口メモカラー'
   md_ccadip: string; // '更新IPアドレス'
   md_ccmodu: string; // '更新モジュール'
-  createdAt: Date; // '作成日'
-  updatedAt: Date; // '更新日'
+  createdAt: string; // '作成日'
+  updatedAt: string; // '更新日'
 };
 
 export type Mdmms = Mdmm[];
@@ -32,8 +32,8 @@ export type Aclg = {
   al_nmcstm: string; // '顧客名'
   al_nmtnbu: string; // '部署名'
   al_nmtnto: string; // '担当者名'
-  createdAt: Date; // '作成日'
-  updatedAt: Date; // '更新日'
+  createdAt: string; // '作成日'
+  updatedAt: string; // '更新日'
 };
 
 export type Aclgs = Aclg[];

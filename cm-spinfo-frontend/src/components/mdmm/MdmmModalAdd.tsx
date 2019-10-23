@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import './MdmmModal.css';
 
-interface MdmmAddValues {
+type MdmmAddValues = {
   md_cdcstm: string;
   md_nmmmbr: string;
   md_txmdmm: string;
@@ -13,9 +13,9 @@ interface MdmmAddValues {
   md_clmdmm: string;
   // createdAt: Date;
   // updatedAt: Date;;
-}
+};
 
-interface MdmmAddProps {
+type MdmmAddProps = {
   md_cdcstm?: string;
   md_nmmmbr?: string;
   md_txmdmm?: string;
@@ -25,7 +25,7 @@ interface MdmmAddProps {
   // updatedAt: Date;
   mdmmAdd: Function;
   handleCloseModal: Function;
-}
+};
 
 const MyForm: React.FC<InjectedFormikProps<MdmmAddProps, MdmmAddValues>> = ({
   touched,
@@ -144,8 +144,9 @@ const MdmmAdd = withFormik<MdmmAddProps, MdmmAddValues>({
     md_fganch: Yup.string().required('Enter a md_fganch'),
     md_clmdmm: Yup.string().required('Enter a md_clmdmm'),
   }),
-  handleSubmit: (values, { props, setSubmitting, resetForm, setErrors }) => {
-    setTimeout(() => {
+  // handleSubmit: (values, { props, setSubmitting, resetForm, setErrors }) => {
+  handleSubmit: (values, { props, setSubmitting }) => {
+    setTimeout(async () => {
       // if(values.email === 'test@test.test') {
       //   setErrors({ email: 'That email is already taken'})
       // } else {
@@ -154,7 +155,7 @@ const MdmmAdd = withFormik<MdmmAddProps, MdmmAddValues>({
       //
       // values.mdmmAdd({
       // TODO: &&の代替手段
-      props.mdmmAdd({
+      await props.mdmmAdd({
         md_idmdmm: '0',
         md_cdcstm: values.md_cdcstm,
         md_nommrb: '0',
@@ -168,7 +169,8 @@ const MdmmAdd = withFormik<MdmmAddProps, MdmmAddValues>({
         // "updatedAt": "2019-05-24",
         createdAt: moment().format('YYYY-MM-DD'),
         updatedAt: moment().format('YYYY-MM-DD'),
-      }) && props.handleCloseModal();
+      });
+      props.handleCloseModal();
       // alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 1000);

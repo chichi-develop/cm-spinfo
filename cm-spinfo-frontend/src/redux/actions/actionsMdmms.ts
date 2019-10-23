@@ -30,7 +30,7 @@ export const getMdmmsFail = (error: object) => ({
 export const editMdmmsStart = (cdcstm: string, nommrb: number, mdmm: Mdmm) => ({
   type: types.editMdmmsStart,
   payload: { cdcstm, nommrb, mdmm },
-  meta: { confirm: '更新してよろしいですか？' },
+  meta: { confirm: '更新してよろしいですか？' } as const,
 });
 export const editMdmmsSucceed = (mdmms: Mdmms) => ({
   type: types.editMdmmsSucceed,
@@ -44,7 +44,7 @@ export const editMdmmsFail = (error: object) => ({
 export const deleteMdmmsStart = (cdcstm: string, nommrb: number) => ({
   type: types.deleteMdmmsStart,
   payload: { cdcstm, nommrb },
-  meta: { confirm: '削除してよろしいですか？' },
+  meta: { confirm: '削除してよろしいですか？' } as const,
 });
 export const deleteMdmmsSucceed = (mdmms: Mdmms) => ({
   type: types.deleteMdmmsSucceed,
@@ -58,7 +58,7 @@ export const deleteMdmmsFail = (error: object, showListMdmms: boolean) => ({
 export const addMdmmsStart = (mdmm: Mdmm) => ({
   type: types.addMdmmsStart,
   payload: { mdmm },
-  meta: { confirm: '登録してよろしいですか？' },
+  meta: { confirm: '登録してよろしいですか？' } as const,
 });
 export const addMdmmsSucceed = (mdmms: Mdmms) => ({
   type: types.addMdmmsSucceed,
