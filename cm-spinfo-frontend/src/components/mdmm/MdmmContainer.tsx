@@ -14,7 +14,7 @@ import {
 } from '@material-ui/icons';
 
 import { Mdmms } from '../../redux/actions/models';
-import * as actions from '../../redux/actions/actionsMdmms';
+import * as actions from '../../redux/actions/actionsSpinfo';
 
 // import CircularProgress from '@material-ui/core/CircularProgress';
 

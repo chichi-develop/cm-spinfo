@@ -2,7 +2,7 @@ import React from 'react';
 import { withFormik, Form, Field, InjectedFormikProps } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import * as actions from '../../redux/actions/actionsMdmms';
+import * as actions from '../../redux/actions/actionsSpinfo';
 
 // import { Mdmm } from '../../redux/actions/models';
 

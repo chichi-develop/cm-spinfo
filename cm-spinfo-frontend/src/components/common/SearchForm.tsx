@@ -3,7 +3,7 @@ import { Mdmms, Aclgs } from '../../redux/actions/models';
 
 import './SearchForm.css';
 
-import * as actions from '../../redux/actions/actionsMdmms';
+import * as actions from '../../redux/actions/actionsSpinfo';
 
 type Props = {
   cm_mdmms: Mdmms;

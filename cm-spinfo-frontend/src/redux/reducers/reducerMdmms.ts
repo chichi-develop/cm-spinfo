@@ -1,4 +1,4 @@
-import types from '../actions/actionsConsMdmms';
+import types from '../actions/actionsConsSpinfos';
 import { Actions } from '../actions/actions';
 import { Mdmms } from '../actions/models';
 

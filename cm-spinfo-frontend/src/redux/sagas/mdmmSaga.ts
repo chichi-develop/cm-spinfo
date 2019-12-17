@@ -1,6 +1,6 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import types from '../actions/actionsConsMdmms';
-import * as actions from '../actions/actionsMdmms';
+import types from '../actions/actionsConsSpinfos';
+import * as actions from '../actions/actionsSpinfo';
 import {
   getMdmmsFactory,
   deleteMdmmsFactory,

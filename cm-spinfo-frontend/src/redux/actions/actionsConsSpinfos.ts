@@ -2,6 +2,10 @@ export default {
   getAclgsStart: 'GET_ACLGS_START',
   getAclgsSucceed: 'GET_ACLGS_SUCCEED',
   getAclgsFail: 'GET_ACLGS_FAIL',
+  
+  getUrnksStart: 'GET_URNKS_START',
+  getUrnksSucceed: 'GET_URNKS_SUCCEED',
+  getUrnksFail: 'GET_URNKS_FAIL',
 
   getMdmmsStart: 'GET_MDMMS_START',
   getMdmmsSucceed: 'GET_MDMMS_SUCCEED',
@@ -18,4 +22,5 @@ export default {
   addMdmmsStart: 'ADD_MDMMS_START',
   addMdmmsSucceed: 'ADD_MDMMS_SUCCEED',
   addMdmmsFail: 'ADD_MDMMS_FAIL',
+
 } as const;

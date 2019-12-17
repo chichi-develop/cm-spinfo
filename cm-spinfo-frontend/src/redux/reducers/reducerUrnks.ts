@@ -1,19 +1,19 @@
 import types from '../actions/actionsConsSpinfos';
 import { Actions } from '../actions/actions';
-import { Aclgs } from '../actions/models';
+import { Urnks } from '../actions/models';
 
-interface AclgsState {
-  cm_aclgs: Aclgs | [];
-  showListAclgs: boolean;
+interface UrnksState {
+  cm_urnks: Urnks | [];
+  showListUrnks: boolean;
   clearSortFilter: boolean;
   searchHistory: [];
   error: {};
 }
 
-export const initialState = (injects?: AclgsState): AclgsState => ({
+export const initialState = (injects?: UrnksState): UrnksState => ({
   // eslint-disable-next-line @typescript-eslint/camelcase
-  cm_aclgs: [],
-  showListAclgs: false,
+  cm_urnks: [],
+  showListUrnks: false,
   // showList: true,
   // isLoading: false,
   // isUpdating: false,
@@ -23,7 +23,7 @@ export const initialState = (injects?: AclgsState): AclgsState => ({
   ...injects,
 });
 
-export const aclgsReducer = (state = initialState(), action: Actions) => {
+export const urnksReducer = (state = initialState(), action: Actions) => {
   switch (action.type) {
     // case ActionType.GET_MDMMS_START:
     //   return Object.assign({}, state, {
@@ -51,17 +51,17 @@ export const aclgsReducer = (state = initialState(), action: Actions) => {
     //     error: action.payload.error,
     //   });
 
-    case types.getAclgsStart:
+    case types.getUrnksStart:
       return Object.assign({}, state, {
-        showListAclgs: false,
+        showListUrnks: false,
         isLoading: true,
         error: {},
       });
-    case types.getAclgsSucceed:
+    case types.getUrnksSucceed:
       return Object.assign({}, state, {
-        ...action.payload.aclgs,
+        ...action.payload.urnks,
         // ...action.payload.mdmms,
-        showListAclgs: true,
+        showListUrnks: true,
         searchHistory: [
           action.payload.searchHistory,
           ...state.searchHistory,
@@ -69,11 +69,11 @@ export const aclgsReducer = (state = initialState(), action: Actions) => {
         isLoading: false,
         error: {},
       });
-    case types.getAclgsFail:
+    case types.getUrnksFail:
       return Object.assign({}, state, {
         // eslint-disable-next-line @typescript-eslint/camelcase
-        cm_aclgs: {},
-        showListAclgs: false,
+        cm_urnks: {},
+        showListUrnks: false,
         isLoading: false,
         error: action.payload.error,
       });
@@ -130,4 +130,4 @@ export const aclgsReducer = (state = initialState(), action: Actions) => {
   }
 };
 
-export default aclgsReducer;
+export default urnksReducer;

@@ -14,8 +14,8 @@ export type Mdmm = {
 
 export type Mdmms = Mdmm[];
 
-export type Aclg = {
-  al_idactv: string; // 'ID'
+export type Aclg = { 
+  al_idactv: string; // 'ID' 
   al_nmactv: string; // 'アクティビティ区分名'
   al_noactv: number; // 'アクティビティ番号'
   al_dtactv: string; // 'アクティビティ日付'
@@ -37,3 +37,20 @@ export type Aclg = {
 };
 
 export type Aclgs = Aclg[];
+
+export type Urnk  = { 
+  vun_cdsqsk: number; // '顧客ナンバー'
+  vun_nmsqsk: string; // '顧客名'
+  vun_nosqsy: number; // '請求ナンバー'
+  vun_dtsyri: string; // '処理日'
+  vun_tmsyri: string; // '処理時間'
+  vun_nmsyri: string; // '処理名'
+  vun_kbsrsy: string; // '処理詳細'
+  vun_nosyri: string; // '処理ナンバー'
+  vun_kgkiyk: number; // '契約金額'
+  vun_kgkykj: number; // '解除金額'
+  vun_kgnykn: number; // '入金金額'
+  vun_kgzndk: number; // '残高'
+};
+
+export type Urnks = Urnk[];

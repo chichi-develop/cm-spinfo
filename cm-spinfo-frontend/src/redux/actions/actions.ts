@@ -7,4 +7,4 @@ type ReturnTypes<T> = {
 export type CreatorsToActions<T> = Unwrap<ReturnTypes<T>>;
 // ______________________________________________________
 //
-export type Actions = CreatorsToActions<typeof import('./actionsMdmms')>;
+export type Actions = CreatorsToActions<typeof import('./actionsSpinfo')>;

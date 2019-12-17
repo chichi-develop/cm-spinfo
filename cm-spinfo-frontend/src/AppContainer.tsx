@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import * as Actions from './redux/actions/actionsMdmms';
+import * as Actions from './redux/actions/actionsSpinfo';
 import { Mdmm } from './redux/actions/models';
 
 import SearchForm from './components/common/SearchForm';

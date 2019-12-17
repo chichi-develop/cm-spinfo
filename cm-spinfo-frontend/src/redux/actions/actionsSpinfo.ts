@@ -1,4 +1,4 @@
-import types from './actionsConsMdmms';
+import types from './actionsConsSpinfos';
 import { Mdmms, Mdmm } from './models';
 
 export const getAclgsStart = (cdcstm: string) => ({
@@ -12,7 +12,21 @@ export const getAclgsSucceed = (searchHistory: object, aclgs: object) => ({
 export const getAclgsFail = (error: object) => ({
   type: types.getAclgsFail,
   payload: { error },
+}); 
+
+export const getUrnksStart = (cdcstm: string) => ({
+  type: types.getUrnksStart,
+  payload: { cdcstm },
 });
+export const getUrnksSucceed = (searchHistory: object, urnks: object) => ({
+  type: types.getUrnksSucceed,
+  payload: { searchHistory, urnks },
+});
+export const getUrnksFail = (error: object) => ({
+  type: types.getUrnksFail,
+  payload: { error },
+}); 
+
 
 export const getMdmmsStart = (cdcstm: string) => ({
   type: types.getMdmmsStart,

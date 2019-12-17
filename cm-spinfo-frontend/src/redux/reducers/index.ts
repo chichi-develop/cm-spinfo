@@ -7,13 +7,14 @@ import storage from 'redux-persist/lib/storage';
 // import reducerAclgs from './reducerAclgs';
 import * as Mdmms from './reducerMdmms';
 import * as Aclgs from './reducerAclgs';
+import * as Urnks from './reducerUrnks';
 
 export const history = createBrowserHistory();
 
 const rootPersistConfig = {
   key: 'root',
   storage,
-  blacklist: ['mdmms', 'aclgs'],
+  blacklist: ['mdmms', 'aclgs', 'urnks'],
 };
 
 const mdmmsPersistConfig = {
@@ -27,9 +28,15 @@ const aclgsPersistConfig = {
   storage,
   whitelist: ['searchHistory'],
 };
+const urnksPersistConfig = {
+  key: 'urnks',
+  storage,
+  whitelist: ['searchHistory'],
+};
 const rootReducer = combineReducers({
   mdmms: persistReducer(mdmmsPersistConfig, Mdmms.mdmmsReducer),
   aclgs: persistReducer(aclgsPersistConfig, Aclgs.aclgsReducer),
+  urnks: persistReducer(urnksPersistConfig, Urnks.urnksReducer),
   router: connectRouter(history),
 });
 
@@ -37,6 +44,7 @@ export const initialState = () => {
   return {
     mdmms: Mdmms.initialState(),
     aclgs: Aclgs.initialState(),
+    urnks: Urnks.initialState(),
   };
 };
 

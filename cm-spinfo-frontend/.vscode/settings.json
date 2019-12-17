@@ -23,7 +23,7 @@
   ],
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "prettier.eslintIntegration": true,
+  // "prettier.eslintIntegration": true,
   // "prettier.stylelintIntegration": true,
   // "stylelint.enable": true,
   "typescript.tsserver.trace": "verbose",
